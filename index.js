@@ -112,7 +112,7 @@ client.on("messageCreate", (meddelande) => {  //=> är en funktion
 
 	};
 	let dravel = meddelande.content.toLowerCase()
-	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 2 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
+	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 1 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
 	if (dravel === 'hey guys') { meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8') }
 	if (!dravel.startsWith(prefix)) return; //det här fattar tom jag :) 
 	const commandBody = dravel.slice(prefix.length) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
