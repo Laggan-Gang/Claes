@@ -10,7 +10,8 @@ var filGöraren = require('fs');
 
 const pinns = '873614838692192286'
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
+const { createAudioPlayer, createAudioResource, joinVoiceChannel, AudioPlayer } = require('@discordjs/voice');
 
 
 // When the client is ready, run this code (only once)
@@ -39,8 +40,8 @@ client.once('ready', () => {
 	//	//	console.log('najs');
 	//	//})
 	//})
-//
-//
+	//
+	//
 	//kanalen.messages.fetch({ limit: 100 }).then(messages => {
 	//	let telegram = messages.map(meddelande => ({ //Deklarar en funktion som input till messages.map //Två paranteser säger att den här kommer direkt bli en grej jag vill
 	//		litteratör: meddelande?.embeds[0]?.author?.name, //kommatecken avgränsar mellan två fält i det jag returnar
@@ -50,21 +51,21 @@ client.once('ready', () => {
 	//		hyperövrigbonuslänkar: meddelande?.embeds[0]?.fields?.slice(1)?.map(
 	//			hyperfält => hyperfält?.value?.match(/\(([^\)]+)/i)[1]),
 	//	}))
-//
+	//
 	//	let rensad = telegram.filter(t => t.litteratör && t.hyperhopplänk)
 	//	let JAAAAYSOOOOOon = JSON.stringify(rensad, null, "\t");
 	//	//filGöraren.appendFile('Bigpinns.json', JAAAAYSOOOOOon, 'utf8', function (whoops) {
 	//	//	if (whoops) throw whoops;
 	//	//	console.log('najs');
 	//	//}); DEN HÄR SKA AKTIVERAS SEN NÄR BOTTEN ÄR REDO FÖR RIKTIG BUSINESS
-//
+	//
 	//	console.log(rensad)
-//
-//
-//
-//
-//
-//
+	//
+	//
+	//
+	//
+	//
+	//
 	//})
 });
 
@@ -112,8 +113,51 @@ client.on("messageCreate", (meddelande) => {  //=> är en funktion
 
 	};
 	let dravel = meddelande.content.toLowerCase()
-	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 1 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
+	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 10 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
 	if (dravel === 'hey guys') { meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8') }
+	else if (dravel.endsWith('maakep happen')) {
+		if (meddelande.member.voice.channel !== null) {
+			let channel = meddelande.member.voice.channel
+			const player = createAudioPlayer();
+			const resource = createAudioResource('/Users/hugo/GitHub/Claes/bow bow.wav');
+			const connection = joinVoiceChannel({
+				channelId: channel.id,
+				guildId: channel.guild.id,
+				adapterCreator: channel.guild.voiceAdapterCreator,
+			});
+			player.play(resource)
+			const subscription = connection.subscribe(player)
+			if (subscription) {
+				setTimeout(() => subscription.unsubscribe(), 4_000);
+				setTimeout(() => connection.destroy(), 4_000);
+				setTimeout(() => player.stop(), 4_000)
+			}
+		}
+		const minusMaakep = dravel.slice(0, -14) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
+		var behållare = ['', '', '', '', '']
+		var spelareLista = minusMaakep.split(" ", 5)
+		for (var i of spelareLista) {
+			behållare.push(i);
+			behållare.shift()
+		}
+		console.log(behållare)
+		console.log(spelareLista)
+		//// Loop through the array and switch places
+		//with a random position for every item in array
+		function shuffleArray(arr) {
+			const array = [...arr];
+			for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]];
+			}
+			return array;
+		}
+		const omSkuffadSamling = shuffleArray(behållare)
+		console.log(omSkuffadSamling)
+		const prioriteringar = omSkuffadSamling.join(" > ") 
+		meddelande.reply(svampbob(prioriteringar))
+
+	}
 	if (!dravel.startsWith(prefix)) return; //det här fattar tom jag :) 
 	const commandBody = dravel.slice(prefix.length) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
 	const args = commandBody.split(' '); //skapar "en array of sub-strings" för allt som är mellanslag. Denna heter "args
