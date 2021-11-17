@@ -57,17 +57,6 @@ client.once('ready', () => {
 	//})
 });
 
-const applyText = (canvas, text) => {
-	const context = canvas.getContext('2d');
-	let fontSize = 70;
-
-	do {
-		context.font = `${fontSize -= 10}px sans-serif`;
-	} while (context.measureText(text).width > canvas.width - 300);
-
-	return context.font;
-};
-
 var svampbob = function (harang) {
 	var chars = harang.toLowerCase().split("");
 	for (var i = 0; i < chars.length; i += 2) {
@@ -155,8 +144,9 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const context = canvas.getContext('2d');
 
 		const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
+		context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-		context.font = applyText(canvas, svampPrio);
+		context.font = "40pt Calibri";
 		context.fillStyle = '#ffffff';
 		context.fillText(svampPrio, canvas.width / 2.5, canvas.height / 1.8);
 
