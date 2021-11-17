@@ -174,7 +174,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 		context.font = applyText(canvas, `${joinedTopText}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${joinedTopText}`, 0, canvas.height / 0.9); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${joinedTopText}`, 0, canvas.height / 1.9); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		context.font = applyText(canvas, `${joinedBottomText}`);
 		context.fillStyle = '#ffffff';
