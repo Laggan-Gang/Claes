@@ -154,7 +154,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
 
-		const background = await Canvas.loadImage('maakep.png');
+		const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
 
 		context.font = applyText(canvas, svampPrio);
 		context.fillStyle = '#ffffff';
