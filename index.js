@@ -181,7 +181,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		context.fillText(`${joinedBottomText}`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
-		//meddelande.edit(`${svampPrio}`)
+		meddelande.edit(`${svampPrio}`)
 		meddelande.reply({ files: [attachment] });
 
 	}
