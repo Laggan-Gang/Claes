@@ -149,7 +149,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 		context.font = "40pt Calibri";
 		context.fillStyle = '#ffffff';
-		context.fillText(`${svampPrio}`, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${svampPrio}`); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 
