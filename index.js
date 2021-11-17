@@ -1,31 +1,19 @@
-//Typically, the structure of a Discord command contains three parts in the following order: a prefix, 
-//a command name, and (sometimes) command arguments.
-//kommande version???? hämta allas roller???? kommer aldrig hända men säg inte det till dennis
-
-
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
-const { Client, Intents, Message, Channel, TextChannel } = require('discord.js');
+const { Client, Intents, Message, Channel, TextChannel, MessageAttachment } = require('discord.js');
 const { token } = require('./config.json');
+const Canvas = require('canvas');
 var filGöraren = require('fs');
 
-const pinns = '873614838692192286'
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
 const { createAudioPlayer, createAudioResource, joinVoiceChannel, AudioPlayer } = require('@discordjs/voice');
-
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
 	console.log('Claes is online');
 
-
-	const kanalen = client.channels.cache.get(pinns);
-
-
-
-
-
-
+	//const pinns = '873614838692192286'
+	//const kanalen = client.channels.cache.get(pinns);
 	//kanalen.guild.members.fetch().then(gubbar => {
 	//	let gobbar = gubbar.map(gubbe => ({
 	//		gobbe: gubbe.user.username,
@@ -69,8 +57,16 @@ client.once('ready', () => {
 	//})
 });
 
-const prefix = "hej ";
-//const haranglängd = 200 INTE AKTIV JUST NU
+const applyText = (canvas, text) => {
+	const context = canvas.getContext('2d');
+	let fontSize = 70;
+
+	do {
+		context.font = `${fontSize -= 10}px sans-serif`;
+	} while (context.measureText(text).width > canvas.width - 300);
+
+	return context.font;
+};
 
 var svampbob = function (harang) {
 	var chars = harang.toLowerCase().split("");
@@ -79,9 +75,6 @@ var svampbob = function (harang) {
 	}
 	return chars.join("");
 };
-
-
-
 
 
 client.on("messageCreate", (meddelande) => {  //=> är en funktion
@@ -155,7 +148,20 @@ client.on("messageCreate", (meddelande) => {  //=> är en funktion
 		const omSkuffadSamling = shuffleArray(behållare)
 		console.log(omSkuffadSamling)
 		const prioriteringar = omSkuffadSamling.join(" > ") 
-		meddelande.reply(svampbob(prioriteringar))
+		const svampPrio = meddelande.reply(svampbob(prioriteringar))
+
+		const canvas = Canvas.createCanvas(700, 250);
+		const context = canvas.getContext('2d');
+
+		const background = await Canvas.loadImage('maakep.png');
+
+		context.font = applyText(canvas, svampPrio);
+		context.fillStyle = '#ffffff';
+		context.fillText(svampPrio, canvas.width / 2.5, canvas.height / 1.8);
+
+		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
+
+		meddelande.reply({ files: [attachment] });
 
 	}
 	if (!dravel.startsWith(prefix)) return; //det här fattar tom jag :) 
