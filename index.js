@@ -76,8 +76,9 @@ var svampbob = function (harang) {
 	return chars.join("");
 };
 
+const prefix = 'hej'
 
-client.on("messageCreate", (meddelande) => {  //=> är en funktion
+client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 	//if (meddelande.channelId == pinns && meddelande.author.id == "873614862578769940" && meddelande.embeds[0]) { den här är sparad eftersom den har NQN botten
 	console.log(meddelande.content.length)
 	var aleaIactaEst = Math.floor(Math.random() * 50)
@@ -112,7 +113,7 @@ client.on("messageCreate", (meddelande) => {  //=> är en funktion
 		if (meddelande.member.voice.channel !== null) {
 			let channel = meddelande.member.voice.channel
 			const player = createAudioPlayer();
-			const resource = createAudioResource('/Users/hugo/GitHub/Claes/bow bow.wav');
+			const resource = createAudioResource('/home/hugo/Claes/bow bow.wav');
 			const connection = joinVoiceChannel({
 				channelId: channel.id,
 				guildId: channel.guild.id,
