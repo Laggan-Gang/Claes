@@ -158,7 +158,13 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 		const omSkuffadSamling = shuffleArray(behållare)
 		omSkuffadSamling[3] = '\n' + omSkuffadSamling[3];
-		const prioriteringar = omSkuffadSamling.join(" > ") 
+		
+		// Gör det mer random! :)
+		if (Math.floor(Math.random() * 2) == 0) {
+			const prioriteringar = omSkuffadSamling.join(" > ") 
+		} else {
+			const prioriteringar = omSkuffadSamling.join(" < ")
+		}
 		const svampPrio = svampbob(prioriteringar)
 
 		context.font = applyText(canvas, `${svampPrio}`);
