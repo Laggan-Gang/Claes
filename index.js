@@ -174,11 +174,11 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 		context.font = applyText(canvas, `${joinedTopText}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${joinedTopText}`, 0, canvas.height / 1.9); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${joinedTopText}`, 0, canvas.height / 3.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		context.font = applyText(canvas, `${joinedBottomText}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${joinedBottomText}`, 0, canvas.height / 3.6); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${joinedBottomText}`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(svampPrio)
