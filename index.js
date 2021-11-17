@@ -69,7 +69,7 @@ const applyText = (canvas, text) => {
 	const context = canvas.getContext('2d');
 
 	// Declare a base size of the font
-	let fontSize = 70;
+	let fontSize = 200;
 
 	do {
 		// Assign the font to the context and decrement it so it can be measured again
@@ -151,24 +151,22 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 			}
 			return array;
 		}
-		const omSkuffadSamling = shuffleArray(behållare)
-		console.log(omSkuffadSamling)
-		const prioriteringar = omSkuffadSamling.join(" > ") 
-		const svampPrio = svampbob(prioriteringar)
-		//meddelande.reply(svampbob(prioriteringar))
-
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
-
 		const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+		const omSkuffadSamling = shuffleArray(behållare)
+		omSkuffadSamling[3] = '\n' + omSkuffadSamling[3];
+		const prioriteringar = omSkuffadSamling.join(" > ") 
+		const svampPrio = svampbob(prioriteringar)
 
 		context.font = applyText(canvas, `${svampPrio}`);
 		context.fillStyle = '#ffffff';
 		context.fillText(`${svampPrio}`, 0, canvas.height / 1.8); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
-
+		meddelande.edit(svampPrio)
 		meddelande.reply({ files: [attachment] });
 
 	}
