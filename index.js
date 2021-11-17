@@ -138,7 +138,8 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const omSkuffadSamling = shuffleArray(behållare)
 		console.log(omSkuffadSamling)
 		const prioriteringar = omSkuffadSamling.join(" > ") 
-		const svampPrio = meddelande.reply(svampbob(prioriteringar))
+		const svampPrio = svampbob(prioriteringar)
+		//meddelande.reply(svampbob(prioriteringar))
 
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
