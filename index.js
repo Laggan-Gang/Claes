@@ -69,7 +69,7 @@ const applyText = (canvas, text) => {
 	const context = canvas.getContext('2d');
 
 	// Declare a base size of the font
-	let fontSize = 200;
+	let fontSize = 400;
 
 	do {
 		// Assign the font to the context and decrement it so it can be measured again
@@ -162,7 +162,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const svampPrio = svampbob(prioriteringar)
 
 		context.font = applyText(canvas, `${svampPrio}`);
-		context.fillStyle = '#ffffff';
+		context.fillStyle = '#FFAC1C';//'#ffffff';
 		context.fillText(`${svampPrio}`, 0, canvas.height / 1.8); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
