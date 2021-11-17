@@ -157,19 +157,28 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 		const omSkuffadSamling = shuffleArray(behållare)
-		omSkuffadSamling[3] = '\n' + omSkuffadSamling[3];
+		let topText = []
+		let bottomText = []
+		topText.push(omSkuffadSamling[0])
+		topText.push(omSkuffadSamling[1])
+		topText.push(omSkuffadSamling[2])
+		bottomText.push(omSkuffadSamling[3])
+		bottomText.push(omSkuffadSamling[4])
+		let joinedTopText = topText.join(" > ")
+		joinedTopText = svampbob(joinedTopText)
+		let joinedBottomText = bottomText.join(" > ")
+		joinedBottomText = svampbob(joinedBottomText)
 		
-		// Gör det mer random! :)
-		if (Math.floor(Math.random() * 2) == 0) {
-			const prioriteringar = omSkuffadSamling.join(" > ") 
-		} else {
-			const prioriteringar = omSkuffadSamling.join(" < ")
-		}
+		const prioriteringar = omSkuffadSamling.join(" > ") 
 		const svampPrio = svampbob(prioriteringar)
 
-		context.font = applyText(canvas, `${svampPrio}`);
+		context.font = applyText(canvas, `${joinedTopText}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${svampPrio}`, 0, canvas.height / 1.8); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${joinedTopText}`, 0, canvas.height / 0.9); //, canvas.width / 2.5, canvas.height / 1.8);
+
+		context.font = applyText(canvas, `${joinedBottomText}`);
+		context.fillStyle = '#ffffff';
+		context.fillText(`${joinedBottomText}`, 0, canvas.height / 3.6); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(svampPrio)
