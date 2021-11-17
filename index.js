@@ -164,14 +164,23 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		topText.push(omSkuffadSamling[2])
 		bottomText.push(omSkuffadSamling[3])
 		bottomText.push(omSkuffadSamling[4])
-		let joinedTopText = topText.join(" > ")
-		joinedTopText = svampbob(joinedTopText)
-		let joinedBottomText = bottomText.join(" > ")
-		joinedBottomText = svampbob(joinedBottomText)
+		// Gör det mer random! :)
+		if (Math.floor(Math.random() * 2) == 0) {
+			let joinedTopText = topText.join(" > ")
+			joinedTopText = svampbob(joinedTopText)
+			let joinedBottomText = bottomText.join(" > ")
+			joinedBottomText = svampbob(joinedBottomText)
+			const prioriteringar = omSkuffadSamling.join(" > ") 
+			const svampPrio = svampbob(prioriteringar)
+		} else {
+			let joinedTopText = topText.join(" < ")
+			joinedTopText = svampbob(joinedTopText)
+			let joinedBottomText = bottomText.join(" < ")
+			joinedBottomText = svampbob(joinedBottomText)
+			const prioriteringar = omSkuffadSamling.join(" < ") 
+			const svampPrio = svampbob(prioriteringar)
+		}
 		
-		const prioriteringar = omSkuffadSamling.join(" > ") 
-		const svampPrio = svampbob(prioriteringar)
-
 		context.font = applyText(canvas, `${joinedTopText}`);
 		context.fillStyle = '#ffffff';
 		context.fillText(`${joinedTopText}`, 0, canvas.height / 3.0); //, canvas.width / 2.5, canvas.height / 1.8);
