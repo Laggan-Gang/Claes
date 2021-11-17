@@ -168,7 +168,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const svampPrio = svampbob(prioriteringar)
 
 		context.font = applyText(canvas, `${svampPrio}`);
-		context.fillStyle = '#FFAC1C';//'#ffffff';
+		context.fillStyle = '#ffffff';
 		context.fillText(`${svampPrio}`, 0, canvas.height / 1.8); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
