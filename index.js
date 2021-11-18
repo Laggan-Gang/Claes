@@ -206,11 +206,11 @@ client.on("messageCreate", async (meddelande) => {
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff'
-		context.fillText(`v`, 0, canvas.height / 3.9); 
+		context.fillText(`v`, 0, canvas.height / 2.0); 
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${underText}`, 0, canvas.height / 3.0); 
+		context.fillText(`${underText}`, 0, canvas.height / 1.5); 
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
