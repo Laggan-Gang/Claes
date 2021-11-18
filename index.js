@@ -159,19 +159,19 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const omSkuffadSamling = shuffleArray(behållare)
 		let överText = []
 		let subText = []
-		let finalText = []
+		let finalText = omSkuffadSamling[4]
 		överText.push(omSkuffadSamling[0])
 		överText.push(omSkuffadSamling[1])
 		subText.push(omSkuffadSamling[2])
 		subText.push(omSkuffadSamling[3])
-		finalText.push(omSkuffadSamling[4])
 		
 		let rubrik = överText.join(" > ")
 		rubrik = svampbob(rubrik)
 		let underText = subText.join(" > ")
 		underText = svampbob(underText)
-		let slutText = finalText
-		slutText = svampbob(slutText).join()
+
+		finalText = svampbob(finalText)
+	
 		
 		const prioriteringar = omSkuffadSamling.join(" > ") 
 		const svampPrio = svampbob(prioriteringar)
@@ -184,9 +184,9 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		context.fillStyle = '#ffffff';
 		context.fillText(`${underText}`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
-		context.font = dymo(canvas, `${slutText}`);
+		context.font = dymo(canvas, `${finalText}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${slutText}`, 0, canvas.height / 8.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${finalText}`, 0, canvas.height / 6.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
