@@ -161,7 +161,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		let subText = []
 		överText.push(omSkuffadSamling[0])
 		överText.push(omSkuffadSamling[1])
-		överText.push(omSkuffadSamling[2])
+		subText.push(omSkuffadSamling[2])
 		subText.push(omSkuffadSamling[3])
 		subText.push(omSkuffadSamling[4])
 		let rubrik = överText.join(" > ")
