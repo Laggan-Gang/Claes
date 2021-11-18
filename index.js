@@ -174,7 +174,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 		context.font = dymo(canvas, `${rubrik}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${rubrik}`, 0, canvas.height / 3.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${rubrik}`, 0, canvas.height / 4.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		context.font = dymo(canvas, `${underText}`);
 		context.fillStyle = '#ffffff';
