@@ -179,17 +179,14 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		const svampPrio = svampbob(prioriteringar)
 
 		context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
-		context.textAlign = 'center';
 		context.fillStyle = '#ffffff';
 		context.fillText(`${rubrik}`, 0, canvas.height / 4.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-		context.textAlign = 'center';
 		context.fillStyle ='#ffffff'
 		context.fillText(`v`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-		context.textAlign = 'center';
 		context.fillStyle = '#ffffff';
 		context.fillText(`${underText}`, 0, canvas.height / 1.5); //, canvas.width / 2.5, canvas.height / 1.8);
 
