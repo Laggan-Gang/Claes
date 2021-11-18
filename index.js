@@ -188,7 +188,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${underText}`, 0, canvas.height / 1.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${underText}`, 0, canvas.height / 1.5); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
