@@ -73,7 +73,7 @@ const dymo = (canvas, text) => {
 
 	do {
 		// Assign the font to the context and decrement it so it can be measured again
-		context.font = `${fontSize -= 10}px sans-serif`;
+		context.font = `${fontSize -= 10}px `;
 		// Compare pixel width of the text to the canvas minus the approximate avatar size
 	} while (context.measureText(text).width > canvas.width);
 
@@ -151,6 +151,10 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 			}
 			return array;
 		}
+		const { registerFont, createCanvas } = require('canvas')
+		registerFont('ComicMono.ttf', { family: 'Comic Mono' })
+
+
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
 		const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
@@ -170,17 +174,21 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		rubrik = svampbob(rubrik)
 		let underText = subText.join(" > ")
 		underText = svampbob(underText)
-		
-		const prioriteringar = omSkuffadSamling.join(" > ") 
+
+		const prioriteringar = omSkuffadSamling.join(" > ")
 		const svampPrio = svampbob(prioriteringar)
 
-		context.font = dymo(canvas, `${rubrik}`);
+		context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
 		context.fillText(`${rubrik}`, 0, canvas.height / 4.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
-		context.font = dymo(canvas, `${underText}`);
+		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
+		context.fillStyle ='#ffffff'
+		context.fillText(`v`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
+
+		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${underText}`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${underText}`, 0, canvas.height / 1.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
