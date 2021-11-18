@@ -65,7 +65,7 @@ var svampbob = function (harang) {
 	return chars.join("");
 };
 
-const applyText = (canvas, text) => {
+const dymo = (canvas, text) => {
 	const context = canvas.getContext('2d');
 
 	// Declare a base size of the font
@@ -112,7 +112,7 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 	};
 	let dravel = meddelande.content.toLowerCase()
-	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 10 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
+	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 7 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
 	if (dravel === 'hey guys') { meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8') }
 	else if (dravel.endsWith('maakep happen')) {
 		if (meddelande.member.voice.channel !== null) {
@@ -157,28 +157,28 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 		const omSkuffadSamling = shuffleArray(behållare)
-		let topText = []
-		let bottomText = []
-		topText.push(omSkuffadSamling[0])
-		topText.push(omSkuffadSamling[1])
-		topText.push(omSkuffadSamling[2])
-		bottomText.push(omSkuffadSamling[3])
-		bottomText.push(omSkuffadSamling[4])
-		let joinedTopText = topText.join(" > ")
-		joinedTopText = svampbob(joinedTopText)
-		let joinedBottomText = bottomText.join(" > ")
-		joinedBottomText = svampbob(joinedBottomText)
+		let överText = []
+		let subText = []
+		överText.push(omSkuffadSamling[0])
+		överText.push(omSkuffadSamling[1])
+		överText.push(omSkuffadSamling[2])
+		subText.push(omSkuffadSamling[3])
+		subText.push(omSkuffadSamling[4])
+		let rubrik = överText.join(" > ")
+		rubrik = svampbob(rubrik)
+		let underText = subText.join(" > ")
+		underText = svampbob(underText)
 		
 		const prioriteringar = omSkuffadSamling.join(" > ") 
 		const svampPrio = svampbob(prioriteringar)
 
-		context.font = applyText(canvas, `${joinedTopText}`);
+		context.font = dymo(canvas, `${rubrik}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${joinedTopText}`, 0, canvas.height / 3.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${rubrik}`, 0, canvas.height / 3.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
-		context.font = applyText(canvas, `${joinedBottomText}`);
+		context.font = dymo(canvas, `${underText}`);
 		context.fillStyle = '#ffffff';
-		context.fillText(`${joinedBottomText}`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${underText}`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
