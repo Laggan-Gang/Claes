@@ -56,7 +56,7 @@ client.once('ready', () => {
 	//
 	//})
 });
-
+//important function for bullying
 var svampbob = function (harang) {
 	var chars = harang.toLowerCase().split("");
 	for (var i = 0; i < chars.length; i += 2) {
@@ -65,6 +65,7 @@ var svampbob = function (harang) {
 	return chars.join("");
 };
 
+//supposedly fits text to size of image for use with canvas, not sure what's really going on
 const dymo = (canvas, text) => {
 	const context = canvas.getContext('2d');
 
@@ -81,15 +82,18 @@ const dymo = (canvas, text) => {
 	return context.font;
 };
 
+//this is only for asking where pee is stored
 const prefix = 'hej'
 
-client.on("messageCreate", async (meddelande) => {  //=> är en funktion
+client.on("messageCreate", async (meddelande) => {
 	//if (meddelande.channelId == pinns && meddelande.author.id == "873614862578769940" && meddelande.embeds[0]) { den här är sparad eftersom den har NQN botten
-	console.log(meddelande.content.length)
+
+	//the die is cast is very important for determining what's going on
 	var aleaIactaEst = Math.floor(Math.random() * 50)
 	console.log('Tärningen är kastad! ' + aleaIactaEst)
+	//if we get bully crit then we bully
 	if (aleaIactaEst == 18 && meddelande.author.id !== "745345949295181886") {
-
+		//make the webhook that impersonates the bullyee
 		let jamesCameron = 'https://cdn.discordapp.com/avatars/' + meddelande.author.id + '/' + meddelande.author.avatar
 		async function webbKrok() {
 			try {
@@ -112,9 +116,13 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 	};
 	let dravel = meddelande.content.toLowerCase()
+	//cursed regex and then some more crit-based bullying
 	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 7 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
+	//a proper greeting gets a proper response
 	if (dravel === 'hey guys') { meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8') }
+	//code to help dota nerds win games
 	else if (dravel.endsWith('maakep happen')) {
+		// bunch of stuff to play audio in voice
 		if (meddelande.member.voice.channel !== null) {
 			let channel = meddelande.member.voice.channel
 			const player = createAudioPlayer();
@@ -132,7 +140,8 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 				setTimeout(() => player.stop(), 4_000)
 			}
 		}
-		const minusMaakep = dravel.slice(0, -14) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
+		//make an array that is exactly 5 long to fit 5 bozos
+		const minusMaakep = dravel.slice(0, -14)
 		var behållare = ['', '', '', '', '']
 		var spelareLista = minusMaakep.split(" ", 5)
 		for (var i of spelareLista) {
@@ -141,7 +150,10 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 		}
 		console.log(behållare)
 		console.log(spelareLista)
-		//// Loop through the array and switch places
+
+		//BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
+
+		// Loop through the array and switch places
 		//with a random position for every item in array
 		function shuffleArray(arr) {
 			const array = [...arr];
@@ -151,51 +163,62 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 			}
 			return array;
 		}
+
+		//ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
+
+		//Set up a bunch of canvas shit that I don't know what's going on with but the tutorials says to do it 
 		const { registerFont, createCanvas } = require('canvas')
 		registerFont('ComicMono.ttf', { family: 'Comic Mono' })
 
-
+		//the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
+		//get the dumb image and draw the dumb image
 		const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+		//do the hoyl and mix up the bag of bozos
 		const omSkuffadSamling = shuffleArray(behållare)
 		let överText = []
 		let subText = []
 
+		//i'm a baby so i write baby code
 		överText.push(omSkuffadSamling[0])
 		överText.push(omSkuffadSamling[1])
 		subText.push(omSkuffadSamling[2])
 		subText.push(omSkuffadSamling[3])
 		subText.push(omSkuffadSamling[4])
 
+		//establish hierarchy and bully
 		let rubrik = överText.join(" > ")
 		rubrik = svampbob(rubrik)
 		let underText = subText.join(" > ")
 		underText = svampbob(underText)
 
+		//2 lines below aren't really used
 		const prioriteringar = omSkuffadSamling.join(" > ")
 		const svampPrio = svampbob(prioriteringar)
 
+		//make canvas type the words on the image time babyyyyyy, the values for .filltext shit is arbitrary and could probably be improved but who cares it looks nice and jank
 		context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${rubrik}`, 0, canvas.height / 4.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${rubrik}`, 0, canvas.height / 4.0); 
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-		context.fillStyle ='#ffffff'
-		context.fillText(`v`, 0, canvas.height / 2.0); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillStyle = '#ffffff'
+		context.fillText(`v`, 0, canvas.height / 2.0); 
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${underText}`, 0, canvas.height / 1.5); //, canvas.width / 2.5, canvas.height / 1.8);
+		context.fillText(`${underText}`, 0, canvas.height / 1.5); 
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
 		meddelande.reply({ files: [attachment] });
 
 	}
-	if (!dravel.startsWith(prefix)) return; //det här fattar tom jag :) 
+	//below is legacy code that is important for ceremonial reasons
+	if (!dravel.startsWith(prefix)) return; 
 	const commandBody = dravel.slice(prefix.length) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
 	const args = commandBody.split(' '); //skapar "en array of sub-strings" för allt som är mellanslag. Denna heter "args
 	const command = args.shift().toLowerCase() //gör allt som finns i args till lowercase, och kallar allt för command   
@@ -209,5 +232,5 @@ client.on("messageCreate", async (meddelande) => {  //=> är en funktion
 
 });
 
-// Login to Discord with your client's token this should always go last I guess? 
+//You have to do this
 client.login(token);
