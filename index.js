@@ -56,8 +56,15 @@ client.once('ready', () => {
 	//
 	//})
 });
+
+
+function inRange(x, min, max) {
+	return ((x - min) * (x - max) <= 0);
+}
+
+
 //important function for bullying
-var svampbob = function (harang) {
+var svampbob = (harang) => {
 	var chars = harang.toLowerCase().split("");
 	for (var i = 0; i < chars.length; i += 2) {
 		chars[i] = chars[i].toUpperCase();
@@ -124,9 +131,41 @@ client.on("messageCreate", async (meddelande) => {
 	else if (dravel.endsWith('maakep happen')) {
 		// bunch of stuff to play audio in voice
 		if (meddelande.member.voice.channel !== null) {
+
+			let ljudfil = 'bow bow.wav'
+
+			switch (true) {
+				case (inRange(aleaIactaEst, 0, 9)):
+					ljudfil = 'mitchyapos.wav'
+					console.log('mitchyapos')
+					break;
+				case (inRange(aleaIactaEst, 10, 19)):
+					ljudfil = 'hugoyapos.wav'
+					console.log('hugo')
+					break;
+				case (inRange(aleaIactaEst, 20, 29)):
+					ljudfil = 'claesyapos.wav'
+					console.log('claes')
+					break;
+				case (inRange(aleaIactaEst, 30, 39)):
+					ljudfil = 'edwinyapos.wav'
+					console.log('edwin')
+					break;
+				case (inRange(aleaIactaEst, 40, 49)):
+					console.log('40-49')
+					break;
+
+
+				default:
+					console.log('default')
+					break;
+			}
+
+
+
 			let channel = meddelande.member.voice.channel
 			const player = createAudioPlayer();
-			const resource = createAudioResource('/home/hugo/Claes/bow bow.wav');
+			let resource = createAudioResource('/home/hugo/Claes/' + ljudfil);
 			const connection = joinVoiceChannel({
 				channelId: channel.id,
 				guildId: channel.guild.id,
@@ -202,15 +241,15 @@ client.on("messageCreate", async (meddelande) => {
 		//make canvas type the words on the image time babyyyyyy, the values for .filltext shit is arbitrary and could probably be improved but who cares it looks nice and jank
 		context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${rubrik}`, 0, canvas.height / 4.0); 
+		context.fillText(`${rubrik}`, 0, canvas.height / 4.0);
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff'
-		context.fillText(`v`, 0, canvas.height / 2.0); 
+		context.fillText(`v`, 0, canvas.height / 2.0);
 
 		context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
 		context.fillStyle = '#ffffff';
-		context.fillText(`${underText}`, 0, canvas.height / 1.5); 
+		context.fillText(`${underText}`, 0, canvas.height / 1.5);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
 		meddelande.edit(`${svampPrio}`)
@@ -218,7 +257,7 @@ client.on("messageCreate", async (meddelande) => {
 
 	}
 	//below is legacy code that is important for ceremonial reasons
-	if (!dravel.startsWith(prefix)) return; 
+	if (!dravel.startsWith(prefix)) return;
 	const commandBody = dravel.slice(prefix.length) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
 	const args = commandBody.split(' '); //skapar "en array of sub-strings" för allt som är mellanslag. Denna heter "args
 	const command = args.shift().toLowerCase() //gör allt som finns i args till lowercase, och kallar allt för command   
