@@ -152,6 +152,7 @@ client.on("messageCreate", async (meddelande) => {
 					break;
 				case (inRange(aleaIactaEst, 30, 39)):
 					ljudfil = 'edwinyapos.wav'
+					vänteTid = 9_000
 					console.log('edwin')
 					break;
 				case (inRange(aleaIactaEst, 40, 49)):
