@@ -134,11 +134,10 @@ client.on("messageCreate", async (meddelande) => {
 
 			let ljudfil = 'bow bow.wav'
 			let tidUtTid = 7_000
-			
+
 			switch (true) {
 				case (inRange(aleaIactaEst, 0, 9)):
 					ljudfil = 'mitchyapos.wav'
-					tidUtTid = 
 					console.log('mitchyapos')
 					break;
 				case (inRange(aleaIactaEst, 10, 19)):
