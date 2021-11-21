@@ -252,7 +252,7 @@ client.on("messageCreate", async (meddelande) => {
 		context.fillText(`${underText}`, 0, canvas.height / 1.5);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'maakepHappen.png');
-		meddelande.edit(`${svampPrio}`)
+		//meddelande.edit(`${svampPrio}`) det är illegal att göra detta tydligen
 		meddelande.reply({ files: [attachment] });
 
 	}
