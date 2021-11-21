@@ -155,11 +155,17 @@ client.on("messageCreate", async (meddelande) => {
 					vänteTid = 9_000
 					console.log('edwin')
 					break;
+
 				case (inRange(aleaIactaEst, 40, 49)):
-					console.log('40-49')
-					break;
+					ljudfil = 'sarayapos.wav'
+					vänteTid = 24_000
+					console.log('sara')
 
 
+
+				//case (inRange(aleaIactaEst, 40, 49)):
+				//	console.log('40-49')
+				//	break;
 				default:
 					console.log('default')
 					break;
