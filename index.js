@@ -133,10 +133,12 @@ client.on("messageCreate", async (meddelande) => {
 		if (meddelande.member.voice.channel !== null) {
 
 			let ljudfil = 'bow bow.wav'
-
+			let tidUtTid = 7_000
+			
 			switch (true) {
 				case (inRange(aleaIactaEst, 0, 9)):
 					ljudfil = 'mitchyapos.wav'
+					tidUtTid = 
 					console.log('mitchyapos')
 					break;
 				case (inRange(aleaIactaEst, 10, 19)):
@@ -145,6 +147,7 @@ client.on("messageCreate", async (meddelande) => {
 					break;
 				case (inRange(aleaIactaEst, 20, 29)):
 					ljudfil = 'claesyapos.wav'
+					tidUtTid = 20_000
 					console.log('claes')
 					break;
 				case (inRange(aleaIactaEst, 30, 39)):
@@ -174,9 +177,9 @@ client.on("messageCreate", async (meddelande) => {
 			player.play(resource)
 			const subscription = connection.subscribe(player)
 			if (subscription) {
-				setTimeout(() => subscription.unsubscribe(), 4_000);
-				setTimeout(() => connection.destroy(), 4_000);
-				setTimeout(() => player.stop(), 4_000)
+				setTimeout(() => subscription.unsubscribe(), tidUtTid);
+				setTimeout(() => connection.destroy(), tidUtTid);
+				setTimeout(() => player.stop(), tidUtTid)
 			}
 		}
 		//make an array that is exactly 5 long to fit 5 bozos
