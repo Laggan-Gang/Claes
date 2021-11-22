@@ -1,3 +1,20 @@
+//TABLE OF CONTENTS
+// Around line 15 Preface								
+// Around line 28 Introduction
+// Around line 80 Chapter One: Boring Functions
+// Around line 114 Chapter Two: The Key to the Mystery
+// Around line 120 Chapter Three: Call & Response
+// Around line 126 Chapter Four: The art of Bullying
+// Around line 157 Chapter Five: There are Only Dumb Questions
+// Around line 164 Chapter Six: The Team
+// Around line 305 Chapter Seven: The Mystery to the Key
+// ARound line 321 Chapter Eight: The End
+
+
+
+//PREFACE:
+//Boring stuff that I don't care about but it's about using other people's code to do things no one should go
+
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
 const { Client, Intents, Message, Channel, TextChannel, MessageAttachment } = require('discord.js');
 const { token } = require('./config.json');
@@ -7,6 +24,9 @@ var filGöraren = require('fs');
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
 const { createAudioPlayer, createAudioResource, joinVoiceChannel, AudioPlayer } = require('@discordjs/voice');
+
+// INTRODUCTION:
+// This is also boring stuff that's "required" for things to "work"
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
@@ -57,6 +77,8 @@ client.once('ready', () => {
 	//})
 });
 
+//CHAPTER ONE: Boring Functions
+//These are boring functions that are mostly stolen
 
 function inRange(x, min, max) {
 	return ((x - min) * (x - max) <= 0);
@@ -89,11 +111,19 @@ const dymo = (canvas, text) => {
 	return context.font;
 };
 
+//CHAPTER TWO: The Key to the Mystery
+//The key is "hej" and the mystery is where pee is stored
+
 //this is only for asking where pee is stored
 const prefix = 'hej'
 
+//CHAPTER THREE: Call & Response
+//This is where things happen babyyyyyyy!
+
 client.on("messageCreate", async (meddelande) => {
 	//if (meddelande.channelId == pinns && meddelande.author.id == "873614862578769940" && meddelande.embeds[0]) { den här är sparad eftersom den har NQN botten
+
+	//CHAPTER FOUR: Bullying is An Art
 
 	//the die is cast is very important for determining what's going on
 	var aleaIactaEst = Math.floor(Math.random() * 50)
@@ -123,10 +153,15 @@ client.on("messageCreate", async (meddelande) => {
 
 	};
 	let dravel = meddelande.content.toLowerCase()
+
+	//CHAPTER FIVE: There are Only Dumb Questions
 	//cursed regex and then some more crit-based bullying
 	if (/.+\?([\n\r\t !]|$)/ig.test(dravel) && aleaIactaEst < 7 && meddelande.author.id !== "745345949295181886") meddelande.reply('Bra fråga, återkommer :)');
 	//a proper greeting gets a proper response
 	if (dravel === 'hey guys') { meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8') }
+
+
+	//CHAPTER SIX: The Team
 	//code to help dota nerds win games
 	else if (dravel.endsWith('maakep happen')) {
 		// bunch of stuff to play audio in voice
@@ -266,6 +301,8 @@ client.on("messageCreate", async (meddelande) => {
 		meddelande.reply({ files: [attachment] });
 
 	}
+
+	//CHAPTER SEVEN: The Mystery to the Key
 	//below is legacy code that is important for ceremonial reasons
 	if (!dravel.startsWith(prefix)) return;
 	const commandBody = dravel.slice(prefix.length) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
@@ -281,5 +318,6 @@ client.on("messageCreate", async (meddelande) => {
 
 });
 
+//CHAPTER EIGHT: The End
 //You have to do this
 client.login(token);
