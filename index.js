@@ -136,31 +136,31 @@ client.on("messageCreate", async (meddelande) => {
 			let vänteTid = 5_000
 
 			switch (true) {
-				case (inRange(aleaIactaEst, 0, 8)):
+				case (inRange(aleaIactaEst, 0, 7)):
 					ljudfil = 'mitchyapos.wav'
 					vänteTid = 7_000
 					console.log('mitchyapos')
 					break;
-				case (inRange(aleaIactaEst, 9, 17)):
+				case (inRange(aleaIactaEst, 8, 16)):
 					ljudfil = 'hugoyapos.wav'
 					console.log('hugo')
 					break;
-				case (inRange(aleaIactaEst, 18, 26)):
+				case (inRange(aleaIactaEst, 17, 25)):
 					ljudfil = 'claesyapos.wav'
 					vänteTid = 20_000
 					console.log('claes')
 					break;
-				case (inRange(aleaIactaEst, 27, 35)):
+				case (inRange(aleaIactaEst, 26, 34)):
 					ljudfil = 'edwinyapos.wav'
 					vänteTid = 9_000
 					console.log('edwin')
 					break;
-				case (inRange(aleaIactaEst, 42, 50)):
+				case (inRange(aleaIactaEst, 35, 43)):
 					ljudfil = 'sarayapos.wav'
 					vänteTid = 24_000
 					console.log('sara')
 					break;
-				case (inRange(aleaIactaEst, 51, 59)):
+				case (inRange(aleaIactaEst, 44, 50)):
 					ljudfil = 'sarayapos2.wav'
 					vänteTid = 17_000
 					console.log('sara')
