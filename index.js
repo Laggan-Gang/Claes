@@ -155,25 +155,17 @@ client.on("messageCreate", async (meddelande) => {
 					vänteTid = 9_000
 					console.log('edwin')
 					break;
-
 				case (inRange(aleaIactaEst, 42, 50)):
 					ljudfil = 'sarayapos.wav'
 					vänteTid = 24_000
 					console.log('sara')
 					break;
-
 				case (inRange(aleaIactaEst, 51, 59)):
 					ljudfil = 'sarayapos2.wav'
 					vänteTid = 17_000
 					console.log('sara')
 					break;
 
-
-
-				//case (inRange(aleaIactaEst, 40, 49)):
-				//	console.log('40-49')
-				//	break;
-				// UNUSED: EDWINS, SARA YAPOS 2, 
 				default:
 					console.log('default')
 					break;
