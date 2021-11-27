@@ -171,39 +171,45 @@ client.on("messageCreate", async (meddelande) => {
 			let vänteTid = 5_000
 
 			switch (true) {
-				case (inRange(aleaIactaEst, 0, 6)):
+				case (inRange(aleaIactaEst, 0, 5)):
 					ljudfil = 'mitchyapos.wav'
 					vänteTid = 7_000
 					console.log('mitchyapos')
 					break;
-				case (inRange(aleaIactaEst, 7, 13)):
+				case (inRange(aleaIactaEst, 6, 11)):
 					ljudfil = 'hugoyapos.wav'
 					console.log('hugo')
 					break;
-				case (inRange(aleaIactaEst, 14, 20)):
+				case (inRange(aleaIactaEst, 12, 17)):
 					ljudfil = 'claesyapos.wav'
 					vänteTid = 20_000
 					console.log('claes')
 					break;
-				case (inRange(aleaIactaEst, 21, 26)):
+				case (inRange(aleaIactaEst, 18, 23)):
 					ljudfil = 'edwinyapos.wav'
 					vänteTid = 9_000
 					console.log('edwin')
 					break;
-				case (inRange(aleaIactaEst, 27, 33)):
+				case (inRange(aleaIactaEst, 24, 29)):
 					ljudfil = 'sarayapos.wav'
 					vänteTid = 24_000
 					console.log('sara')
 					break;
-				case (inRange(aleaIactaEst, 34, 41)):
+				case (inRange(aleaIactaEst, 30, 35)):
 					ljudfil = 'densetsuyapos.wav'
 					vänteTid = 26_000
 					console.log('Laggan gaiden')
 					break;
-				case (inRange(aleaIactaEst, 42, 49)):
+				case (inRange(aleaIactaEst, 36, 41)):
 					ljudfil = 'sarayapos2.wav'
 					vänteTid = 17_000
 					console.log('sara')
+					break;
+
+				case (inRange(aleaIactaEst, 42, 47)):
+					ljudfil = 'onyourmarksyapos.wav'
+					vänteTid = 10_000
+					console.log('On your marks')
 					break;
 
 				default:
