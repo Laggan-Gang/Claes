@@ -315,14 +315,7 @@ client.on("messageCreate", async (meddelande) => {
 
 	//CHAPTER SEVEN: The Mystery to the Key
 	//below is legacy code that is important for ceremonial reasons
-	if (!dravel.startsWith(prefix)) return;
-	const commandBody = dravel.slice(prefix.length) // tar meddelandet som vi fått med prefixet, tar bort så många bokstäver som prefixet är
-	const args = commandBody.split(' '); //skapar "en array of sub-strings" för allt som är mellanslag. Denna heter "args
-	const command = args.shift().toLowerCase() //gör allt som finns i args till lowercase, och kallar allt för command   
-
-
-
-	if (command === "claes") { //blabla om command är hej bla bla
+	if (dravel === "hej claes") { //blabla om command är hej bla bla
 
 		meddelande.reply(`PEE IS STORED IN BALLS`);
 	}
