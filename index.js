@@ -135,6 +135,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 		player.play(resurs)
 		while (!(player.state == AudioPlayerStatus.Idle)) //dumb baby jail
 		{
+			let x = 1
 		}
 		console.log('Nu är vi i loopen :)' + player.state.status)
 	}
