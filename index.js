@@ -130,12 +130,7 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     });
 	
     const subscription = connection.subscribe(player)
-    if (subscription) 
-    {
-        setTimeout(() => subscription.unsubscribe(), vänteTid);
-        setTimeout(() => connection.destroy(), vänteTid);
-        setTimeout(() => player.stop(), vänteTid)
-    }
+
 
 
     for(let i = 0; i < bokstäver.length;i++)
@@ -151,7 +146,13 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
         {
 
         }
-
+    }
+	
+    if (subscription) 
+    {
+        setTimeout(() => subscription.unsubscribe(), vänteTid);
+        setTimeout(() => connection.destroy(), vänteTid);
+        setTimeout(() => player.stop(), vänteTid)
     }
 }
 
@@ -387,9 +388,14 @@ client.on("messageCreate", async (meddelande) => {
 	
 	if(meddelande.member.voice.channel != undefined){
 		if(meddelande.content.startsWith('say ')){
+			const connection = joinVoiceChannel({
+				channelId: meddelande.member.voice.channel.id,
+				guildId: meddelande.member.voice.channel.guild.id,
+				adapterCreator: meddelande.member.voice.channel.guild.voiceAdapterCreator,
+			});
+
 			tosay = meddelande.cleanContent.substring(4,).toLowerCase()
-			meddelande.member.voice.channel.joinVoiceChannel()
-			.then(connection => { spelaungefärljudetavenbokstav2(msg,connection,tosay) });
+			spelaungefärljudetavenbokstav2(msg,connection,tosay);
 		}
 	}
 });
