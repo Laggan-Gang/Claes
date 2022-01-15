@@ -23,7 +23,7 @@ var filGöraren = require('fs');
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
-const { createAudioPlayer, createAudioResource, joinVoiceChannel, AudioPlayer } = require('@discordjs/voice');
+const { createAudioPlayer, createAudioResource, joinVoiceChannel, createReadStream, AudioPlayer } = require('@discordjs/voice');
 
 // INTRODUCTION:
 // This is also boring stuff that's "required" for things to "work"
