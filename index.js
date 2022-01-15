@@ -118,7 +118,6 @@ function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver){
 		meddelande.delete({ timeout: 3000})
 	}
 	else{
-		console.log(bokstäver.charAt(0));
 		anslutning.play(`./bokstäver/${bokstäver.charAt(0)}.wav`)
 		.on("finish", () => { spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver.substring(1,)) })
 	}
