@@ -125,17 +125,19 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
         adapterCreator: channel.guild.voiceAdapterCreator,
     });
 
+    const subscription = connection.subscribe(player)
+    
     for(let i = 0; i < bokstäver.length;i++)
     {
+    	let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
         player.play(resurs)
-        const subscription = connection.subscribe(player)
-        if (subscription) 
+    }
+    if (subscription) 
         {
             setTimeout(() => subscription.unsubscribe(), vänteTid);
             setTimeout(() => connection.destroy(), vänteTid);
             setTimeout(() => player.stop(), vänteTid)
         }
-    }
 }
 
 //CHAPTER TWO: The Key to the Mystery
