@@ -120,8 +120,16 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     console.log(bokstäver.length)
     vänteTid = 1_000
     let channel = meddelande.member.voice.channel
+    let vänteTid = 500 *bokstäver.length
     const player = createAudioPlayer();
-    let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[0] + ".wav");
+
+    const subscription = connection.subscribe(player)
+    if (subscription) 
+    {
+        setTimeout(() => subscription.unsubscribe(), vänteTid);
+        setTimeout(() => connection.destroy(), vänteTid);
+        setTimeout(() => player.stop(), vänteTid)
+    }
     const connection = joinVoiceChannel(
     {
         channelId: channel.id,
@@ -129,24 +137,21 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
         adapterCreator: channel.guild.voiceAdapterCreator,
     });
 
-    const subscription = connection.subscribe(player)
-
     for(let i = 0; i < bokstäver.length;i++)
     {
+	console.log(i)
         let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
-        
+        player.play(resurs)
+        let gate = true;
         player.on(AudioPlayerStatus.Idle, () => {
-            player.play(resurs);
+            gate = false;
         });
-        //ASYNC.WAITFORSOUNDTOFINISH()
-    }
-    console.log("Nu har jag spelat klart! :)")
-    if (subscription) 
+        while(gate)
         {
-            setTimeout(() => subscription.unsubscribe(), vänteTid);
-            setTimeout(() => connection.destroy(), vänteTid);
-            setTimeout(() => player.stop(), vänteTid)
+
         }
+
+    }
 }
 
 function spelaungefärljudetavenbokstav2(meddelande,anslutning,bokstäver){
