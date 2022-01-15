@@ -130,9 +130,11 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	for(let i = 0; i < bokstäver.length;i++)
 	{
 	console.log(bokstäver[i])
+	console.log('Nu är vi utanför loopen :(' + player.state)
 	let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
 	player.on(AudioPlayerStatus.Idle, () => {
 		player.play(resurs)
+		console.log('Nu är vi i loopen :)' + player.state)
 	}) 
 
 	setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
