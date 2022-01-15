@@ -112,7 +112,10 @@ const dymo = (canvas, text) => {
 };
 
 //And here is a self-made one (it's NOT recursive!) ;)
-async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
+function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
+	console.log("NU KÖR VI!!!!111ettett")
+	console.log(bokstäver)
+	console.log(bokstäver.length)
 	bokstavsBegynnelseTid = 1000
 	bokstavsTid = 500
 	let vänteTid = 2000 + bokstavsBegynnelseTid + bokstavsTid * bokstäver.length
@@ -128,23 +131,18 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	console.log('Nu är vi utanför loopen :(' + player.state.status)
 	const subscription = connection.subscribe(player)
 	for (let i = 0; i < bokstäver.length; i++) {
-		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav")
-		console.log('Innan player.play ' + player.state.status)
-		player.play(resurs).then(() => {player.stop});
-		console.log('efter player.play ' + player.state.status)
-		//player.on(AudioPlayerStatus.Idle, () => {
-		//	player.stop();
-		//	console.log(player.state.status);
-		//})
 		
 		
 		
 		
-		//console.log(bokstäver[i])
-		//let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
-		//setTimeout(() => player.play(resurs), (bokstavsTid * i))
-		//setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
-		//console.log('Nu är vi i loopen :)' + player.state.status)
+		
+		
+		console.log(bokstäver[i])
+
+		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
+		setTimeout(() => player.play(resurs), (bokstavsTid * i))
+		setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
+		console.log('Nu är vi i loopen :)' + player.state.status)
 	}
 	console.log("Nu har jag spelat klart! :)")
 	if (subscription) {
