@@ -128,13 +128,28 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
 	const subscription = connection.subscribe(player)
 	for(let i = 0; i < bokstäver.length;i++)
-	{
-	console.log(bokstäver[i])
-	let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
-	player.play(resurs)
+    {
+        let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
 
-	setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
-	}
+        player.play(resurs);
+        let gate = true;
+        player.on(AudioPlayerStatus.Idle, () => {
+            gate = false;
+        });
+        while(gate)
+        {
+
+        }
+
+    }
+	//for(let i = 0; i < bokstäver.length;i++)
+	//{
+	//console.log(bokstäver[i])
+	//let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
+	//player.play(resurs)
+//
+	//setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
+	//}
 	console.log("Nu har jag spelat klart! :)")
 	if (subscription) {
 		setTimeout(() => subscription.unsubscribe(), vänteTid);
@@ -142,6 +157,8 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 		setTimeout(() => player.stop(), vänteTid)
 	}
 }
+
+
 
 //CHAPTER TWO: The Key to the Mystery
 //The key is "hej" and the mystery is where pee is stored
