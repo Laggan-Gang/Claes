@@ -358,7 +358,9 @@ client.on("messageCreate", async (meddelande) => {
 	//Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
 	if(meddelande.member.voice.channel != undefined){
 		if(meddelande.content.startsWith('säg ')){
+			console.log(meddelande.cleanContent)
 			attsäga = meddelande.cleanContent.split("säg ")[1].toLowerCase
+			console.log(attsäga)
 			spelaungefärljudetavenbokstav(meddelande,attsäga)
 		}
 	}
