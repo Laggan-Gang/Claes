@@ -379,10 +379,10 @@ client.on("messageCreate", async (meddelande) => {
 		}
 	}
 	
-	if(msg.member.voice.channel != undefined){
-		if(msg.content.startsWith('say ')){
-			tosay = msg.cleanContent.substring(4,).toLowerCase()
-			msg.member.voice.channel.joinVoiceChannel()
+	if(meddelande.member.voice.channel != undefined){
+		if(meddelande.content.startsWith('say ')){
+			tosay = meddelande.cleanContent.substring(4,).toLowerCase()
+			meddelande.member.voice.channel.joinVoiceChannel()
 			.then(connection => { spelaungefärljudetavenbokstav2(msg,connection,tosay) });
 		}
 	}
