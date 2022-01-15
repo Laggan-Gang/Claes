@@ -117,7 +117,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	console.log(bokstäver)
 	console.log(bokstäver.length)
 	bokstavsBegynnelseTid = 1000
-	bokstavsTid = 300
+	bokstavsTid = 500
 	let vänteTid = 2000 + bokstavsBegynnelseTid + bokstavsTid * bokstäver.length
 	let channel = meddelande.member.voice.channel
 	const player = createAudioPlayer();
