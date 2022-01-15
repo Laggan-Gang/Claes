@@ -126,13 +126,14 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 			adapterCreator: channel.guild.voiceAdapterCreator,
 		});
 	let i = 1
-	const subscription = connection.subscribe(player)
+
 
 	//for(let i = 0; i < bokstäver.length;i++)
 	//{
 	console.log(bokstäver[i])
 	let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
 	player.play(resurs)
+	const subscription = connection.subscribe(player)
 	setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
 	//}
 	console.log("Nu har jag spelat klart! :)")
