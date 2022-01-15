@@ -23,7 +23,7 @@ var filGöraren = require('fs');
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
-const { createAudioPlayer, createAudioResource, joinVoiceChannel, createReadStream, AudioPlayer } = require('@discordjs/voice');
+const { createAudioPlayer, createAudioResource, joinVoiceChannel, AudioPlayer } = require('@discordjs/voice');
 
 // INTRODUCTION:
 // This is also boring stuff that's "required" for things to "work"
@@ -112,38 +112,36 @@ const dymo = (canvas, text) => {
 };
 
 //And here is a self-made one (it's NOT recursive!) ;)
-function spelaungefärljudetavenbokstav(meddelande,bokstäver)
-{
-    console.log("NU KÖR VI!!!!111ettett")
-    console.log(bokstäver)
-    console.log(bokstäver.length)
-    vänteTid = 1_000
-    let channel = meddelande.member.voice.channel
-    const player = createAudioPlayer();
-    let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[0] + ".wav");
-    const connection = joinVoiceChannel(
-    {
-        channelId: channel.id,
-        guildId: channel.guild.id,
-        adapterCreator: channel.guild.voiceAdapterCreator,
-    });
+function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
+	console.log("NU KÖR VI!!!!111ettett")
+	console.log(bokstäver)
+	console.log(bokstäver.length)
+	vänteTid = 1_000
+	let channel = meddelande.member.voice.channel
+	const player = createAudioPlayer();
+	let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[0] + ".wav");
+	const connection = joinVoiceChannel(
+		{
+			channelId: channel.id,
+			guildId: channel.guild.id,
+			adapterCreator: channel.guild.voiceAdapterCreator,
+		});
+	let i = 0
+	const subscription = connection.subscribe(player)
 
-    const subscription = connection.subscribe(player)
-    
-    for(let i = 0; i < bokstäver.length;i++)
-    {
+	//for(let i = 0; i < bokstäver.length;i++)
+	//{
 	console.log(bokstäver[i])
-    	let resurs = createAudioResource(createReadStream('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav"));
-        player.play(resurs)
+	let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
+	player.play(resurs)
 	setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
-    }
-    console.log("Nu har jag spelat klart! :)")
-    if (subscription) 
-        {
-            setTimeout(() => subscription.unsubscribe(), vänteTid);
-            setTimeout(() => connection.destroy(), vänteTid);
-            setTimeout(() => player.stop(), vänteTid)
-        }
+	//}
+	console.log("Nu har jag spelat klart! :)")
+	if (subscription) {
+		setTimeout(() => subscription.unsubscribe(), vänteTid);
+		setTimeout(() => connection.destroy(), vänteTid);
+		setTimeout(() => player.stop(), vänteTid)
+	}
 }
 
 //CHAPTER TWO: The Key to the Mystery
@@ -354,13 +352,13 @@ client.on("messageCreate", async (meddelande) => {
 
 		meddelande.reply(`PEE IS STORED IN BALLS`);
 	}
-	
+
 	//CHAPTER EIGHT: The Endless River
 	//Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
-	if(meddelande.member.voice.channel != undefined){
-		if(meddelande.content.startsWith('säg ')){
+	if (meddelande.member.voice.channel != undefined) {
+		if (meddelande.content.startsWith('säg ')) {
 			attsäga = meddelande.cleanContent.substring(4,).toLowerCase()
-			spelaungefärljudetavenbokstav(meddelande,attsäga)
+			spelaungefärljudetavenbokstav(meddelande, attsäga)
 		}
 	}
 });
