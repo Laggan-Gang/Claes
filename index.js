@@ -115,6 +115,8 @@ const dymo = (canvas, text) => {
 function spelaungefärljudetavenbokstav(meddelande,bokstäver)
 {
     console.log("NU KÖR VI!!!!111ettett")
+    console.log(bokstäver)
+    console.log(bokstäver.length)
     vänteTid = 50_000
     let channel = meddelande.member.voice.channel
     const player = createAudioPlayer();
