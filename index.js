@@ -121,7 +121,14 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     let channel = meddelande.member.voice.channel
     let vänteTid = 500 *bokstäver.length
     const player = createAudioPlayer();
-
+	
+    const connection = joinVoiceChannel(
+    {
+        channelId: channel.id,
+        guildId: channel.guild.id,
+        adapterCreator: channel.guild.voiceAdapterCreator,
+    });
+	
     const subscription = connection.subscribe(player)
     if (subscription) 
     {
@@ -129,12 +136,7 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
         setTimeout(() => connection.destroy(), vänteTid);
         setTimeout(() => player.stop(), vänteTid)
     }
-    const connection = joinVoiceChannel(
-    {
-        channelId: channel.id,
-        guildId: channel.guild.id,
-        adapterCreator: channel.guild.voiceAdapterCreator,
-    });
+
 
     for(let i = 0; i < bokstäver.length;i++)
     {
