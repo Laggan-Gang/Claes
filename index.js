@@ -395,7 +395,7 @@ client.on("messageCreate", async (meddelande) => {
 			});
 
 			tosay = meddelande.cleanContent.substring(4,).toLowerCase()
-			spelaungefärljudetavenbokstav2(msg,connection,tosay);
+			spelaungefärljudetavenbokstav2(meddelande,connection,tosay);
 		}
 	}
 });
