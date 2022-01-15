@@ -17,6 +17,7 @@
 
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
 const { Client, Intents, Message, Channel, TextChannel, MessageAttachment } = require('discord.js');
+const { AudioPlayerStatus } = require('@discordjs/voice');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
 var filGöraren = require('fs');
@@ -134,7 +135,7 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     {
         let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
         
-        player.on(AudioPlayerStatus.Idle, () => {
+        player.on(audioPlayerStatus.Idle, () => {
             player.play(resurs);
         });
         //ASYNC.WAITFORSOUNDTOFINISH()
@@ -365,6 +366,14 @@ client.on("messageCreate", async (meddelande) => {
 			spelaungefärljudetavenbokstav(meddelande,attsäga)
 		}
 	}
+	/*
+	if(msg.member.voice.channel != undefined){
+		if(msg.content.startsWith('säg ')){
+			tosay = msg.cleanContent.substring(4,).toLowerCase()
+			msg.member.voice.channel.joinVoiceChannel()
+			.then(connection => { spelaungefärljudetavenbokstav2(msg,connection,tosay) });
+		}
+	*/
 });
 
 //CHAPTER NINE: The End
