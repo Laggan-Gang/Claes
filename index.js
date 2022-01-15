@@ -114,6 +114,7 @@ const dymo = (canvas, text) => {
 //And here is a self-made one (it's NOT recursive!) ;)
 function spelaungefärljudetavenbokstav(meddelande,bokstäver)
 {
+    console.log("NU KÖR VI!!!!111ettett")
     vänteTid = 50_000
     let channel = meddelande.member.voice.channel
     const player = createAudioPlayer();
@@ -129,9 +130,11 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     
     for(let i = 0; i < bokstäver.length;i++)
     {
+	console.log(bokstäver[i])
     	let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
         player.play(resurs)
     }
+    console.log("Nu har jag spelat klart! :)")
     if (subscription) 
         {
             setTimeout(() => subscription.unsubscribe(), vänteTid);
