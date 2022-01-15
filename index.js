@@ -125,7 +125,6 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 			guildId: channel.guild.id,
 			adapterCreator: channel.guild.voiceAdapterCreator,
 		});
-	let i = 1
 
 	const subscription = connection.subscribe(player)
 	for(let i = 0; i < bokstäver.length;i++)
