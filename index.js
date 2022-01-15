@@ -126,18 +126,18 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 			adapterCreator: channel.guild.voiceAdapterCreator,
 		});
 
+	console.log('Nu är vi utanför loopen :(' + player.state.status)
 	const subscription = connection.subscribe(player)
-	for(let i = 0; i < bokstäver.length;i++)
-	{
-	console.log(bokstäver[i])
-	console.log('Nu är vi utanför loopen :(' + player.state)
-	let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
-	player.on(AudioPlayerStatus.Idle, () => {
-		player.play(resurs)
-		console.log('Nu är vi i loopen :)' + player.state)
-	}) 
+	for (let i = 0; i < bokstäver.length; i++) {
+		console.log(bokstäver[i])
 
-	setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
+		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
+		player.play(resurs)
+		//while ((player.state == AudioPlayerStatus.Playing)) //dumb baby jail
+		//{
+//
+		//}
+		console.log('Nu är vi i loopen :)' + player.state.status)
 	}
 	console.log("Nu har jag spelat klart! :)")
 	if (subscription) {
