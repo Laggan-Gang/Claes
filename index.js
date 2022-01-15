@@ -117,6 +117,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	console.log(bokstäver)
 	console.log(bokstäver.length)
 	vänteTid = 10_000
+	bokstavsTid = 500
 	let channel = meddelande.member.voice.channel
 	const player = createAudioPlayer();
 	const connection = joinVoiceChannel(
@@ -133,16 +134,13 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
 		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
 		player.play(resurs)
-		while (!(player.state.status === 'idle')) //dumb baby jail
-		{
-		}
+		setTimeout(() => player.stop(), vänteTid)
 		console.log('Nu är vi i loopen :)' + player.state.status)
 	}
 	console.log("Nu har jag spelat klart! :)")
 	if (subscription) {
 		setTimeout(() => subscription.unsubscribe(), vänteTid);
 		setTimeout(() => connection.destroy(), vänteTid);
-		setTimeout(() => player.stop(), vänteTid)
 	}
 }
 
