@@ -17,7 +17,6 @@
 
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
 const { Client, Intents, Message, Channel, TextChannel, MessageAttachment } = require('discord.js');
-const { AudioPlayerStatus } = require('@discordjs/voice');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
 var filGöraren = require('fs');
@@ -118,54 +117,33 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     console.log("NU KÖR VI!!!!111ettett")
     console.log(bokstäver)
     console.log(bokstäver.length)
+    vänteTid = 1_000
     let channel = meddelande.member.voice.channel
-    let vänteTid = 500 *bokstäver.length
     const player = createAudioPlayer();
-	
+    let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[0] + ".wav");
     const connection = joinVoiceChannel(
     {
         channelId: channel.id,
         guildId: channel.guild.id,
         adapterCreator: channel.guild.voiceAdapterCreator,
     });
-	
+
     const subscription = connection.subscribe(player)
-
-
-
+    
     for(let i = 0; i < bokstäver.length;i++)
     {
-	console.log(i)
-        let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
+	console.log(bokstäver[i])
+    	let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
         player.play(resurs)
-        let gate = true;
-        player.on(AudioPlayerStatus.Idle, () => {
-            gate = false;
-        });
-        while(gate)
-        {
-
-        }
+	setTimeout(() => console.log("HUGO HUGO HUGO"), 1_000)
     }
-	
+    console.log("Nu har jag spelat klart! :)")
     if (subscription) 
-    {
-        setTimeout(() => subscription.unsubscribe(), vänteTid);
-        setTimeout(() => connection.destroy(), vänteTid);
-        setTimeout(() => player.stop(), vänteTid)
-    }
-}
-
-function spelaungefärljudetavenbokstav2(meddelande,anslutning,bokstäver){
-	if (bokstäver == ""){
-		meddelande.member.voice.channel.leave() 
-		meddelande.delete({ timeout: 3000})
-	}
-	else{
-		console.log(bokstäver.charAt(0));
-		anslutning.play(`./bokstäver/${bokstäver.charAt(0)}.wav`)
-		.on("finish", () => { spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver.substring(1,)) })
-	}
+        {
+            setTimeout(() => subscription.unsubscribe(), vänteTid);
+            setTimeout(() => connection.destroy(), vänteTid);
+            setTimeout(() => player.stop(), vänteTid)
+        }
 }
 
 //CHAPTER TWO: The Key to the Mystery
@@ -383,19 +361,6 @@ client.on("messageCreate", async (meddelande) => {
 		if(meddelande.content.startsWith('säg ')){
 			attsäga = meddelande.cleanContent.substring(4,).toLowerCase()
 			spelaungefärljudetavenbokstav(meddelande,attsäga)
-		}
-	}
-	
-	if(meddelande.member.voice.channel != undefined){
-		if(meddelande.content.startsWith('say ')){
-			const connection = joinVoiceChannel({
-				channelId: meddelande.member.voice.channel.id,
-				guildId: meddelande.member.voice.channel.guild.id,
-				adapterCreator: meddelande.member.voice.channel.guild.voiceAdapterCreator,
-			});
-
-			tosay = meddelande.cleanContent.substring(4,).toLowerCase()
-			spelaungefärljudetavenbokstav2(meddelande,connection,tosay);
 		}
 	}
 });
