@@ -114,7 +114,7 @@ const dymo = (canvas, text) => {
 //And here is a self-made one (it's NOT recursive!) ;)
 function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver)
 {
-    vänteTid = 0_500 * bokstäver.length
+    vänteTid = 500 * bokstäver.length
     let channel = meddelande.member.voice.channel
     const player = createAudioPlayer();
     let resource = createAudioResource('/home/hugo/Claes/' + ljudfil);
