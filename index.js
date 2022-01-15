@@ -385,7 +385,7 @@ client.on("messageCreate", async (meddelande) => {
 			msg.member.voice.channel.joinVoiceChannel()
 			.then(connection => { spelaungefärljudetavenbokstav2(msg,connection,tosay) });
 		}
-	
+	}
 });
 
 //CHAPTER NINE: The End
