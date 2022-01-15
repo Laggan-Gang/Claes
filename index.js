@@ -135,7 +135,6 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 			console.log(player.state.status)
 		})
 		
-		player.
 		
 		
 		
