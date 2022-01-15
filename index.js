@@ -134,7 +134,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
 		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
 		player.play(resurs)
-		setTimeout(() => player.stop(), vänteTid)
+		setTimeout(() => player.stop(), bokstavstid)
 		console.log('Nu är vi i loopen :)' + player.state.status)
 	}
 	console.log("Nu har jag spelat klart! :)")
