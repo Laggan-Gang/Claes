@@ -131,9 +131,9 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	console.log('Nu är vi utanför loopen :(' + player.state.status)
 	const subscription = connection.subscribe(player)
 	for (let i = 0; i < bokstäver.length; i++) {
+		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav")
+		player.play(resurs);
 		player.on(AudioPlayerStatus.Idle, () => {
-			let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav")
-			player.play(resurs);
 			console.log(player.state.status)
 		})
 		
