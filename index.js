@@ -149,6 +149,18 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
         }
 }
 
+function spelaungefärljudetavenbokstav2(meddelande,anslutning,bokstäver){
+	if (bokstäver == ""){
+		meddelande.member.voice.channel.leave() 
+		meddelande.delete({ timeout: 3000})
+	}
+	else{
+		console.log(bokstäver.charAt(0));
+		anslutning.play(`./bokstäver/${bokstäver.charAt(0)}.wav`)
+		.on("finish", () => { spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver.substring(1,)) })
+	}
+}
+
 //CHAPTER TWO: The Key to the Mystery
 //The key is "hej" and the mystery is where pee is stored
 
@@ -366,14 +378,14 @@ client.on("messageCreate", async (meddelande) => {
 			spelaungefärljudetavenbokstav(meddelande,attsäga)
 		}
 	}
-	/*
+	
 	if(msg.member.voice.channel != undefined){
 		if(msg.content.startsWith('säg ')){
 			tosay = msg.cleanContent.substring(4,).toLowerCase()
 			msg.member.voice.channel.joinVoiceChannel()
 			.then(connection => { spelaungefärljudetavenbokstav2(msg,connection,tosay) });
 		}
-	*/
+	
 });
 
 //CHAPTER NINE: The End
