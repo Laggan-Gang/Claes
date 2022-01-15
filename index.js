@@ -111,6 +111,18 @@ const dymo = (canvas, text) => {
 	return context.font;
 };
 
+//And here is a self-made one (it's recursive!) ;)
+function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver){
+	if (bokstäver == ""){
+		meddelande.member.voice.channel.leave() 
+		meddelande.delete({ timeout: 3000})
+	}
+	else{
+		anslutning.play(`./bokstäver/${bokstäver.charAt(0)}.wav`)
+		.on("finish", () => { spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver.substring(1,)) })
+	}
+}
+
 //CHAPTER TWO: The Key to the Mystery
 //The key is "hej" and the mystery is where pee is stored
 
@@ -319,9 +331,18 @@ client.on("messageCreate", async (meddelande) => {
 
 		meddelande.reply(`PEE IS STORED IN BALLS`);
 	}
-
+	
+	//CHAPTER EIGHT: The Endless River
+	//Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
+	if(meddelande.member.voice.channel != undefined){
+		if(meddelande.content.startsWith('säg ')){
+			attsäga = meddelande.cleanContent.split("säg ")[1].toLowerCase
+			meddelande.member.voice.channel.join()
+			.then(anslutning => { spelaungefärljudetavenbokstav(meddelande,anslutning,attsäga) });
+		}
+	}
 });
 
-//CHAPTER EIGHT: The End
+//CHAPTER NINE: The End
 //You have to do this
 client.login(token);
