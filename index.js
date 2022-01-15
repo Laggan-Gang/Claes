@@ -129,10 +129,15 @@ function spelaungefärljudetavenbokstav(meddelande,bokstäver)
     });
 
     const subscription = connection.subscribe(player)
-    
+
     for(let i = 0; i < bokstäver.length;i++)
     {
-	setTimeout(() => player.play(createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav")), 1_000 * i)
+        let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[i] + ".wav");
+        
+        player.on(AudioPlayerStatus.Idle, () => {
+            player.play(resurs);
+        });
+        //ASYNC.WAITFORSOUNDTOFINISH()
     }
     console.log("Nu har jag spelat klart! :)")
     if (subscription) 
