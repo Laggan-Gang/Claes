@@ -18,7 +18,6 @@
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
 const { Client, Intents, Message, Channel, TextChannel, MessageAttachment } = require('discord.js');
 const { AudioPlayerStatus } = require('@discordjs/voice');
-const { joinVoiceChannel } = require('@discordjs/voice');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
 var filGöraren = require('fs');
