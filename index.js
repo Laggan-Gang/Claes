@@ -117,7 +117,7 @@ function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver)
     vänteTid = 500 * bokstäver.length
     let channel = meddelande.member.voice.channel
     const player = createAudioPlayer();
-    let resource = createAudioResource('/home/hugo/Claes/' + ljudfil);
+    let resurs = createAudioResource('/home/hugo/Claes/bokstäver' + bokstäver[0] + ".wav");
     const connection = joinVoiceChannel(
     {
         channelId: channel.id,
@@ -127,7 +127,7 @@ function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver)
 
     for(let i = 0; i < bokstäver.length;i++)
     {
-        player.play(./bokstäver/${bokstäver.charAt(i)}.wav)
+        player.play(resurs)
         const subscription = connection.subscribe(player)
         if (subscription) 
         {
