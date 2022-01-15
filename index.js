@@ -133,7 +133,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
 		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
 		player.play(resurs)
-		while ((player.state == AudioPlayerStatus.Playing || player.state == AudioPlayerStatus.Buffering)) //dumb baby jail
+		while (!(player.state == AudioPlayerStatus.Idle)) //dumb baby jail
 		{
 		}
 		console.log('Nu är vi i loopen :)' + player.state.status)
