@@ -112,15 +112,29 @@ const dymo = (canvas, text) => {
 };
 
 //And here is a self-made one (it's recursive!) ;)
-function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver){
-	if (bokstäver == ""){
-		meddelande.member.voice.channel.leave() 
-		meddelande.delete({ timeout: 3000})
-	}
-	else{
-		anslutning.play(`./bokstäver/${bokstäver.charAt(0)}.wav`)
-		.on("finish", () => { spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver.substring(1,)) })
-	}
+function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver)
+{
+    let channel = meddelande.member.voice.channel
+    const player = createAudioPlayer();
+    let resource = createAudioResource('/home/hugo/Claes/' + ljudfil);
+    const connection = joinVoiceChannel(
+    {
+        channelId: channel.id,
+        guildId: channel.guild.id,
+        adapterCreator: channel.guild.voiceAdapterCreator,
+    });
+
+    for(let i = 0; i < bokstäver.length;i++)
+    {
+        player.play(./bokstäver/${bokstäver.charAt(i)}.wav)
+        const subscription = connection.subscribe(player)
+        if (subscription) 
+        {
+            setTimeout(() => subscription.unsubscribe(), vänteTid);
+            setTimeout(() => connection.destroy(), vänteTid);
+            setTimeout(() => player.stop(), vänteTid)
+        }
+    }
 }
 
 //CHAPTER TWO: The Key to the Mystery
@@ -337,8 +351,7 @@ client.on("messageCreate", async (meddelande) => {
 	if(meddelande.member.voice.channel != undefined){
 		if(meddelande.content.startsWith('säg ')){
 			attsäga = meddelande.cleanContent.split("säg ")[1].toLowerCase
-			meddelande.member.voice.channel.join()
-			.then(anslutning => { spelaungefärljudetavenbokstav(meddelande,anslutning,attsäga) });
+			spelaungefärljudetavenbokstav(meddelande,anslutning,attsäga)
 		}
 	}
 });
