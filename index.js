@@ -112,7 +112,7 @@ const dymo = (canvas, text) => {
 };
 
 //And here is a self-made one (it's NOT recursive!) ;)
-function spelaungefärljudetavenbokstav(meddelande,anslutning,bokstäver)
+function spelaungefärljudetavenbokstav(meddelande,bokstäver)
 {
     vänteTid = 500 * bokstäver.length
     let channel = meddelande.member.voice.channel
@@ -352,7 +352,7 @@ client.on("messageCreate", async (meddelande) => {
 	if(meddelande.member.voice.channel != undefined){
 		if(meddelande.content.startsWith('säg ')){
 			attsäga = meddelande.cleanContent.split("säg ")[1].toLowerCase
-			spelaungefärljudetavenbokstav(meddelande,anslutning,attsäga)
+			spelaungefärljudetavenbokstav(meddelande,attsäga)
 		}
 	}
 });
