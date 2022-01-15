@@ -131,12 +131,21 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	console.log('Nu är vi utanför loopen :(' + player.state.status)
 	const subscription = connection.subscribe(player)
 	for (let i = 0; i < bokstäver.length; i++) {
-		console.log(bokstäver[i])
-
-		let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
-		setTimeout(() => player.play(resurs), (bokstavsTid * i))
-		setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
-		console.log('Nu är vi i loopen :)' + player.state.status)
+		player.on(AudioPlayerStatus.Idle, () => {
+			let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav")
+			player.play(resurs);
+		})
+		
+		
+		
+		
+		
+		
+		//console.log(bokstäver[i])
+		//let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav");
+		//setTimeout(() => player.play(resurs), (bokstavsTid * i))
+		//setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
+		//console.log('Nu är vi i loopen :)' + player.state.status)
 	}
 	console.log("Nu har jag spelat klart! :)")
 	if (subscription) {
@@ -144,6 +153,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 		setTimeout(() => connection.destroy(), vänteTid);
 	}
 }
+
 
 
 
