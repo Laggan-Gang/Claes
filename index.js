@@ -116,7 +116,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 	console.log("NU KÖR VI!!!!111ettett")
 	console.log(bokstäver)
 	console.log(bokstäver.length)
-	vänteTid = 1_000
+	vänteTid = 10_000
 	let channel = meddelande.member.voice.channel
 	const player = createAudioPlayer();
 	const connection = joinVoiceChannel(
