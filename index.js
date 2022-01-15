@@ -18,6 +18,7 @@
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
 const { Client, Intents, Message, Channel, TextChannel, MessageAttachment } = require('discord.js');
 const { AudioPlayerStatus } = require('@discordjs/voice');
+const { joinVoiceChannel } = require('@discordjs/voice');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
 var filGöraren = require('fs');
@@ -380,7 +381,7 @@ client.on("messageCreate", async (meddelande) => {
 	}
 	
 	if(msg.member.voice.channel != undefined){
-		if(msg.content.startsWith('säg ')){
+		if(msg.content.startsWith('say ')){
 			tosay = msg.cleanContent.substring(4,).toLowerCase()
 			msg.member.voice.channel.joinVoiceChannel()
 			.then(connection => { spelaungefärljudetavenbokstav2(msg,connection,tosay) });
