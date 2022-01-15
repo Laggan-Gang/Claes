@@ -134,6 +134,7 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 		player.on(AudioPlayerStatus.Idle, () => {
 			let resurs = createAudioResource('/home/hugo/Claes/bokstäver/' + bokstäver[i] + ".wav")
 			player.play(resurs);
+			console.log(player.state.status)
 		})
 		
 		
