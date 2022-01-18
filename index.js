@@ -17,6 +17,7 @@
 const { Client, Intents, MessageAttachment } = require("discord.js");
 const { token } = require("./config.json");
 const Canvas = require("canvas");
+const dotaPrefs = require("./dota-prefs-api.js");
 
 // Create a new client instance
 const client = new Client({
@@ -358,6 +359,9 @@ client.on("messageCreate", async (meddelande) => {
     );
     //meddelande.edit(`${svampPrio}`) det är illegal att göra detta tydligen
     meddelande.reply({ files: [attachment] });
+  } else if (dravel.startsWith("!dota")) {
+    const res = dotaPrefs.parseMessage(dravel);
+    meddelande.reply(res);
   }
 
   //CHAPTER SEVEN: The Mystery to the Key
