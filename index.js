@@ -14,17 +14,9 @@
 //Boring stuff that I don't care about but it's about using other people's code to do things no one should go
 
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
-const {
-  Client,
-  Intents,
-  Message,
-  Channel,
-  TextChannel,
-  MessageAttachment,
-} = require("discord.js");
+const { Client, Intents, MessageAttachment } = require("discord.js");
 const { token } = require("./config.json");
 const Canvas = require("canvas");
-var filGöraren = require("fs");
 
 // Create a new client instance
 const client = new Client({
@@ -39,8 +31,6 @@ const {
   createAudioPlayer,
   createAudioResource,
   joinVoiceChannel,
-  AudioPlayerStatus,
-  AudioPlayer,
 } = require("@discordjs/voice");
 
 // INTRODUCTION:
@@ -163,7 +153,6 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 //The key is "hej" and the mystery is where pee is stored
 
 //this is only for asking where pee is stored
-const prefix = "hej";
 
 //CHAPTER THREE: Call & Response
 //This is where things happen babyyyyyyy!
@@ -226,47 +215,47 @@ client.on("messageCreate", async (meddelande) => {
   else if (dravel.endsWith("maakep happen")) {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
-      let ljudfil = "bow bow.wav";
+      let ljudfil = "ljudklipp/bow bow.wav";
       let vänteTid = 5_000;
 
       switch (true) {
         case inRange(aleaIactaEst, 0, 5):
-          ljudfil = "mitchyapos.wav";
+          ljudfil = "ljudklipp/mitchyapos.wav";
           vänteTid = 7_000;
           console.log("mitchyapos");
           break;
         case inRange(aleaIactaEst, 6, 11):
-          ljudfil = "hugoyapos.wav";
+          ljudfil = "ljudklipp/hugoyapos.wav";
           console.log("hugo");
           break;
         case inRange(aleaIactaEst, 12, 17):
-          ljudfil = "claesyapos.wav";
+          ljudfil = "ljudklipp/claesyapos.wav";
           vänteTid = 20_000;
           console.log("claes");
           break;
         case inRange(aleaIactaEst, 18, 23):
-          ljudfil = "edwinyapos.wav";
+          ljudfil = "ljudklipp/edwinyapos.wav";
           vänteTid = 9_000;
           console.log("edwin");
           break;
         case inRange(aleaIactaEst, 24, 29):
-          ljudfil = "sarayapos.wav";
+          ljudfil = "ljudklipp/sarayapos.wav";
           vänteTid = 24_000;
           console.log("sara");
           break;
         case inRange(aleaIactaEst, 30, 35):
-          ljudfil = "densetsuyapos.wav";
+          ljudfil = "ljudklipp/densetsuyapos.wav";
           vänteTid = 26_000;
           console.log("Laggan gaiden");
           break;
         case inRange(aleaIactaEst, 36, 41):
-          ljudfil = "sarayapos2.wav";
+          ljudfil = "ljudklipp/sarayapos2.wav";
           vänteTid = 17_000;
           console.log("sara");
           break;
 
         case inRange(aleaIactaEst, 42, 47):
-          ljudfil = "onyourmarksyapos.wav";
+          ljudfil = "ljudklipp/onyourmarksyapos.wav";
           vänteTid = 10_000;
           console.log("On your marks");
           break;
@@ -319,7 +308,7 @@ client.on("messageCreate", async (meddelande) => {
     //ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
     //Set up a bunch of canvas shit that I don't know what's going on with but the tutorials says to do it
-    const { registerFont, createCanvas } = require("canvas");
+    const { registerFont } = require("canvas");
     registerFont("ComicMono.ttf", { family: "Comic Mono" });
 
     //the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
@@ -349,7 +338,6 @@ client.on("messageCreate", async (meddelande) => {
 
     //2 lines below aren't really used
     const prioriteringar = omSkuffadSamling.join(" > ");
-    const svampPrio = svampbob(prioriteringar);
 
     //make canvas type the words on the image time babyyyyyy, the values for .filltext shit is arbitrary and could probably be improved but who cares it looks nice and jank
     context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
