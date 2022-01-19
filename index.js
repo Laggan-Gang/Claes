@@ -292,12 +292,11 @@ client.on("messageCreate", async (meddelande) => {
         adapterCreator: channel.guild.voiceAdapterCreator,
       });
       player.play(resource);
-      await löftesKollaren(player);
       const subscription = connection.subscribe(player);
       if (subscription) {
-        subscription.unsubscribe();
-        connection.destroy();
-        player.stop();
+        setTimeout(() => subscription.unsubscribe(), vänteTid);
+        setTimeout(() => connection.destroy(), vänteTid);
+        setTimeout(() => player.stop(), vänteTid);
       }
     }
     //make an array that is exactly 5 long to fit 5 bozos
