@@ -345,7 +345,7 @@ client.on("messageCreate", async (meddelande) => {
         förstaFyran.join(", ") +
         " & " +
         kapitalisera(omSkuffadSamling[4]) +
-        ' throw a game of Dota 2"';
+        ' \nthrow a game of Dota 2"';
 
       const canvas = Canvas.createCanvas(420, 320);
       const context = canvas.getContext("2d");
