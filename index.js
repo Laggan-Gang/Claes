@@ -257,6 +257,7 @@ client.on("messageCreate", async (meddelande) => {
         case inRange(aleaIactaEst, 25, 25):
           ljudfil = "IASID.wav";
           console.log("IASID");
+          break;
         case inRange(aleaIactaEst, 0, 5):
           ljudfil = "mitchyapos.wav";
           console.log("mitchyapos");
