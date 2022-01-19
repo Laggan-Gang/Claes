@@ -202,8 +202,7 @@ client.on("messageCreate", async (meddelande) => {
   //CHAPTER FOUR: Bullying is An Art
 
   //the die is cast is very important for determining what's going on
-  aleaIactaEst = 25;
-  //var aleaIactaEst = Math.floor(Math.random() * 50);
+  var aleaIactaEst = Math.floor(Math.random() * 50);
   console.log("Tärningen är kastad! " + aleaIactaEst);
   //if we get bully crit then we bully
   if (aleaIactaEst == 18 && meddelande.author.id !== "745345949295181886") {
