@@ -295,9 +295,9 @@ client.on("messageCreate", async (meddelande) => {
       player.play(resource);
       await löftesKollaren(player);
       if (subscription) {
-        setTimeout(() => subscription.unsubscribe(), vänteTid);
-        setTimeout(() => connection.destroy(), vänteTid);
-        setTimeout(() => player.stop(), vänteTid);
+        subscription.unsubscribe();
+        connection.destroy();
+        player.stop();
       }
     }
     //make an array that is exactly 5 long to fit 5 bozos
