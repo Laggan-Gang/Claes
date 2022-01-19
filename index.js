@@ -136,7 +136,6 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   upptagen = true;
   bokstavsBegynnelseTid = 3000;
   bokstavsTid = 300;
-  let vänteTid = bokstavsBegynnelseTid + bokstavsTid * bokstäver.length;
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
   const connection = joinVoiceChannel({
@@ -293,11 +292,12 @@ client.on("messageCreate", async (meddelande) => {
         adapterCreator: channel.guild.voiceAdapterCreator,
       });
       player.play(resource);
+      await löftesKollaren(player);
       const subscription = connection.subscribe(player);
       if (subscription) {
-        setTimeout(() => subscription.unsubscribe(), vänteTid);
-        setTimeout(() => connection.destroy(), vänteTid);
-        setTimeout(() => player.stop(), vänteTid);
+        subscription.unsubscribe();
+        connection.destroy();
+        player.stop();
       }
     }
     //make an array that is exactly 5 long to fit 5 bozos
