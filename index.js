@@ -92,6 +92,12 @@ client.once("ready", () => {
 
 var upptagen = false;
 
+function kapitalisera(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+console.log(capitalizeFirstLetter("foo")); // Foo
+
 function inRange(x, min, max) {
   return (x - min) * (x - max) <= 0;
 }
@@ -351,13 +357,14 @@ client.on("messageCreate", async (meddelande) => {
     if (aleaIactaEst === 25) {
       let förstaFyran = [];
       for (let i = 0; i < 4; i++) {
-        förstaFyran.push(omSkuffadSamling[i]);
+        let kapitaliserad = kapitalisera(omSkuffadSamling[i]);
+        förstaFyran.push(kapitaliserad);
       }
       let strängBoys =
         förstaFyran.join(", ") +
         " & " +
         omSkuffadSamling[4] +
-        "throw a game of Dota 2";
+        " throw a game of Dota 2";
       console.log(strängBoys);
     }
 
