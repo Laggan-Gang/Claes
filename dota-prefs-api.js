@@ -22,7 +22,7 @@ module.exports = {
         res = await generate(users);
         break;
       case "delete":
-        const user = parameters[0];
+        user = parameters[0];
         res = await del(user);
         break;
       case "link":
