@@ -332,6 +332,7 @@ client.on("messageCreate", async (meddelande) => {
     const { registerFont } = require("canvas");
     registerFont("ComicMono.ttf", { family: "Comic Mono" });
     registerFont("Textile Regular.ttf", { family: "Textile Regular" });
+    const omSkuffadSamling = shuffleArray(behållare);
 
     if (aleaIactaEst === 25) {
       let förstaFyran = [];
@@ -361,7 +362,6 @@ client.on("messageCreate", async (meddelande) => {
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
     //do the hoyl and mix up the bag of bozos
-    const omSkuffadSamling = shuffleArray(behållare);
     let överText = [];
     let subText = [];
 
