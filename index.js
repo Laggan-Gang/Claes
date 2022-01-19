@@ -252,8 +252,9 @@ client.on("messageCreate", async (meddelande) => {
     if (meddelande.member.voice.channel !== null) {
       let ljudfil = "bow bow.wav";
       aleaIactaEst = 25;
+      console.log("Nu är tärningen " + aleaIactaEst);
       switch (true) {
-        case aleaIactaEst === 25:
+        case inRange(aleaIactaEst, 25, 25):
           ljudfil = "IASID.wav";
           console.log("IASID");
         case inRange(aleaIactaEst, 0, 5):
