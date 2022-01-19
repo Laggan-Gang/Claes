@@ -346,10 +346,10 @@ client.on("messageCreate", async (meddelande) => {
         kapitalisera(omSkuffadSamling[4]) +
         " throw a game of Dota 2";
 
-      const canvas = Canvas.createCanvas(640, 840);
+      const canvas = Canvas.createCanvas(840, 640);
       const context = canvas.getContext("2d");
       context.fillStyle = "black";
-      context.fillRect(0, 0, 640, 840);
+      context.fillRect(0, 0, 840, 640);
 
       const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
       meddelande.reply({ files: [attachment] });
