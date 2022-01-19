@@ -357,7 +357,7 @@ client.on("messageCreate", async (meddelande) => {
       context.fillStyle = "#ffffff";
       context.fillText(
         `${strängBoys}`,
-        canvas.height / 1.0,
+        canvas.width / 1.0,
         canvas.height / 1.0
       );
 
