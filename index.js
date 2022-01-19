@@ -96,8 +96,6 @@ function kapitalisera(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-console.log(capitalizeFirstLetter("foo")); // Foo
-
 function inRange(x, min, max) {
   return (x - min) * (x - max) <= 0;
 }
