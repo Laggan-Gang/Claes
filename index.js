@@ -153,7 +153,6 @@ async function ljudGöraren(meddelande, ljudfil) {
 
 //And here is a self-made one (it's NOT recursive!) ;)
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
-  upptagen = true;
   bokstavsBegynnelseTid = 3000;
   bokstavsTid = 300;
   let channel = meddelande.member.voice.channel;
@@ -182,11 +181,11 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   if (connection) {
     connection.destroy();
   }
-  upptagen = false;
 }
 
 //CHAPTER TWO: The Key to the Mystery
 //The key is "hej" and the mystery is where pee is stored
+//The mystery is also what happened to "hej"
 
 //this is only for asking where pee is stored
 
@@ -389,8 +388,10 @@ client.on("messageCreate", async (meddelande) => {
   if (meddelande.content.startsWith("säg ")) {
     if (meddelande.member.voice.channel !== null) {
       if (upptagen !== true) {
+        upptagen = true;
         attsäga = meddelande.cleanContent.substring(3).toLowerCase();
         spelaungefärljudetavenbokstav(meddelande, attsäga);
+        upptagen = false;
       } else {
         meddelande.reply("Jag är upptagen");
       }
