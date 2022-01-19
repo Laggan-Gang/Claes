@@ -131,6 +131,26 @@ function löftesKollaren(player) {
   return ed;
 }
 
+async function ljudGöraren(meddelande, ljudfil) {
+  let channel = meddelande.member.voice.channel;
+  const player = createAudioPlayer();
+  let resource = createAudioResource("/home/hugo/Claes/ljudklipp/" + ljudfil);
+  const connection = joinVoiceChannel({
+    channelId: channel.id,
+    guildId: channel.guild.id,
+    adapterCreator: channel.guild.voiceAdapterCreator,
+  });
+  const subscription = connection.subscribe(player);
+  player.play(resource);
+  await löftesKollaren(player);
+  if (subscription) {
+    subscription.unsubscribe();
+    connection.destroy();
+    player.stop();
+  }
+  return console.log("Eftersom jag retrurnar har jag tänkt på det");
+}
+
 //And here is a self-made one (it's NOT recursive!) ;)
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   upptagen = true;
@@ -272,26 +292,7 @@ client.on("messageCreate", async (meddelande) => {
           console.log("default");
           break;
       }
-      (async () => {
-        let channel = meddelande.member.voice.channel;
-        const player = createAudioPlayer();
-        let resource = createAudioResource(
-          "/home/hugo/Claes/ljudklipp/" + ljudfil
-        );
-        const connection = joinVoiceChannel({
-          channelId: channel.id,
-          guildId: channel.guild.id,
-          adapterCreator: channel.guild.voiceAdapterCreator,
-        });
-        const subscription = connection.subscribe(player);
-        player.play(resource);
-        await löftesKollaren(player);
-        if (subscription) {
-          subscription.unsubscribe();
-          connection.destroy();
-          player.stop();
-        }
-      })();
+      ljudGöraren(meddelande, ljudfil);
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
