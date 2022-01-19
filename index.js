@@ -268,7 +268,7 @@ client.on("messageCreate", async (meddelande) => {
 
       let channel = meddelande.member.voice.channel;
       const player = createAudioPlayer();
-      let resource = createAudioResource("/home/hugo/Claes/ljudkilipp/" + ljudfil);
+      let resource = createAudioResource("./ljudkilipp/" + ljudfil);
       const connection = joinVoiceChannel({
         channelId: channel.id,
         guildId: channel.guild.id,
