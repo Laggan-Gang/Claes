@@ -340,8 +340,9 @@ client.on("messageCreate", async (meddelande) => {
         let kapitaliserad = kapitalisera(omSkuffadSamling[i]);
         förstaFyran.push(kapitaliserad);
       }
-      let strängBoys = '"';
-      förstaFyran.join(", ") +
+      let strängBoys =
+        '"' +
+        förstaFyran.join(", ") +
         " & " +
         kapitalisera(omSkuffadSamling[4]) +
         ' throw a game of Dota 2"';
