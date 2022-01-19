@@ -296,7 +296,7 @@ client.on("messageCreate", async (meddelande) => {
           console.log("default");
           break;
       }
-      ljudGöraren(meddelande, ljudfil);
+      //ljudGöraren(meddelande, ljudfil);
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
@@ -327,6 +327,7 @@ client.on("messageCreate", async (meddelande) => {
     //Set up a bunch of canvas shit that I don't know what's going on with but the tutorials says to do it
     const { registerFont } = require("canvas");
     registerFont("ComicMono.ttf", { family: "Comic Mono" });
+    registerFont("Textile Regular.ttf", { family: "Textile Regular" });
 
     //the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
     const canvas = Canvas.createCanvas(700, 250);
@@ -346,6 +347,17 @@ client.on("messageCreate", async (meddelande) => {
     subText.push(omSkuffadSamling[2]);
     subText.push(omSkuffadSamling[3]);
     subText.push(omSkuffadSamling[4]);
+
+    if (aleaIactaEst === 25) {
+      let förstaFyran = [];
+      for (let i = 0; i < 4; i++) {
+        förstaFyran.push(omSkuffadSamling[i]);
+      }
+      let strängBoys = `${förstaFyran.join(", ")}${
+        omSkuffadSamling[4]
+      } throw a game of Dota 2`;
+      console.log(strängBoys);
+    }
 
     //establish hierarchy and bully
     let rubrik = överText.join(" > ");
