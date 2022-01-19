@@ -90,6 +90,8 @@ client.once("ready", () => {
 //CHAPTER ONE: Boring Functions
 //These are boring functions that are mostly stolen
 
+var upptagen = false;
+
 function inRange(x, min, max) {
   return (x - min) * (x - max) <= 0;
 }
@@ -131,7 +133,8 @@ function löftesKollaren(player) {
 
 //And here is a self-made one (it's NOT recursive!) ;)
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
-  bokstavsBegynnelseTid = 5000;
+  upptagen = true;
+  bokstavsBegynnelseTid = 3000;
   bokstavsTid = 300;
   let vänteTid = bokstavsBegynnelseTid + bokstavsTid * bokstäver.length;
   let channel = meddelande.member.voice.channel;
@@ -155,9 +158,12 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   }
   console.log("Nu har jag spelat klart! :)");
   if (subscription) {
-    setTimeout(() => subscription.unsubscribe(), vänteTid);
-    setTimeout(() => connection.destroy(), vänteTid);
+    subscription.unsubscribe();
   }
+  if (connection) {
+    connection.destroy();
+  }
+  upptagen = false;
 }
 
 //CHAPTER TWO: The Key to the Mystery
@@ -386,11 +392,17 @@ client.on("messageCreate", async (meddelande) => {
 
   //CHAPTER EIGHT: The Endless River
   //Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
-  if (meddelande.member.voice.channel != undefined) {
-    if (meddelande.content.startsWith("säg ")) {
-      attsäga = meddelande.cleanContent.substring(3).toLowerCase();
-      spelaungefärljudetavenbokstav(meddelande, attsäga);
+  if (meddelande.member.voice.channel !== null) {
+    if (upptagen !== true) {
+      if (meddelande.content.startsWith("säg ")) {
+        attsäga = meddelande.cleanContent.substring(3).toLowerCase();
+        spelaungefärljudetavenbokstav(meddelande, attsäga);
+      }
+    } else {
+      meddelande.reply("Jag är upptagen");
     }
+  } else {
+    meddelande.reply("Joina voice först");
   }
 });
 
