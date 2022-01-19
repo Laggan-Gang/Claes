@@ -361,7 +361,7 @@ client.on("messageCreate", async (meddelande) => {
       let strängBoys =
         förstaFyran.join(", ") +
         " & " +
-        omSkuffadSamling[4] +
+        kapitalisera(omSkuffadSamling[4]) +
         " throw a game of Dota 2";
       console.log(strängBoys);
     }
