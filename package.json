@@ -16,6 +16,9 @@
   "author": "no",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.1.0"
+    "@discordjs/voice": "^0.7.5",
+    "canvas": "^2.9.0",
+    "discord.js": "^13.1.0",
+    "node-fetch": "^2.6.7"
   }
 }
