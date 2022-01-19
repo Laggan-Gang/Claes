@@ -300,7 +300,7 @@ client.on("messageCreate", async (meddelande) => {
           console.log("default");
           break;
       }
-      //ljudGöraren(meddelande, ljudfil);
+      ljudGöraren(meddelande, ljudfil);
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
@@ -334,6 +334,7 @@ client.on("messageCreate", async (meddelande) => {
     registerFont("Textile Regular.ttf", { family: "Textile Regular" });
     const omSkuffadSamling = shuffleArray(behållare);
 
+    //For commentary on this stuff just look at the else shit below I can't be arsed, it's the same
     if (aleaIactaEst === 25) {
       let förstaFyran = [];
       for (let i = 0; i < 4; i++) {
@@ -363,54 +364,54 @@ client.on("messageCreate", async (meddelande) => {
 
       const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
       meddelande.reply({ files: [attachment] });
+    } else {
+      //the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
+      const canvas = Canvas.createCanvas(700, 250);
+      const context = canvas.getContext("2d");
+      //get the dumb image and draw the dumb image
+      const background = await Canvas.loadImage("/home/hugo/Claes/maakep.png");
+      context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+      //do the hoyl and mix up the bag of bozos
+      let överText = [];
+      let subText = [];
+
+      //i'm a baby so i write baby code
+      överText.push(omSkuffadSamling[0]);
+      överText.push(omSkuffadSamling[1]);
+      subText.push(omSkuffadSamling[2]);
+      subText.push(omSkuffadSamling[3]);
+      subText.push(omSkuffadSamling[4]);
+
+      //establish hierarchy and bully
+      let rubrik = överText.join(" > ");
+      rubrik = svampbob(rubrik);
+      let underText = subText.join(" > ");
+      underText = svampbob(underText);
+
+      //2 lines below aren't really used
+      const prioriteringar = omSkuffadSamling.join(" > ");
+
+      //make canvas type the words on the image time babyyyyyy, the values for .filltext shit is arbitrary and could probably be improved but who cares it looks nice and jank
+      context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
+      context.fillStyle = "#ffffff";
+      context.fillText(`${rubrik}`, 0, canvas.height / 4.0);
+
+      context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
+      context.fillStyle = "#ffffff";
+      context.fillText(`v`, 0, canvas.height / 2.0);
+
+      context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
+      context.fillStyle = "#ffffff";
+      context.fillText(`${underText}`, 0, canvas.height / 1.5);
+
+      const attachment = new MessageAttachment(
+        canvas.toBuffer(),
+        "maakepHappen.png"
+      );
+      //meddelande.edit(`${svampPrio}`) det är illegal att göra detta tydligen
+      meddelande.reply({ files: [attachment] });
     }
-
-    //the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
-    const canvas = Canvas.createCanvas(700, 250);
-    const context = canvas.getContext("2d");
-    //get the dumb image and draw the dumb image
-    const background = await Canvas.loadImage("/home/hugo/Claes/maakep.png");
-    context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-    //do the hoyl and mix up the bag of bozos
-    let överText = [];
-    let subText = [];
-
-    //i'm a baby so i write baby code
-    överText.push(omSkuffadSamling[0]);
-    överText.push(omSkuffadSamling[1]);
-    subText.push(omSkuffadSamling[2]);
-    subText.push(omSkuffadSamling[3]);
-    subText.push(omSkuffadSamling[4]);
-
-    //establish hierarchy and bully
-    let rubrik = överText.join(" > ");
-    rubrik = svampbob(rubrik);
-    let underText = subText.join(" > ");
-    underText = svampbob(underText);
-
-    //2 lines below aren't really used
-    const prioriteringar = omSkuffadSamling.join(" > ");
-
-    //make canvas type the words on the image time babyyyyyy, the values for .filltext shit is arbitrary and could probably be improved but who cares it looks nice and jank
-    context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
-    context.fillStyle = "#ffffff";
-    context.fillText(`${rubrik}`, 0, canvas.height / 4.0);
-
-    context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-    context.fillStyle = "#ffffff";
-    context.fillText(`v`, 0, canvas.height / 2.0);
-
-    context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-    context.fillStyle = "#ffffff";
-    context.fillText(`${underText}`, 0, canvas.height / 1.5);
-
-    const attachment = new MessageAttachment(
-      canvas.toBuffer(),
-      "maakepHappen.png"
-    );
-    //meddelande.edit(`${svampPrio}`) det är illegal att göra detta tydligen
-    meddelande.reply({ files: [attachment] });
   } else if (dravel.startsWith("!dota")) {
     const res = await dotaPrefs.parseMessage(dravel);
     meddelande.reply(svampbob(`${res}`));
