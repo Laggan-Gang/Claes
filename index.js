@@ -216,47 +216,47 @@ client.on("messageCreate", async (meddelande) => {
   else if (dravel.endsWith("maakep happen")) {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
-      let ljudfil = "ljudklipp/bow bow.wav";
+      let ljudfil = "bow bow.wav";
       let vänteTid = 5_000;
 
       switch (true) {
         case inRange(aleaIactaEst, 0, 5):
-          ljudfil = "ljudklipp/mitchyapos.wav";
+          ljudfil = "mitchyapos.wav";
           vänteTid = 7_000;
           console.log("mitchyapos");
           break;
         case inRange(aleaIactaEst, 6, 11):
-          ljudfil = "ljudklipp/hugoyapos.wav";
+          ljudfil = "hugoyapos.wav";
           console.log("hugo");
           break;
         case inRange(aleaIactaEst, 12, 17):
-          ljudfil = "ljudklipp/claesyapos.wav";
+          ljudfil = "claesyapos.wav";
           vänteTid = 20_000;
           console.log("claes");
           break;
         case inRange(aleaIactaEst, 18, 23):
-          ljudfil = "ljudklipp/edwinyapos.wav";
+          ljudfil = "edwinyapos.wav";
           vänteTid = 9_000;
           console.log("edwin");
           break;
         case inRange(aleaIactaEst, 24, 29):
-          ljudfil = "ljudklipp/sarayapos.wav";
+          ljudfil = "sarayapos.wav";
           vänteTid = 24_000;
           console.log("sara");
           break;
         case inRange(aleaIactaEst, 30, 35):
-          ljudfil = "ljudklipp/densetsuyapos.wav";
+          ljudfil = "densetsuyapos.wav";
           vänteTid = 26_000;
           console.log("Laggan gaiden");
           break;
         case inRange(aleaIactaEst, 36, 41):
-          ljudfil = "ljudklipp/sarayapos2.wav";
+          ljudfil = "sarayapos2.wav";
           vänteTid = 17_000;
           console.log("sara");
           break;
 
         case inRange(aleaIactaEst, 42, 47):
-          ljudfil = "ljudklipp/onyourmarksyapos.wav";
+          ljudfil = "onyourmarksyapos.wav";
           vänteTid = 10_000;
           console.log("On your marks");
           break;
