@@ -361,7 +361,7 @@ client.on("messageCreate", async (meddelande) => {
     meddelande.reply({ files: [attachment] });
   } else if (dravel.startsWith("!dota")) {
     const res = await dotaPrefs.parseMessage(dravel);
-    meddelande.reply(res);
+    meddelande.reply(svampBob(res));
   }
 
   //CHAPTER SEVEN: The Mystery to the Key
