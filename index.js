@@ -114,7 +114,7 @@ const dymo = (canvas, text) => {
   const context = canvas.getContext("2d");
 
   // Declare a base size of the font
-  let fontSize = 400;
+  let fontSize = 800;
 
   do {
     // Assign the font to the context and decrement it so it can be measured again
