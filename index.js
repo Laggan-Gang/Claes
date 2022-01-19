@@ -349,6 +349,7 @@ client.on("messageCreate", async (meddelande) => {
       const canvas = Canvas.createCanvas(640, 840);
       const context = canvas.getContext("2d");
       context.fillStyle = "black";
+      context.fillRect(0, 0, 640, 840);
 
       const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
       meddelande.reply({ files: [attachment] });
