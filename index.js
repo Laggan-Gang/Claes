@@ -291,8 +291,9 @@ client.on("messageCreate", async (meddelande) => {
         guildId: channel.guild.id,
         adapterCreator: channel.guild.voiceAdapterCreator,
       });
-      player.play(resource);
       const subscription = connection.subscribe(player);
+      player.play(resource);
+      await löftesKollaren(player);
       if (subscription) {
         setTimeout(() => subscription.unsubscribe(), vänteTid);
         setTimeout(() => connection.destroy(), vänteTid);
