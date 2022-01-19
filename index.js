@@ -149,9 +149,9 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     let resurs = createAudioResource(
       "/home/hugo/Claes/bokstäver/" + bokstäver[i] + ".wav"
     );
-    await löftesKollaren(player);
     //setTimeout(() => player.play(resurs), bokstavsTid * i);
     player.play(resurs);
+    await löftesKollaren(player);
     //setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
     console.log("Nu är vi i loopen :)" + player.state.status);
   }
