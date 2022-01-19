@@ -232,12 +232,10 @@ client.on("messageCreate", async (meddelande) => {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
       let ljudfil = "bow bow.wav";
-      let vänteTid = 5_000;
 
       switch (true) {
         case inRange(aleaIactaEst, 0, 5):
           ljudfil = "mitchyapos.wav";
-          vänteTid = 7_000;
           console.log("mitchyapos");
           break;
         case inRange(aleaIactaEst, 6, 11):
@@ -246,33 +244,27 @@ client.on("messageCreate", async (meddelande) => {
           break;
         case inRange(aleaIactaEst, 12, 17):
           ljudfil = "claesyapos.wav";
-          vänteTid = 20_000;
           console.log("claes");
           break;
         case inRange(aleaIactaEst, 18, 23):
           ljudfil = "edwinyapos.wav";
-          vänteTid = 9_000;
           console.log("edwin");
           break;
         case inRange(aleaIactaEst, 24, 29):
           ljudfil = "sarayapos.wav";
-          vänteTid = 24_000;
           console.log("sara");
           break;
         case inRange(aleaIactaEst, 30, 35):
           ljudfil = "densetsuyapos.wav";
-          vänteTid = 26_000;
           console.log("Laggan gaiden");
           break;
         case inRange(aleaIactaEst, 36, 41):
           ljudfil = "sarayapos2.wav";
-          vänteTid = 17_000;
           console.log("sara");
           break;
 
         case inRange(aleaIactaEst, 42, 47):
           ljudfil = "onyourmarksyapos.wav";
-          vänteTid = 10_000;
           console.log("On your marks");
           break;
 
@@ -280,25 +272,26 @@ client.on("messageCreate", async (meddelande) => {
           console.log("default");
           break;
       }
-
-      let channel = meddelande.member.voice.channel;
-      const player = createAudioPlayer();
-      let resource = createAudioResource(
-        "/home/hugo/Claes/ljudklipp/" + ljudfil
-      );
-      const connection = joinVoiceChannel({
-        channelId: channel.id,
-        guildId: channel.guild.id,
-        adapterCreator: channel.guild.voiceAdapterCreator,
-      });
-      const subscription = connection.subscribe(player);
-      player.play(resource);
-      await löftesKollaren(player);
-      if (subscription) {
-        subscription.unsubscribe();
-        connection.destroy();
-        player.stop();
-      }
+      (async () => {
+        let channel = meddelande.member.voice.channel;
+        const player = createAudioPlayer();
+        let resource = createAudioResource(
+          "/home/hugo/Claes/ljudklipp/" + ljudfil
+        );
+        const connection = joinVoiceChannel({
+          channelId: channel.id,
+          guildId: channel.guild.id,
+          adapterCreator: channel.guild.voiceAdapterCreator,
+        });
+        const subscription = connection.subscribe(player);
+        player.play(resource);
+        await löftesKollaren(player);
+        if (subscription) {
+          subscription.unsubscribe();
+          connection.destroy();
+          player.stop();
+        }
+      })();
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
