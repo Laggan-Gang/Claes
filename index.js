@@ -355,7 +355,11 @@ client.on("messageCreate", async (meddelande) => {
       context.textAlign = "center";
       context.font = `${dymo(canvas, `${strängBoys}`)}"Textile Regular"`;
       context.fillStyle = "#ffffff";
-      context.fillText(`${strängBoys}`, 0, canvas.height / 2.0);
+      context.fillText(
+        `${strängBoys}`,
+        canvas.height / 2.0,
+        canvas.height / 2.0
+      );
 
       const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
       meddelande.reply({ files: [attachment] });
