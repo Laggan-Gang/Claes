@@ -347,18 +347,18 @@ client.on("messageCreate", async (meddelande) => {
         kapitalisera(omSkuffadSamling[4]) +
         ' \nthrow a game of Dota 2"';
 
-      const canvas = Canvas.createCanvas(420, 320);
+      const canvas = Canvas.createCanvas(420, 260);
       const context = canvas.getContext("2d");
       context.fillStyle = "black";
-      context.fillRect(0, 0, 420, 320);
+      context.fillRect(0, 0, 420, 260);
 
       context.textAlign = "center";
       context.font = `${dymo(canvas, `${strängBoys}`)}"Textile Regular"`;
       context.fillStyle = "#ffffff";
       context.fillText(
         `${strängBoys}`,
-        canvas.height / 2.0,
-        canvas.height / 2.0
+        canvas.height / 1.0,
+        canvas.height / 1.0
       );
 
       const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
