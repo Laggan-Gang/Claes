@@ -357,8 +357,8 @@ client.on("messageCreate", async (meddelande) => {
       context.fillStyle = "#ffffff";
       context.fillText(
         `${strängBoys}`,
-        canvas.width / 1.0,
-        canvas.height / 1.0
+        canvas.width / 2.0,
+        canvas.height / 2.0
       );
 
       const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
