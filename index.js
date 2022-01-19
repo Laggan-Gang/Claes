@@ -131,9 +131,9 @@ function löftesKollaren(player) {
 
 //And here is a self-made one (it's NOT recursive!) ;)
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
-  bokstavsBegynnelseTid = 1000;
-  bokstavsTid = 500;
-  let vänteTid = 2000 + bokstavsBegynnelseTid + bokstavsTid * bokstäver.length;
+  bokstavsBegynnelseTid = 5000;
+  bokstavsTid = 300;
+  let vänteTid = bokstavsBegynnelseTid + bokstavsTid * bokstäver.length;
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
   const connection = joinVoiceChannel({
@@ -149,10 +149,8 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     let resurs = createAudioResource(
       "/home/hugo/Claes/bokstäver/" + bokstäver[i] + ".wav"
     );
-    //setTimeout(() => player.play(resurs), bokstavsTid * i);
     player.play(resurs);
     await löftesKollaren(player);
-    //setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
     console.log("Nu är vi i loopen :)" + player.state.status);
   }
   console.log("Nu har jag spelat klart! :)");
