@@ -397,12 +397,12 @@ client.on("messageCreate", async (meddelande) => {
       if (upptagen !== true) {
         attsäga = meddelande.cleanContent.substring(3).toLowerCase();
         spelaungefärljudetavenbokstav(meddelande, attsäga);
+      } else {
+        meddelande.reply("Jag är upptagen");
       }
     } else {
-      meddelande.reply("Jag är upptagen");
+      meddelande.reply("Joina voice först");
     }
-  } else {
-    meddelande.reply("Joina voice först");
   }
 });
 
