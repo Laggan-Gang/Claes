@@ -251,8 +251,11 @@ client.on("messageCreate", async (meddelande) => {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
       let ljudfil = "bow bow.wav";
-
+      aleaIactaEst = 25;
       switch (true) {
+        case aleaIactaEst === 25:
+          ljudfil = "IASID.wav";
+          console.log("IASID");
         case inRange(aleaIactaEst, 0, 5):
           ljudfil = "mitchyapos.wav";
           console.log("mitchyapos");
