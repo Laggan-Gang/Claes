@@ -333,6 +333,26 @@ client.on("messageCreate", async (meddelande) => {
     registerFont("ComicMono.ttf", { family: "Comic Mono" });
     registerFont("Textile Regular.ttf", { family: "Textile Regular" });
 
+    if (aleaIactaEst === 25) {
+      let förstaFyran = [];
+      for (let i = 0; i < 4; i++) {
+        let kapitaliserad = kapitalisera(omSkuffadSamling[i]);
+        förstaFyran.push(kapitaliserad);
+      }
+      let strängBoys =
+        förstaFyran.join(", ") +
+        " & " +
+        kapitalisera(omSkuffadSamling[4]) +
+        " throw a game of Dota 2";
+
+      const canvas = Canvas.createCanvas(640, 840);
+      const context = canvas.getContext("2d");
+      context.fillStyle = "black";
+
+      const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
+      meddelande.reply({ files: [attachment] });
+    }
+
     //the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
     const canvas = Canvas.createCanvas(700, 250);
     const context = canvas.getContext("2d");
@@ -351,20 +371,6 @@ client.on("messageCreate", async (meddelande) => {
     subText.push(omSkuffadSamling[2]);
     subText.push(omSkuffadSamling[3]);
     subText.push(omSkuffadSamling[4]);
-
-    if (aleaIactaEst === 25) {
-      let förstaFyran = [];
-      for (let i = 0; i < 4; i++) {
-        let kapitaliserad = kapitalisera(omSkuffadSamling[i]);
-        förstaFyran.push(kapitaliserad);
-      }
-      let strängBoys =
-        förstaFyran.join(", ") +
-        " & " +
-        kapitalisera(omSkuffadSamling[4]) +
-        " throw a game of Dota 2";
-      console.log(strängBoys);
-    }
 
     //establish hierarchy and bully
     let rubrik = överText.join(" > ");
