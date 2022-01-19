@@ -32,6 +32,7 @@ const {
   createAudioPlayer,
   createAudioResource,
   joinVoiceChannel,
+  AudioPlayerStatus,
 } = require("@discordjs/voice");
 
 // INTRODUCTION:
@@ -119,8 +120,17 @@ const dymo = (canvas, text) => {
   return context.font;
 };
 
+function löftesKollaren(player) {
+  const ed = new Promise((resolve, reject) => {
+    player.on(AudioPlayerStatus.Idle, function filibuster() {
+      resolve();
+    });
+  });
+  return ed;
+}
+
 //And here is a self-made one (it's NOT recursive!) ;)
-function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
+async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   bokstavsBegynnelseTid = 1000;
   bokstavsTid = 500;
   let vänteTid = 2000 + bokstavsBegynnelseTid + bokstavsTid * bokstäver.length;
@@ -139,7 +149,9 @@ function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     let resurs = createAudioResource(
       "/home/hugo/Claes/bokstäver/" + bokstäver[i] + ".wav"
     );
-    setTimeout(() => player.play(resurs), bokstavsTid * i);
+    await löftesKollaren(player);
+    //setTimeout(() => player.play(resurs), bokstavsTid * i);
+    player.play(resurs);
     //setTimeout(() => player.stop(), (bokstavsBegynnelseTid + bokstavsTid * i))
     console.log("Nu är vi i loopen :)" + player.state.status);
   }
@@ -268,7 +280,9 @@ client.on("messageCreate", async (meddelande) => {
 
       let channel = meddelande.member.voice.channel;
       const player = createAudioPlayer();
-      let resource = createAudioResource("/home/hugo/Claes/ljudklipp/" + ljudfil);
+      let resource = createAudioResource(
+        "/home/hugo/Claes/ljudklipp/" + ljudfil
+      );
       const connection = joinVoiceChannel({
         channelId: channel.id,
         guildId: channel.guild.id,
