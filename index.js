@@ -347,10 +347,10 @@ client.on("messageCreate", async (meddelande) => {
         kapitalisera(omSkuffadSamling[4]) +
         ' throw a game of Dota 2"';
 
-      const canvas = Canvas.createCanvas(840, 640);
+      const canvas = Canvas.createCanvas(420, 320);
       const context = canvas.getContext("2d");
       context.fillStyle = "black";
-      context.fillRect(0, 0, 840, 640);
+      context.fillRect(0, 0, 420, 320);
 
       context.textAlign = "center";
       context.font = `${dymo(canvas, `${strängBoys}`)}"Textile Regular"`;
