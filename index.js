@@ -353,9 +353,11 @@ client.on("messageCreate", async (meddelande) => {
       for (let i = 0; i < 4; i++) {
         förstaFyran.push(omSkuffadSamling[i]);
       }
-      let strängBoys = `${förstaFyran.join(", ")}${
-        omSkuffadSamling[4]
-      } throw a game of Dota 2`;
+      let strängBoys =
+        förstaFyran.join(", ") +
+        " & " +
+        omSkuffadSamling[4] +
+        "throw a game of Dota 2";
       console.log(strängBoys);
     }
 
