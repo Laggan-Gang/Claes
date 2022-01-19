@@ -360,7 +360,7 @@ client.on("messageCreate", async (meddelande) => {
     //meddelande.edit(`${svampPrio}`) det är illegal att göra detta tydligen
     meddelande.reply({ files: [attachment] });
   } else if (dravel.startsWith("!dota")) {
-    const res = dotaPrefs.parseMessage(dravel);
+    const res = await dotaPrefs.parseMessage(dravel);
     meddelande.reply(res);
   }
 
