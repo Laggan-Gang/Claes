@@ -14,7 +14,7 @@ module.exports = {
     let res = {
       success: false,
       message:
-        "Available commands: set | roll | delete \r\n Example: `!dota set Nisha fill 2 1 3 4 5`",
+        "Available commands: set | roll | delete \r\n Example: `!dota set EternaLEnVy 1 5 2 fill 4 3`",
     };
 
     switch (command) {
