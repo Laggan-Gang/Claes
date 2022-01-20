@@ -413,7 +413,13 @@ client.on("messageCreate", async (meddelande) => {
     }
   } else if (dravel.startsWith("!dota")) {
     const res = await dotaPrefs.parseMessage(dravel);
-    meddelande.reply(svampbob(`${res}`));
+
+    if (res.success) {
+      meddelande.react("✅");
+    } else {
+      meddelande.react("❌");
+      meddelande.reply(svampbob(res.message));
+    }
   }
 
   //CHAPTER SEVEN: The Mystery to the Key

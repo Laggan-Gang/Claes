@@ -11,8 +11,12 @@ module.exports = {
     const command = arr[1];
     const parameters = arr.slice(2);
 
-    let res =
-      "Available commands: set | roll | delete \r\n Example: `!dota set Nisha fill 2 1 3 4 5`";
+    let res = {
+      success: false,
+      message:
+        "Available commands: set | roll | delete \r\n Example: `!dota set Nisha fill 2 1 3 4 5`",
+    };
+
     switch (command) {
       case "set":
         const [user, ...roles] = parameters;
@@ -27,7 +31,8 @@ module.exports = {
         res = await del(brukare);
         break;
       case "link":
-        res = dotaPrefsBaseUrl;
+        res.success = false;
+        res.message = dotaPrefsBaseUrl;
         break;
     }
 
@@ -49,7 +54,10 @@ async function update(user, roles) {
 
   const body = await res.text();
 
-  return body;
+  return {
+    success: res.status == 200,
+    message: body,
+  };
 }
 
 async function generate(users) {
@@ -66,7 +74,10 @@ async function generate(users) {
 
   const body = await res.text();
 
-  return body;
+  return {
+    success: res.status == 200,
+    message: body,
+  };
 }
 
 async function del(user) {
@@ -74,5 +85,9 @@ async function del(user) {
     method: "DELETE",
   });
 
-  return res.status == 200 ? "deleted" : "something went wrong";
+  const success = res.status == 200;
+  return {
+    success: success,
+    message: success ? "Deleted" : "Something went wrong",
+  };
 }
