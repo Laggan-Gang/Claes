@@ -158,24 +158,24 @@ async function ljudGöraren(meddelande, ljudfil) {
 //And here is a self-made one (it's NOT recursive!) ;)
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   skiljetecken = {
-    "!": "utropstecken";
-    "$": "dollartecken";
-    "%": "procenttecken";
-    "&": "ampersand";
-    "/": "snedstreck";
-    "(": "startparentes";
-    ")": "slutparentes";
-    "=": "likamedtecken";
-    "+": "plustecken";
-    "?": "frågetecken";
-    ",": "kommatecken";
-    ".": "punkttecken";
-    "-": "bindestreck";
-    "_": "understreck";
-    ";": "semikolontecken";
-    ":": "kolontecken";
-    "<": "mindreäntecken";
-    ">": "störreäntecken"
+    "!": "utropstecken",
+    $: "dollartecken",
+    "%": "procenttecken",
+    "&": "ampersand",
+    "/": "snedstreck",
+    "(": "startparentes",
+    ")": "slutparentes",
+    "=": "likamedtecken",
+    "+": "plustecken",
+    "?": "frågetecken",
+    ",": "kommatecken",
+    ".": "punkttecken",
+    "-": "bindestreck",
+    _: "understreck",
+    ";": "semikolontecken",
+    ":": "kolontecken",
+    "<": "mindreäntecken",
+    ">": "störreäntecken",
   };
   bokstavsBegynnelseTid = 3000;
   bokstavsTid = 300;
@@ -191,14 +191,15 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   const subscription = connection.subscribe(player);
   for (let i = 0; i < bokstäver.length; i++) {
     console.log(bokstäver[i]);
-    if "!$%&/()=+?,.-_;:<>".includes(bokstäver[i]) {
-      ljudfilsomjagtyckerattvikanskebordespelanu = skiljetecken[bokstäver[i]]
-    }
-    else {
-      ljudfilsomjagtyckerattvikanskebordespelanu = bokstäver[i]
+    if ("!$%&/()=+?,.-_;:<>".includes(bokstäver[i])) {
+      ljudfilsomjagtyckerattvikanskebordespelanu = skiljetecken[bokstäver[i]];
+    } else {
+      ljudfilsomjagtyckerattvikanskebordespelanu = bokstäver[i];
     }
     let resurs = createAudioResource(
-      "/home/hugo/Claes/bokstäver/" + ljudfilsomjagtyckerattvikanskebordespelanu + ".wav"
+      "/home/hugo/Claes/bokstäver/" +
+        ljudfilsomjagtyckerattvikanskebordespelanu +
+        ".wav"
     );
     player.play(resurs);
     await löftesKollaren(player);
