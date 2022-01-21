@@ -443,6 +443,7 @@ client.on("messageCreate", async (meddelande) => {
 
     if (res.success) {
       meddelande.react("✅");
+      meddelande.reply(res.message);
     } else {
       meddelande.react("❌");
       meddelande.reply(svampbob(res.message));
