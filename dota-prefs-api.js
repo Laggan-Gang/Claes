@@ -46,7 +46,7 @@ async function update(user, roles) {
     roles: roles,
   });
 
-  const body = await res.text();
+  const body = await res.data;
 
   return {
     success: res.status == 200,
@@ -60,7 +60,7 @@ async function generate(users) {
     json: false,
   });
 
-  const body = await res.text();
+  const body = await res.data;
 
   return {
     success: res.status == 200,

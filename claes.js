@@ -74,7 +74,7 @@ const {
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
   console.log('Claes is online');
-  EngTillIPA.laddaUppslagsverk();
+  // EngTillIPA.laddaUppslagsverk();
 
   //const pinns = '873614838692192286'
   //const kanalen = client.channels.cache.get(pinns);
