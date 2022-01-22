@@ -101,12 +101,12 @@ function inRange(x, min, max) {
 }
 
 //important function for bullying
-var svampbob = (harang) => {
+const svampbob = (harang) => {
   var chars = harang.toLowerCase().split("");
-  for (var i = 0; i < chars.length; i += 2) {
-    chars[i] = chars[i].toUpperCase();
-  }
-  return chars.join("");
+  const svampbobbifieradeBokstäver = chars.map((char) =>
+    Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()
+  );
+  return svampbobbifieradeBokstäver.join("");
 };
 
 //supposedly fits text to size of image for use with canvas, not sure what's really going on
@@ -159,7 +159,7 @@ async function ljudGöraren(meddelande, ljudfil) {
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   skiljetecken = {
     "!": "utropstecken",
-    "$": "dollartecken",
+    $: "dollartecken",
     "%": "procenttecken",
     "&": "ampersand",
     "/": "snedstreck",
@@ -177,8 +177,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     "<": "mindreäntecken",
     ">": "störreäntecken",
   };
-  bokstavsBegynnelseTid = 3000;
-  bokstavsTid = 300;
+
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
   const connection = joinVoiceChannel({
