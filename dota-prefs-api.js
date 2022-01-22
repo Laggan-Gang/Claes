@@ -69,9 +69,7 @@ async function generate(users) {
 }
 
 async function del(user) {
-  const res = await axios.default.post(DELETE.replace(':user', user), {
-    method: 'DELETE',
-  });
+  const res = await axios.default.delete(DELETE.replace(':user', user));
 
   const success = res.status == 200;
   return {
