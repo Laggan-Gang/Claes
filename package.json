@@ -4,7 +4,8 @@
   "description": "it's claesbot",
   "main": "claes.js",
   "scripts": {
-    "test": "test"
+    "ci": "git pull && npm ci && npm start",
+    "start": "node claes.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,10 @@
     "canvas": "^2.9.0",
     "discord.js": "^13.1.0",
     "node-fetch": "^2.6.7"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "quoteProps": "consistent"
   }
 }
