@@ -41,6 +41,7 @@ module.exports = {
 };
 
 async function update(user, roles, discordId) {
+  console.log(user, roles, discordId);
   const res = await axios.default.post(UPDATE, {
     userId: discordId,
     user: user,
