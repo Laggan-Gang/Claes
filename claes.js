@@ -14,10 +14,10 @@
 //Boring stuff that I don't care about but it's about using other people's code to do things no one should go
 
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
-const { Client, Intents, MessageAttachment } = require("discord.js");
-const { token } = require("./config.json");
-const Canvas = require("canvas");
-const dotaPrefs = require("./dota-prefs-api.js");
+const { Client, Intents, MessageAttachment } = require('discord.js');
+const { token } = require('./config.json');
+const Canvas = require('canvas');
+const dotaPrefs = require('./dota-prefs-api.js');
 
 // Create a new client instance
 const client = new Client({
@@ -33,14 +33,14 @@ const {
   createAudioResource,
   joinVoiceChannel,
   AudioPlayerStatus,
-} = require("@discordjs/voice");
+} = require('@discordjs/voice');
 
 // INTRODUCTION:
 // This is also boring stuff that's "required" for things to "work"
 
 // When the client is ready, run this code (only once)
-client.once("ready", () => {
-  console.log("Claes is online");
+client.once('ready', () => {
+  console.log('Claes is online');
 
   //const pinns = '873614838692192286'
   //const kanalen = client.channels.cache.get(pinns);
@@ -102,16 +102,16 @@ function inRange(x, min, max) {
 
 //important function for bullying
 const svampbob = (harang) => {
-  var chars = harang.toLowerCase().split("");
+  var chars = harang.toLowerCase().split('');
   const svampbobbifieradeBokstäver = chars.map((char) =>
     Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()
   );
-  return svampbobbifieradeBokstäver.join("");
+  return svampbobbifieradeBokstäver.join('');
 };
 
 //supposedly fits text to size of image for use with canvas, not sure what's really going on
 const dymo = (canvas, text) => {
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext('2d');
 
   // Declare a base size of the font
   let fontSize = 800;
@@ -138,7 +138,7 @@ function löftesKollaren(player) {
 async function ljudGöraren(meddelande, ljudfil) {
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
-  let resource = createAudioResource("/home/hugo/Claes/ljudklipp/" + ljudfil);
+  let resource = createAudioResource('/home/hugo/Claes/ljudklipp/' + ljudfil);
   const connection = joinVoiceChannel({
     channelId: channel.id,
     guildId: channel.guild.id,
@@ -152,30 +152,30 @@ async function ljudGöraren(meddelande, ljudfil) {
     connection.destroy();
     player.stop();
   }
-  return console.log("Eftersom jag retrurnar har jag tänkt på det");
+  return console.log('Eftersom jag retrurnar har jag tänkt på det');
 }
 
 //And here is a self-made one (it's NOT recursive!) ;)
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   skiljetecken = {
-    "!": "utropstecken",
-    $: "dollartecken",
-    "%": "procenttecken",
-    "&": "ampersand",
-    "/": "snedstreck",
-    "(": "startparentes",
-    ")": "slutparentes",
-    "=": "likamedtecken",
-    "+": "plustecken",
-    "?": "frågetecken",
-    ",": "kommatecken",
-    ".": "punkttecken",
-    "-": "bindestreck",
-    _: "understreck",
-    ";": "semikolontecken",
-    ":": "kolontecken",
-    "<": "mindreäntecken",
-    ">": "störreäntecken",
+    '!': 'utropstecken',
+    '$': 'dollartecken',
+    '%': 'procenttecken',
+    '&': 'ampersand',
+    '/': 'snedstreck',
+    '(': 'startparentes',
+    ')': 'slutparentes',
+    '=': 'likamedtecken',
+    '+': 'plustecken',
+    '?': 'frågetecken',
+    ',': 'kommatecken',
+    '.': 'punkttecken',
+    '-': 'bindestreck',
+    '_': 'understreck',
+    ';': 'semikolontecken',
+    ':': 'kolontecken',
+    '<': 'mindreäntecken',
+    '>': 'störreäntecken',
   };
 
   let channel = meddelande.member.voice.channel;
@@ -186,25 +186,25 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     adapterCreator: channel.guild.voiceAdapterCreator,
   });
 
-  console.log("Nu är vi utanför loopen :(" + player.state.status);
+  console.log('Nu är vi utanför loopen :(' + player.state.status);
   const subscription = connection.subscribe(player);
   for (let i = 0; i < bokstäver.length; i++) {
     console.log(bokstäver[i]);
-    if ("!$%&/()=+?,.-_;:<>".includes(bokstäver[i])) {
+    if ('!$%&/()=+?,.-_;:<>'.includes(bokstäver[i])) {
       ljudfilsomjagtyckerattvikanskebordespelanu = skiljetecken[bokstäver[i]];
     } else {
       ljudfilsomjagtyckerattvikanskebordespelanu = bokstäver[i];
     }
     let resurs = createAudioResource(
-      "/home/hugo/Claes/bokstäver/" +
+      '/home/hugo/Claes/bokstäver/' +
         ljudfilsomjagtyckerattvikanskebordespelanu +
-        ".wav"
+        '.wav'
     );
     player.play(resurs);
     await löftesKollaren(player);
-    console.log("Nu är vi i loopen :)" + player.state.status);
+    console.log('Nu är vi i loopen :)' + player.state.status);
   }
-  console.log("Nu har jag spelat klart! :)");
+  console.log('Nu har jag spelat klart! :)');
   if (subscription) {
     subscription.unsubscribe();
   }
@@ -222,21 +222,21 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 //CHAPTER THREE: Call & Response
 //This is where things happen babyyyyyyy!
 
-client.on("messageCreate", async (meddelande) => {
+client.on('messageCreate', async (meddelande) => {
   //if (meddelande.channelId == pinns && meddelande.author.id == "873614862578769940" && meddelande.embeds[0]) { den här är sparad eftersom den har NQN botten
 
   //CHAPTER FOUR: Bullying is An Art
 
   //the die is cast is very important for determining what's going on
   var aleaIactaEst = Math.floor(Math.random() * 50);
-  console.log("Tärningen är kastad! " + aleaIactaEst);
+  console.log('Tärningen är kastad! ' + aleaIactaEst);
   //if we get bully crit then we bully
-  if (aleaIactaEst == 18 && meddelande.author.id !== "745345949295181886") {
+  if (aleaIactaEst == 18 && meddelande.author.id !== '745345949295181886') {
     //make the webhook that impersonates the bullyee
     let jamesCameron =
-      "https://cdn.discordapp.com/avatars/" +
+      'https://cdn.discordapp.com/avatars/' +
       meddelande.author.id +
-      "/" +
+      '/' +
       meddelande.author.avatar;
     async function webbKrok() {
       try {
@@ -249,13 +249,13 @@ client.on("messageCreate", async (meddelande) => {
         );
 
         await webhook.send({
-          content: "**" + svampbob(meddelande.content) + "**",
+          content: '**' + svampbob(meddelande.content) + '**',
           username: '"' + svampbob(meddelande.member.displayName) + '"',
           avatarURL: jamesCameron,
         });
         webhook.delete();
       } catch (whoops) {
-        console.error("Här sket det sig: ", whoops);
+        console.error('Här sket det sig: ', whoops);
       }
     }
     webbKrok();
@@ -267,70 +267,70 @@ client.on("messageCreate", async (meddelande) => {
   if (
     /.+\?([\n\r\t !]|$)/gi.test(dravel) &&
     aleaIactaEst < 7 &&
-    meddelande.author.id !== "745345949295181886"
+    meddelande.author.id !== '745345949295181886'
   )
-    meddelande.reply("Bra fråga, återkommer :)");
+    meddelande.reply('Bra fråga, återkommer :)');
   //a proper greeting gets a proper response
-  if (dravel === "hey guys") {
-    meddelande.reply("https://www.youtube.com/watch?v=fqoM2BJ6_-8");
+  if (dravel === 'hey guys') {
+    meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
 
   //CHAPTER SIX: The Team
   //code to help dota nerds win games
-  else if (dravel.endsWith("maakep happen")) {
+  else if (dravel.endsWith('maakep happen')) {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
-      let ljudfil = "bow bow.wav";
-      console.log("Nu är tärningen " + aleaIactaEst);
+      let ljudfil = 'bow bow.wav';
+      console.log('Nu är tärningen ' + aleaIactaEst);
       switch (true) {
         case inRange(aleaIactaEst, 25, 25):
-          ljudfil = "IASID.wav";
-          console.log("IASID");
+          ljudfil = 'IASID.wav';
+          console.log('IASID');
           break;
         case inRange(aleaIactaEst, 0, 5):
-          ljudfil = "mitchyapos.wav";
-          console.log("mitchyapos");
+          ljudfil = 'mitchyapos.wav';
+          console.log('mitchyapos');
           break;
         case inRange(aleaIactaEst, 6, 11):
-          ljudfil = "hugoyapos.wav";
-          console.log("hugo");
+          ljudfil = 'hugoyapos.wav';
+          console.log('hugo');
           break;
         case inRange(aleaIactaEst, 12, 17):
-          ljudfil = "claesyapos.wav";
-          console.log("claes");
+          ljudfil = 'claesyapos.wav';
+          console.log('claes');
           break;
         case inRange(aleaIactaEst, 18, 23):
-          ljudfil = "edwinyapos.wav";
-          console.log("edwin");
+          ljudfil = 'edwinyapos.wav';
+          console.log('edwin');
           break;
         case inRange(aleaIactaEst, 24, 29):
-          ljudfil = "sarayapos.wav";
-          console.log("sara");
+          ljudfil = 'sarayapos.wav';
+          console.log('sara');
           break;
         case inRange(aleaIactaEst, 30, 35):
-          ljudfil = "densetsuyapos.wav";
-          console.log("Laggan gaiden");
+          ljudfil = 'densetsuyapos.wav';
+          console.log('Laggan gaiden');
           break;
         case inRange(aleaIactaEst, 36, 41):
-          ljudfil = "sarayapos2.wav";
-          console.log("sara");
+          ljudfil = 'sarayapos2.wav';
+          console.log('sara');
           break;
 
         case inRange(aleaIactaEst, 42, 47):
-          ljudfil = "onyourmarksyapos.wav";
-          console.log("On your marks");
+          ljudfil = 'onyourmarksyapos.wav';
+          console.log('On your marks');
           break;
 
         default:
-          console.log("default");
+          console.log('default');
           break;
       }
       ljudGöraren(meddelande, ljudfil);
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
-    var behållare = ["", "", "", "", ""];
-    var spelareLista = minusMaakep.split(" ", 5);
+    var behållare = ['', '', '', '', ''];
+    var spelareLista = minusMaakep.split(' ', 5);
     for (var i of spelareLista) {
       behållare.push(i);
       behållare.shift();
@@ -354,9 +354,9 @@ client.on("messageCreate", async (meddelande) => {
     //ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
     //Set up a bunch of canvas shit that I don't know what's going on with but the tutorials says to do it
-    const { registerFont } = require("canvas");
-    registerFont("ComicMono.ttf", { family: "Comic Mono" });
-    registerFont("Textile Regular.ttf", { family: "Textile Regular" });
+    const { registerFont } = require('canvas');
+    registerFont('ComicMono.ttf', { family: 'Comic Mono' });
+    registerFont('Textile Regular.ttf', { family: 'Textile Regular' });
     const omSkuffadSamling = shuffleArray(behållare);
 
     //For commentary on this stuff just look at the else shit below I can't be arsed, it's the same
@@ -368,33 +368,33 @@ client.on("messageCreate", async (meddelande) => {
       }
       let strängBoys =
         '"' +
-        förstaFyran.join(", ") +
-        " & " +
+        förstaFyran.join(', ') +
+        ' & ' +
         kapitalisera(omSkuffadSamling[4]) +
         ' \nthrow a game of Dota 2"';
 
       const canvas = Canvas.createCanvas(420, 260);
-      const context = canvas.getContext("2d");
-      context.fillStyle = "black";
+      const context = canvas.getContext('2d');
+      context.fillStyle = 'black';
       context.fillRect(0, 0, 420, 260);
 
-      context.textAlign = "center";
+      context.textAlign = 'center';
       context.font = `${dymo(canvas, `${strängBoys}`)}"Textile Regular"`;
-      context.fillStyle = "#ffffff";
+      context.fillStyle = '#ffffff';
       context.fillText(
         `${strängBoys}`,
         canvas.width / 2.0,
         canvas.height / 2.0
       );
 
-      const attachment = new MessageAttachment(canvas.toBuffer(), "iasid.png");
+      const attachment = new MessageAttachment(canvas.toBuffer(), 'iasid.png');
       meddelande.reply({ files: [attachment] });
     } else {
       //the canvas size is completely arbitrary, it's used in the tutorial so I haven't been arsed to change it
       const canvas = Canvas.createCanvas(700, 250);
-      const context = canvas.getContext("2d");
+      const context = canvas.getContext('2d');
       //get the dumb image and draw the dumb image
-      const background = await Canvas.loadImage("/home/hugo/Claes/maakep.png");
+      const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
       //do the hoyl and mix up the bag of bozos
@@ -409,49 +409,49 @@ client.on("messageCreate", async (meddelande) => {
       subText.push(omSkuffadSamling[4]);
 
       //establish hierarchy and bully
-      let rubrik = överText.join(" > ");
+      let rubrik = överText.join(' > ');
       rubrik = svampbob(rubrik);
-      let underText = subText.join(" > ");
+      let underText = subText.join(' > ');
       underText = svampbob(underText);
 
       //2 lines below aren't really used
-      const prioriteringar = omSkuffadSamling.join(" > ");
+      const prioriteringar = omSkuffadSamling.join(' > ');
 
       //make canvas type the words on the image time babyyyyyy, the values for .filltext shit is arbitrary and could probably be improved but who cares it looks nice and jank
       context.font = `${dymo(canvas, `${rubrik}`)}"Comic Mono"`;
-      context.fillStyle = "#ffffff";
+      context.fillStyle = '#ffffff';
       context.fillText(`${rubrik}`, 0, canvas.height / 4.0);
 
       context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-      context.fillStyle = "#ffffff";
+      context.fillStyle = '#ffffff';
       context.fillText(`v`, 0, canvas.height / 2.0);
 
       context.font = `${dymo(canvas, `${underText}`)}"Comic Mono"`;
-      context.fillStyle = "#ffffff";
+      context.fillStyle = '#ffffff';
       context.fillText(`${underText}`, 0, canvas.height / 1.5);
 
       const attachment = new MessageAttachment(
         canvas.toBuffer(),
-        "maakepHappen.png"
+        'maakepHappen.png'
       );
       //meddelande.edit(`${svampPrio}`) det är illegal att göra detta tydligen
       meddelande.reply({ files: [attachment] });
     }
-  } else if (dravel.startsWith("!dota")) {
+  } else if (dravel.startsWith('!dota')) {
     const res = await dotaPrefs.parseMessage(dravel);
 
     if (res.success) {
-      meddelande.react("✅");
+      meddelande.react('✅');
       meddelande.reply(res.message);
     } else {
-      meddelande.react("❌");
+      meddelande.react('❌');
       meddelande.reply(svampbob(res.message));
     }
   }
 
   //CHAPTER SEVEN: The Mystery to the Key
   //below is legacy code that is important for ceremonial reasons
-  if (dravel === "hej claes") {
+  if (dravel === 'hej claes') {
     //blabla om command är hej bla bla
 
     meddelande.reply(`PEE IS STORED IN BALLS`);
@@ -459,7 +459,7 @@ client.on("messageCreate", async (meddelande) => {
 
   //CHAPTER EIGHT: The Endless River
   //Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
-  if (meddelande.content.startsWith("säg ")) {
+  if (meddelande.content.startsWith('säg ')) {
     if (meddelande.member.voice.channel !== null) {
       if (upptagen !== true) {
         upptagen = true;
@@ -467,10 +467,10 @@ client.on("messageCreate", async (meddelande) => {
         spelaungefärljudetavenbokstav(meddelande, attsäga);
         upptagen = false;
       } else {
-        meddelande.reply("Jag är upptagen");
+        meddelande.reply('Jag är upptagen');
       }
     } else {
-      meddelande.reply("Joina voice först");
+      meddelande.reply('Joina voice först');
     }
   }
 });
