@@ -18,6 +18,7 @@ const { Client, Intents, MessageAttachment } = require('discord.js');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
 const dotaPrefs = require('./dota-prefs-api.js');
+const EngTillIPA = require('./eng-till-ipa-2000.js');
 
 // Create a new client instance
 const client = new Client({
@@ -41,6 +42,7 @@ const {
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
   console.log('Claes is online');
+  EngTillIPA.laddaUppslagsverk();
 
   //const pinns = '873614838692192286'
   //const kanalen = client.channels.cache.get(pinns);
