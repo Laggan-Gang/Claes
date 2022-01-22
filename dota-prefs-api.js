@@ -20,7 +20,7 @@ module.exports = {
     switch (command) {
       case 'set':
         const [user, ...roles] = parameters;
-        res = await update(user, roles);
+        res = await update(user, roles, meddelande.author.toString());
         break;
       case 'roll':
         const users = parameters;
@@ -40,8 +40,9 @@ module.exports = {
   },
 };
 
-async function update(user, roles) {
+async function update(user, roles, discordId) {
   const res = await axios.default.post(UPDATE, {
+    userId: discordId,
     user: user,
     roles: roles,
   });
