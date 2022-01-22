@@ -6,8 +6,8 @@ const GENERATE = `${dotaPrefsBaseUrl}/roles`;
 const DELETE = `${dotaPrefsBaseUrl}/:user`;
 
 module.exports = {
-  parseMessage: async (message) => {
-    const arr = message.split(' ');
+  parseMessage: async (meddelande) => {
+    const arr = meddelande.content.toLocaleLowerCase().split(' ');
     const command = arr[1];
     const parameters = arr.slice(2);
 

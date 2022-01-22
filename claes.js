@@ -472,7 +472,7 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply({ files: [attachment] });
     }
   } else if (dravel.startsWith('!dota')) {
-    const res = await dotaPrefs.parseMessage(dravel);
+    const res = await dotaPrefs.parseMessage(meddelande);
 
     if (res.success) {
       meddelande.react('✅');
