@@ -36,7 +36,7 @@ if (typeof EngTillIPA !== 'object') {
     TextToIPA.laddaUppslagsverk = function () {
       // Väg till ordlistan:
       OrdlistansPlats = "./eng_ipa.txt"
-      console.log('TextToIPA: Loading dict from ' + OrdlistansPlats + '...');
+      console.log('EngTillIPA: Läser uppslagsverk från ' + OrdlistansPlats + '... det är ganska tråkigt ...');
       
       var textFil = new XMLHttpRequest();
 
@@ -55,7 +55,7 @@ if (typeof EngTillIPA !== 'object') {
         textFil.send(null);
 
       }
-
+    console.log('EngTillIPA: Uppslagsverket är laddat!")
     };
   }
   
