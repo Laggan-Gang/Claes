@@ -159,7 +159,7 @@ async function ljudGöraren(meddelande, ljudfil) {
 async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   skiljetecken = {
     "!": "utropstecken",
-    $: "dollartecken",
+    "$": "dollartecken",
     "%": "procenttecken",
     "&": "ampersand",
     "/": "snedstreck",
