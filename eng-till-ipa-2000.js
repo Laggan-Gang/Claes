@@ -32,7 +32,7 @@ if (typeof EngTillIPA !== 'object') {
   }
 
   if (typeof EngTillIPA.laddaUppslagsverk !== 'function') {
-    TextToIPA.laddaUppslagsverk = function () {
+    EngTillIPA.laddaUppslagsverk = function () {
       // Väg till ordlistan:
       OrdlistansPlats = './eng_ipa.txt';
       console.log(
@@ -51,7 +51,7 @@ if (typeof EngTillIPA !== 'object') {
           // And file is found...
           if (textFil.status == 200 || textFil.status == 0) {
             // Load up the ipa dict
-            TextToIPA._kollaUpp(textFil.responseText.split('\n'));
+            EngTillIPA._kollaUpp(textFil.responseText.split('\n'));
           }
         }
 
@@ -66,12 +66,12 @@ if (typeof EngTillIPA !== 'object') {
       // kolla så uppslagsverket är skapat
       if (Object.keys(EngToIPA._IPpslAgsverk).length === 0) {
         console.log(
-          'EngToIPA Error: No data in TextToIPA._IPADict. Did "TextToIPA.loadDict()" run?'
+          'Jag tror inte du har något Uppslagsverk laddat'
         );
       } else {
         //  Öh det här är för att vissa ord inte finns i listan ( typ dom svenska )
-        if (typeof TextToIPA._IPpslAgsverk[ord] != 'undefined') {
-          var text = TextToIPA._IPpslAgsverk[ord];
+        if (typeof EngTillIPA._IPpslAgsverk[ord] != 'undefined') {
+          var text = EngTillIPA._IPpslAgsverk[ord];
 
           return text;
 
