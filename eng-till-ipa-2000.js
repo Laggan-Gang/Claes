@@ -8,7 +8,7 @@
 // så ska det se ut!
 
 if (typeof EngTillIPA !== 'object') {
-  EngTillIpa = {};
+  EngTillIPA = {};
 }
 
 (function () {
