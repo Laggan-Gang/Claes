@@ -25,6 +25,38 @@ const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MESSAGES,
+    /*
+
+      var a = ['hej', 'bajs', 'kiss']
+      
+      var b = a.map(x => {
+        return x + "wowo"
+      }) 
+
+      b -> ['hejwowo', 'bajswowo', 'kisswowo']
+
+      - - - - - 
+      
+      var a = [1, 2, 3]
+
+      var b = a.reduce((accumulated, current) => {
+        return accumulated + current;
+      }, 0);
+
+      b -> 6
+
+
+      - - - - - 
+
+      var a = ['bicc', 'thicc', 'boi']
+
+      var b = a.filter(x => {
+        return x.endsWith("icc");
+      });
+
+      b -> ['bicc', 'thicc']
+
+    */
     Intents.FLAGS.GUILD_MEMBERS,
     Intents.FLAGS.GUILD_VOICE_STATES,
   ],
