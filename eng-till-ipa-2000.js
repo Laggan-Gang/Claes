@@ -59,9 +59,9 @@ if (typeof EngTillIPA !== 'object') {
     };
   }
   
-  if (typeof EngToIPA.kollaupp !== 'function') {
+  if (typeof EngToIPA.kollaUpp !== 'function') {
 
-    EngToIPA.kollaupp = function (ord) {
+    EngToIPA.kollaUpp = function (ord) {
       // kolla så uppslagsverket är skapat
       if (Object.keys(EngToIPA._IPpslAgsverk).length === 0) {
         console.log('EngToIPA Error: No data in TextToIPA._IPADict. Did "TextToIPA.loadDict()" run?');
