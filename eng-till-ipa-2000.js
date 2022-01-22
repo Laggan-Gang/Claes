@@ -7,6 +7,8 @@
 // hʌlowˈ hawˈ ɑˈɹ juˈ
 // så ska det se ut!
 
+const fs = require("fs")
+
 if (typeof EngTillIPA !== 'object') {
   EngTillIPA = {};
 }
@@ -23,7 +25,7 @@ if (typeof EngTillIPA !== 'object') {
       console.log('EngTillIPA: Börjar kolla upp i uppslagsverket...');
 
       for (var i in rader) {
-        var ord = rader[i].split(/\s+/g);
+        var ord = rader[i].split(",");
         EngTillIPA._IPpslAgsverk[ord[0]] = ord[1];
       }
 
@@ -34,29 +36,14 @@ if (typeof EngTillIPA !== 'object') {
   if (typeof EngTillIPA.laddaUppslagsverk !== 'function') {
     EngTillIPA.laddaUppslagsverk = function () {
       // Väg till ordlistan:
-      OrdlistansPlats = './eng_ipa.txt';
+      var OrdlistansPlats = "./eng_ipa.txt";
       console.log(
         'EngTillIPA: Läser uppslagsverk från ' +
           OrdlistansPlats +
           '... det är ganska tråkigt ...'
       );
-
-      var textFil = new XMLHttpRequest();
-
-      textFil.open('GET', OrdlistansPlats, true);
-
-      textFil.onreadystatechange = function () {
-        // If document is ready to parse...
-        if (textFil.readyState == 4) {
-          // And file is found...
-          if (textFil.status == 200 || textFil.status == 0) {
-            // Load up the ipa dict
-            EngTillIPA._kollaUpp(textFil.responseText.split('\n'));
-          }
-        }
-
-        textFil.send(null);
-      };
+      var textFil = fs.readFileSync(OrdlistansPlats, 'utf-8');
+      EngTillIPA._kollaUpp(textFil.split('\n'));
       console.log('EngTillIPA: Uppslagsverket är laddat!');
     };
   }
@@ -67,13 +54,15 @@ if (typeof EngTillIPA !== 'object') {
       if (Object.keys(EngTillIPA._IPpslAgsverk).length === 0) {
         console.log('Jag tror inte du har något Uppslagsverk laddat');
       } else {
+	//console.log(EngTillIPA._IPpslAgsverk)
         //  Öh det här är för att vissa ord inte finns i listan ( typ dom svenska )
         if (typeof EngTillIPA._IPpslAgsverk[ord] != 'undefined') {
           var text = EngTillIPA._IPpslAgsverk[ord];
 
+          console.log("jag returnar"  + text + ".")
           return text;
 
-          // Dom orden kan vi slänga tillbaka som dom är
+        // Dom orden kan vi slänga tillbaka som dom är
         } else {
           return ord;
         }
@@ -81,3 +70,10 @@ if (typeof EngTillIPA !== 'object') {
     };
   }
 })();
+
+module.exports.ladda = () => { 
+  EngTillIPA.laddaUppslagsverk()
+};
+module.exports.kolla = (ord) => { 
+  return EngTillIPA.kollaUpp(ord) 
+};
