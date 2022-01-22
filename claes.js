@@ -1,6 +1,5 @@
 //TABLE OF CONTENTS
 // Around line 15 Preface
-// ass
 // Around line 28 Introduction
 // Around line 80 Chapter One: Boring Functions
 // Around line 114 Chapter Two: The Key to the Mystery
