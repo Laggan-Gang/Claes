@@ -2,7 +2,7 @@
   "name": "claesbot",
   "version": "1.0.0",
   "description": "it's claesbot",
-  "main": "index.js",
+  "main": "claes.js",
   "scripts": {
     "test": "test"
   },
