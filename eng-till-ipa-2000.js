@@ -1,12 +1,11 @@
-// # SVARTVITT # 
-// Har du någonsin lite engelsk text som ligger och skräpar? 
+// # SVARTVITT #
+// Har du någonsin lite engelsk text som ligger och skräpar?
 // # FÄRG #
 // Släng bara in den i eng-till-ipa-2000 så löser vi allt!
 // "Hello, how are you?"
 // USCH OCH TVI!
 // hʌlowˈ hawˈ ɑˈɹ juˈ
 // så ska det se ut!
-
 
 if (typeof EngTillIPA !== 'object') {
   EngTillIpa = {};
@@ -18,7 +17,7 @@ if (typeof EngTillIPA !== 'object') {
   if (typeof EngTillIPA._IPpslAgsverk !== 'object') {
     EngTillIPA._IPpslAgsverk = {};
   }
-  
+
   if (typeof EngTillIPA._kollaUpp !== 'function') {
     EngTillIPA._kollaUpp = function (rader) {
       console.log('EngTillIPA: Börjar kolla upp i uppslagsverket...');
@@ -31,18 +30,22 @@ if (typeof EngTillIPA !== 'object') {
       console.log('EngTillIPA: Kollat klart :-)');
     };
   }
-  
+
   if (typeof EngTillIPA.laddaUppslagsverk !== 'function') {
     TextToIPA.laddaUppslagsverk = function () {
       // Väg till ordlistan:
-      OrdlistansPlats = "./eng_ipa.txt"
-      console.log('EngTillIPA: Läser uppslagsverk från ' + OrdlistansPlats + '... det är ganska tråkigt ...');
-      
+      OrdlistansPlats = './eng_ipa.txt';
+      console.log(
+        'EngTillIPA: Läser uppslagsverk från ' +
+          OrdlistansPlats +
+          '... det är ganska tråkigt ...'
+      );
+
       var textFil = new XMLHttpRequest();
 
       textFil.open('GET', OrdlistansPlats, true);
 
-      textFil.onreadystatechange = function() {
+      textFil.onreadystatechange = function () {
         // If document is ready to parse...
         if (textFil.readyState == 4) {
           // And file is found...
@@ -50,38 +53,33 @@ if (typeof EngTillIPA !== 'object') {
             // Load up the ipa dict
             TextToIPA._kollaUpp(textFil.responseText.split('\n'));
           }
-        };
+        }
 
         textFil.send(null);
-
-      }
-    console.log('EngTillIPA: Uppslagsverket är laddat!")
+      };
+      console.log('EngTillIPA: Uppslagsverket är laddat!');
     };
   }
-  
-  if (typeof EngToIPA.kollaUpp !== 'function') {
 
+  if (typeof EngToIPA.kollaUpp !== 'function') {
     EngToIPA.kollaUpp = function (ord) {
       // kolla så uppslagsverket är skapat
       if (Object.keys(EngToIPA._IPpslAgsverk).length === 0) {
-        console.log('EngToIPA Error: No data in TextToIPA._IPADict. Did "TextToIPA.loadDict()" run?');
+        console.log(
+          'EngToIPA Error: No data in TextToIPA._IPADict. Did "TextToIPA.loadDict()" run?'
+        );
       } else {
         //  Öh det här är för att vissa ord inte finns i listan ( typ dom svenska )
-        if ( typeof TextToIPA._IPpslAgsverk[ord] != 'undefined' ) {
-          
+        if (typeof TextToIPA._IPpslAgsverk[ord] != 'undefined') {
           var text = TextToIPA._IPpslAgsverk[ord];
 
           return text;
 
-        // Dom orden kan vi slänga tillbaka som dom är
+          // Dom orden kan vi slänga tillbaka som dom är
         } else {
           return ord;
         }
-
       }
-
     };
-
   }
-
-}());
+})();
