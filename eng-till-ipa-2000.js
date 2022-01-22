@@ -61,13 +61,11 @@ if (typeof EngTillIPA !== 'object') {
     };
   }
 
-  if (typeof EngToIPA.kollaUpp !== 'function') {
-    EngToIPA.kollaUpp = function (ord) {
+  if (typeof EngTillIPA.kollaUpp !== 'function') {
+    EngTillIPA.kollaUpp = function (ord) {
       // kolla så uppslagsverket är skapat
-      if (Object.keys(EngToIPA._IPpslAgsverk).length === 0) {
-        console.log(
-          'Jag tror inte du har något Uppslagsverk laddat'
-        );
+      if (Object.keys(EngTillIPA._IPpslAgsverk).length === 0) {
+        console.log('Jag tror inte du har något Uppslagsverk laddat');
       } else {
         //  Öh det här är för att vissa ord inte finns i listan ( typ dom svenska )
         if (typeof EngTillIPA._IPpslAgsverk[ord] != 'undefined') {
