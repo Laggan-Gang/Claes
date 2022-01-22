@@ -1,5 +1,5 @@
 const { dotaPrefsBaseUrl } = require('./config.json');
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 const UPDATE = `${dotaPrefsBaseUrl}/role`;
 const GENERATE = `${dotaPrefsBaseUrl}/roles`;
@@ -41,15 +41,9 @@ module.exports = {
 };
 
 async function update(user, roles) {
-  const res = await fetch(UPDATE, {
-    method: 'POST',
-    body: JSON.stringify({
-      user: user,
-      roles: roles,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const res = await axios.default.post(UPDATE, {
+    user: user,
+    roles: roles,
   });
 
   const body = await res.text();
@@ -61,15 +55,9 @@ async function update(user, roles) {
 }
 
 async function generate(users) {
-  const res = await fetch(GENERATE, {
-    method: 'POST',
-    body: JSON.stringify({
-      users: users,
-      json: false,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const res = await axios.default.post(GENERATE, {
+    users: users,
+    json: false,
   });
 
   const body = await res.text();
@@ -81,7 +69,7 @@ async function generate(users) {
 }
 
 async function del(user) {
-  const res = await fetch(DELETE.replace(':user', user), {
+  const res = await axios.default.post(DELETE.replace(':user', user), {
     method: 'DELETE',
   });
 
