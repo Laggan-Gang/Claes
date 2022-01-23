@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 var subscriptionKey = process.env['translator-key'];
 var endpoint = 'https://api.cognitive.microsofttranslator.com';
 
-export async function swedishToEnglish(message) {
+async function swedishToEnglish(message) {
   const translation = await translate(message, ['en']);
 
   // return only english FOR NOW
@@ -46,3 +46,7 @@ async function translate(message, targetLanguages) {
     console.error(e);
   }
 }
+
+module.exports = {
+  swedishToEnglish,
+};
