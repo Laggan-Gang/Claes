@@ -324,33 +324,48 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
   if (dravel.includes("tack claes")){
-    switch (true):
+    switch (true){
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply("Inga problem!")
+        break;
       case inRange(aleaIactaEst, 31, 40):
         meddelande.reply("Tack själv!")
+        break;
       case inRange(aleaIactaEst, 21, 30):
         meddelande.reply("Det var så lite!")
+        break;
       case inRange(aleaIactaEst, 11, 20):
         meddelande.reply("Du behöver inte tacka mig!")
+        break;
       case inRange(aleaIactaEst, 1, 10):
         meddelande.reply("Var så god!")
+        break;
       default:
         meddelande.reply("Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)")
+        break;
+     }
+  }
   if (dravel.includes("thanks claes")){
-    switch (true):
+    switch (true){
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply("No problem!")
+        break;
       case inRange(aleaIactaEst, 31, 40):
         meddelande.reply("No, thank YOU!")
+        break;
       case inRange(aleaIactaEst, 21, 30):
         meddelande.reply("Oh it's nothing!")
+        break;
       case inRange(aleaIactaEst, 11, 20):
         meddelande.reply("No need to thank me!")
+        break;
       case inRange(aleaIactaEst, 1, 10):
         meddelande.reply("You're welcome!")
+        break;
       default:
         meddelande.reply("Say thank you to this!*turns around and drops his pants* (you can see Claes has pooped himself)")
+        break;
+    }
   }
   //a proper greeting gets a proper response
   if (dravel === 'hey guys') {
