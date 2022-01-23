@@ -60,7 +60,7 @@ if (typeof EngTillIPA !== 'object') {
           var text = EngTillIPA._IPpslAgsverk[ord];
 
           console.log("jag returnar"  + text + ".")
-          return text;
+          return text.trim();
 
         // Dom orden kan vi slänga tillbaka som dom är
         } else {

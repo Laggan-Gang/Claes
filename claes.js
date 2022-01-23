@@ -212,6 +212,12 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     '>': 'störreäntecken',
   };
 
+  for (let i = 0; i < bokstäver.length; i++) {
+    if ('!$%&/()=+?,.-_;:<>'.includes(bokstäver[i])) {
+       bokstäver = bokstäver.slice(0,i) + ":" + bokstäver.slice(i)
+    }
+  }
+  console.log(bokstäver)
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
   const connection = joinVoiceChannel({
