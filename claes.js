@@ -322,10 +322,41 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.author.id !== '745345949295181886'
   )
     meddelande.reply('Bra fråga, återkommer :)');
+  //a proper thank you gets a proper response
+  if (dravel.includes("tack claes")){
+    switch aleaIactaEst:
+      case inRange(aleaIactaEst, 41, 50):
+        meddelande.reply("Inga problem!")
+      case inRange(aleaIactaEst, 31, 40):
+        meddelande.reply("Tack själv!")
+      case inRange(aleaIactaEst, 21, 30):
+        meddelande.reply("Det var så lite!")
+      case inRange(aleaIactaEst, 11, 20):
+        meddelande.reply("Du behöver inte tacka mig!")
+      case inRange(aleaIactaEst, 1, 10):
+        meddelande.reply("Var så god!")
+      default:
+        meddelande.reply("Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)")
+  if (dravel.includes("thanks claes")){
+    switch aleaIactaEst:
+      case inRange(aleaIactaEst, 41, 50):
+        meddelande.reply("No problem!")
+      case inRange(aleaIactaEst, 31, 40):
+        meddelande.reply("No, thank YOU!")
+      case inRange(aleaIactaEst, 21, 30):
+        meddelande.reply("Oh it's nothing!")
+      case inRange(aleaIactaEst, 11, 20):
+        meddelande.reply("No need to thank me!")
+      case inRange(aleaIactaEst, 1, 10):
+        meddelande.reply("You're welcome!")
+      default:
+        meddelande.reply("Say thank you to this!*turns around and drops his pants* (you can see Claes has pooped himself)")
+  }
   //a proper greeting gets a proper response
   if (dravel === 'hey guys') {
     meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
+  
 
   //CHAPTER SIX: The Team
   //code to help dota nerds win games
