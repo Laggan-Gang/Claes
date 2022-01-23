@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 // PLEASE DONT STEAL THIS
 // GCP SECRET VALUE ?
-var subscriptionKey = process.env[translatorKey];
+var subscriptionKey = process.env['translator-key'];
 var endpoint = 'https://api.cognitive.microsofttranslator.com';
 
 export async function swedishToEnglish(message) {
