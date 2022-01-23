@@ -213,11 +213,23 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   };
 
   for (let i = 0; i < bokstäver.length; i++) {
-    if ('!$%&/()=+?,.-_;:<>'.includes(bokstäver[i])) {
-       bokstäver = bokstäver.slice(0,i) + ":" + bokstäver.slice(i)
+    if (!" 'abcdefghijklmnopqrtstuvxyzåäö".includes(bokstäver[i])) {
+       bokstäver = bokstäver.slice(0,i) + " " + bokstäver.slice(i);
+       i++; // Annars skjuter den fram skiljetecknet och lägger in oändligt många " "
     }
   }
-  console.log(bokstäver)
+  console.log(bokstäver);
+  ord = bokstäver.split(" ");
+  var IPAbokstäver = ""
+  for (let i = 0; i < ord.length; i++) {
+    console.log(ord[i])
+    if (i != 0 && !"!.,-()=+_<>?".includes(ord[i])){
+      IPAbokstäver += " ";
+    }
+    IPAbokstäver += EngTillIPA.kolla(ord[i]);
+  }
+  console.log(IPAbokstäver) 
+
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
   const connection = joinVoiceChannel({
@@ -228,15 +240,15 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
   console.log('Nu är vi utanför loopen :(' + player.state.status);
   const subscription = connection.subscribe(player);
-  for (let i = 0; i < bokstäver.length; i++) {
-    console.log(bokstäver[i]);
-    if ('!$%&/()=+?,.-_;:<>'.includes(bokstäver[i])) {
-      ljudfilsomjagtyckerattvikanskebordespelanu = skiljetecken[bokstäver[i]];
+  for (let i = 0; i < IPAbokstäver.length; i++) {
+    console.log(IPAbokstäver[i]);
+    if ('!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
+      ljudfilsomjagtyckerattvikanskebordespelanu = skiljetecken[IPAbokstäver[i]];
     } else {
-      ljudfilsomjagtyckerattvikanskebordespelanu = bokstäver[i];
+      ljudfilsomjagtyckerattvikanskebordespelanu = IPAbokstäver[i];
     }
     let resurs = createAudioResource(
-      '/home/hugo/Claes/bokstäver/' +
+      '/home/hugo/Claes/bokstäver/IPA' +
         ljudfilsomjagtyckerattvikanskebordespelanu +
         '.wav'
     );
@@ -503,7 +515,7 @@ client.on('messageCreate', async (meddelande) => {
     if (meddelande.member.voice.channel !== null) {
       if (upptagen !== true) {
         upptagen = true;
-        attsäga = meddelande.cleanContent.substring(3).toLowerCase();
+        attsäga = meddelande.cleanContent.substring(4).toLowerCase();
         spelaungefärljudetavenbokstav(meddelande, attsäga);
         upptagen = false;
       } else {
