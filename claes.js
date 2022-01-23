@@ -324,7 +324,7 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
   if (dravel.includes("tack claes")){
-    switch aleaIactaEst:
+    switch (true):
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply("Inga problem!")
       case inRange(aleaIactaEst, 31, 40):
@@ -338,7 +338,7 @@ client.on('messageCreate', async (meddelande) => {
       default:
         meddelande.reply("Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)")
   if (dravel.includes("thanks claes")){
-    switch aleaIactaEst:
+    switch (true):
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply("No problem!")
       case inRange(aleaIactaEst, 31, 40):
