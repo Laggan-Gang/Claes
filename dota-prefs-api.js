@@ -21,17 +21,18 @@ module.exports = {
       case 'set':
         const [user, ...roles] = parameters;
         res = await update(user, roles, meddelande.author.toString());
-        console.log('set data: ' + res);
         break;
       case 'roll':
         const users = parameters;
         res = await generate(users);
-        console.log(res);
         break;
       case 'delete':
         const brukare = parameters[0];
         res = await del(brukare);
-        console.log('delete data: ' + res);
+        break;
+      case 'bigdick':
+        const bozos = parameters;
+        res = await big(bozos);
         break;
       case 'link':
         res.success = true;
@@ -71,6 +72,11 @@ async function generate(users) {
     success: res.status == 200,
     message: body,
   };
+}
+
+async function big(bozos) {
+  const res = await axios.default.post(dotaPrefsBaseUrl + '/id/' + bozos[0]);
+  console.log(res);
 }
 
 async function del(user) {
