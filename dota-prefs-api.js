@@ -21,6 +21,7 @@ module.exports = {
       case 'set':
         const [user, ...roles] = parameters;
         res = await update(user, roles, meddelande.author.toString());
+        console.log('set data: ' + res);
         break;
       case 'roll':
         const users = parameters;
@@ -30,6 +31,7 @@ module.exports = {
       case 'delete':
         const brukare = parameters[0];
         res = await del(brukare);
+        console.log('delete data: ' + res);
         break;
       case 'link':
         res.success = true;
