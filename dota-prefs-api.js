@@ -25,6 +25,7 @@ module.exports = {
       case 'roll':
         const users = parameters;
         res = await generate(users);
+        console.log(res);
         break;
       case 'delete':
         const brukare = parameters[0];
