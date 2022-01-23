@@ -222,6 +222,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   ord = bokstäver.split(" ");
   var IPAbokstäver = ""
   for (let i = 0; i < ord.length; i++) {
+    console.log(ord[i])
     if (i != 0 && !"!.,-()=+_<>?".includes(ord[i])){
       IPAbokstäver += " ";
     }
@@ -247,7 +248,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
       ljudfilsomjagtyckerattvikanskebordespelanu = IPAbokstäver[i];
     }
     let resurs = createAudioResource(
-      '/home/hugo/Claes/bokstäver/IPA' +
+      '/home/hugo/Claes/bokstäver/IPA/' +
         ljudfilsomjagtyckerattvikanskebordespelanu +
         '.wav'
     );
