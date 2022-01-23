@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 // PLEASE DONT STEAL THIS
 // GCP SECRET VALUE ?
-var subscriptionKey = process.env['translator-key'];
+const { translatorKey } = require('config.json');
 var endpoint = 'https://api.cognitive.microsofttranslator.com';
 
 module.exports.swedishToEnglish = async (message) => {
@@ -19,7 +19,7 @@ async function translate(message, targetLanguages) {
     url: '/translate',
     method: 'post',
     headers: {
-      'Ocp-Apim-Subscription-Key': subscriptionKey,
+      'Ocp-Apim-Subscription-Key': translatorKey,
       // Add your location, also known as region. The default is global.
       // This is required if using a Cognitive Services resource.
       'Ocp-Apim-Subscription-Region': 'westeurope',
