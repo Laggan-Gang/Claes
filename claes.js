@@ -557,7 +557,7 @@ client.on('messageCreate', async (meddelande) => {
 
   //CHAPTER EIGHT: The Endless River
   //Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
-  if (meddelande.content.startsWith('säg ')) {
+  if (meddelande.content.toLowerCase().startsWith('säg ') || meddelande.content.toLowerCase().startsWith('say ')) {
     if (meddelande.member.voice.channel !== null) {
       if (upptagen !== true) {
         upptagen = true;
