@@ -10,6 +10,7 @@ module.exports.swedishToEnglish = async (message) => {
   const translation = await translate(message, ['en']);
 
   // return only english FOR NOW
+  console.log(translation);
   return translation[0].translations.find((t) => t.to == 'en');
 };
 
@@ -40,6 +41,8 @@ async function translate(message, targetLanguages) {
 
   try {
     const response = await axios(request);
+    console.log(response);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     // YELL IN THE CONSOLE FOR NO GOOD REASON :)
