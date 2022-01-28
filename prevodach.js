@@ -39,10 +39,10 @@ async function translate(message, targetLanguages) {
   };
 
   try {
-    const response = await axios.post(request);
+    const response = await axios(request);
     return response.data;
   } catch (e) {
-    // YELL IN THE CONSOLE FOR NO GOOD REASON
+    // YELL IN THE CONSOLE FOR NO GOOD REASON :)
     console.error(e);
   }
 }

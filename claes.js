@@ -293,6 +293,10 @@ client.on('messageCreate', async (meddelande) => {
       '/' +
       meddelande.author.avatar;
     async function webbKrok() {
+      //switch (true) {
+      //  case client.channels.cache.get(meddelande.channel.id):
+      //    break;
+      //}
       try {
         const channel = client.channels.cache.get(meddelande.channel.id);
         var webhook = await channel.createWebhook(
@@ -591,7 +595,7 @@ client.on('messageCreate', async (meddelande) => {
   }
   if (meddelande.content.startsWith('prevedi')) {
     let strängToTranslate = meddelande.content.replace('prevedi', '');
-    meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
+    await meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
   }
 });
 
