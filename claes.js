@@ -593,7 +593,7 @@ client.on('messageCreate', async (meddelande) => {
   if (meddelande.author.id == '162288590192246784' && aleaIactaEst < 5) {
     meddelande.reply('This you?', { files: ['.august.png'] });
   }
-  if (/$(prevedi|преведи)/.test(meddelande.content)) {
+  if (/$(prevedi|преведи)/.test(dravel)) {
     let strängToTranslate = meddelande.content.replace('prevedi', '');
     meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
   }
