@@ -554,7 +554,7 @@ client.on('messageCreate', async (meddelande) => {
     const res = await dotaPrefs.parseMessage(meddelande);
 
     if (res.success) {
-      meddelande.react('935684531023925299');
+      meddelande.react('899414250492166174');
       meddelande.reply(svampbob(res.message));
     } else {
       meddelande.react('703784231893073922');
