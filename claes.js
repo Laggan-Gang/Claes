@@ -324,6 +324,13 @@ client.on('messageCreate', async (meddelande) => {
   )
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
+  if (dravel.startsWith('tack mig') || dravel.startsWith('tack mej')) {
+    if (meddelande.author.id == '207974495393153024') {
+      // CLAES
+      //if (meddelande.author.id == '199914493570973697') { // AUGUST för att testa
+      meddelande.reply({ files: ['./spiderman.jpg'] });
+    }
+  }
   if (dravel.includes('tack claes')) {
     switch (true) {
       case inRange(aleaIactaEst, 41, 50):
