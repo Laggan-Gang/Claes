@@ -30,10 +30,6 @@ module.exports = {
         const brukare = parameters[0];
         res = await del(brukare);
         break;
-      case 'bigdick':
-        const bozos = parameters;
-        res = await big(bozos);
-        break;
       case 'link':
         res.success = true;
         res.message = dotaPrefsBaseUrl;
@@ -72,11 +68,6 @@ async function generate(users) {
     success: res.status == 200,
     message: body,
   };
-}
-
-async function big(bozos) {
-  const res = await axios.default.post(dotaPrefsBaseUrl + '/id/' + bozos[0]);
-  console.log(res);
 }
 
 async function del(user) {

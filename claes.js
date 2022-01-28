@@ -214,21 +214,21 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
   for (let i = 0; i < bokstäver.length; i++) {
     if (!" 'abcdefghijklmnopqrtstuvxyzåäö".includes(bokstäver[i])) {
-       bokstäver = bokstäver.slice(0,i) + " " + bokstäver.slice(i);
-       i++; // Annars skjuter den fram skiljetecknet och lägger in oändligt många " "
+      bokstäver = bokstäver.slice(0, i) + ' ' + bokstäver.slice(i);
+      i++; // Annars skjuter den fram skiljetecknet och lägger in oändligt många " "
     }
   }
   console.log(bokstäver);
-  ord = bokstäver.split(" ");
-  var IPAbokstäver = ""
+  ord = bokstäver.split(' ');
+  var IPAbokstäver = '';
   for (let i = 0; i < ord.length; i++) {
-    console.log(ord[i])
-    if (i != 0 && !"!.,-()=+_<>?".includes(ord[i])){
-      IPAbokstäver += " ";
+    console.log(ord[i]);
+    if (i != 0 && !'!.,-()=+_<>?'.includes(ord[i])) {
+      IPAbokstäver += ' ';
     }
     IPAbokstäver += EngTillIPA.kolla(ord[i]);
   }
-  console.log(IPAbokstäver) 
+  console.log(IPAbokstäver);
 
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
@@ -243,7 +243,8 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   for (let i = 0; i < IPAbokstäver.length; i++) {
     console.log(IPAbokstäver[i]);
     if ('!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
-      ljudfilsomjagtyckerattvikanskebordespelanu = skiljetecken[IPAbokstäver[i]];
+      ljudfilsomjagtyckerattvikanskebordespelanu =
+        skiljetecken[IPAbokstäver[i]];
     } else {
       ljudfilsomjagtyckerattvikanskebordespelanu = IPAbokstäver[i];
     }
@@ -323,47 +324,51 @@ client.on('messageCreate', async (meddelande) => {
   )
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
-  if (dravel.includes("tack claes")){
-    switch (true){
+  if (dravel.includes('tack claes')) {
+    switch (true) {
       case inRange(aleaIactaEst, 41, 50):
-        meddelande.reply("Inga problem!")
+        meddelande.reply('Inga problem!');
         break;
       case inRange(aleaIactaEst, 31, 40):
-        meddelande.reply("Tack själv!")
+        meddelande.reply('Tack själv!');
         break;
       case inRange(aleaIactaEst, 21, 30):
-        meddelande.reply("Det var så lite!")
+        meddelande.reply('Det var så lite!');
         break;
       case inRange(aleaIactaEst, 11, 20):
-        meddelande.reply("Du behöver inte tacka mig!")
+        meddelande.reply('Du behöver inte tacka mig!');
         break;
       case inRange(aleaIactaEst, 1, 10):
-        meddelande.reply("Var så god!")
+        meddelande.reply('Var så god!');
         break;
       default:
-        meddelande.reply("Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)")
+        meddelande.reply(
+          'Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)'
+        );
         break;
-     }
+    }
   }
-  if (dravel.includes("thanks claes")){
-    switch (true){
+  if (dravel.includes('thanks claes')) {
+    switch (true) {
       case inRange(aleaIactaEst, 41, 50):
-        meddelande.reply("No problem!")
+        meddelande.reply('No problem!');
         break;
       case inRange(aleaIactaEst, 31, 40):
-        meddelande.reply("No, thank YOU!")
+        meddelande.reply('No, thank YOU!');
         break;
       case inRange(aleaIactaEst, 21, 30):
-        meddelande.reply("Oh it's nothing!")
+        meddelande.reply("Oh it's nothing!");
         break;
       case inRange(aleaIactaEst, 11, 20):
-        meddelande.reply("No need to thank me!")
+        meddelande.reply('No need to thank me!');
         break;
       case inRange(aleaIactaEst, 1, 10):
-        meddelande.reply("You're welcome!")
+        meddelande.reply("You're welcome!");
         break;
       default:
-        meddelande.reply("Say thank you to this!*turns around and drops his pants* (you can see Claes has pooped himself)")
+        meddelande.reply(
+          'Say thank you to this!*turns around and drops his pants* (you can see Claes has pooped himself)'
+        );
         break;
     }
   }
@@ -371,7 +376,6 @@ client.on('messageCreate', async (meddelande) => {
   if (dravel === 'hey guys') {
     meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
-  
 
   //CHAPTER SIX: The Team
   //code to help dota nerds win games
@@ -557,7 +561,10 @@ client.on('messageCreate', async (meddelande) => {
 
   //CHAPTER EIGHT: The Endless River
   //Have you ever had a dream that you, um, you had, your, you- you could, you’ll do, you- you wants, you, you could do so, you- you’ll do, you could- you, you want, you want them to do you so much you could do anything?
-  if (meddelande.content.toLowerCase().startsWith('säg ') || meddelande.content.toLowerCase().startsWith('say ')) {
+  if (
+    meddelande.content.toLowerCase().startsWith('säg ') ||
+    meddelande.content.toLowerCase().startsWith('say ')
+  ) {
     if (meddelande.member.voice.channel !== null) {
       if (upptagen !== true) {
         upptagen = true;
@@ -570,6 +577,9 @@ client.on('messageCreate', async (meddelande) => {
     } else {
       meddelande.reply('Joina voice först');
     }
+  }
+  if (meddelande.author.id == '162288590192246784' && aleaIactaEst < 5) {
+    meddelande.reply('This you?', { files: ['.august.png'] });
   }
 });
 
