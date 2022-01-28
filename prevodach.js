@@ -19,7 +19,7 @@ async function translate(message, targetLanguages) {
     url: '/translate',
     method: 'post',
     headers: {
-      'Ocp-Apim-Subscription-Key': translatorKey,
+      'Ocp-Apim-Subscription-Key': swekey,
       // Add your location, also known as region. The default is global.
       // This is required if using a Cognitive Services resource.
       'Ocp-Apim-Subscription-Region': 'westeurope',
