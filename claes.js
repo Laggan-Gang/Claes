@@ -591,7 +591,7 @@ client.on('messageCreate', async (meddelande) => {
   }
   if (meddelande.content.startsWith('prevedi')) {
     let strängToTranslate = meddelande.content.replace('prevedi', '');
-    meddelande.reply('Hello');
+    meddelande.reply('Hello nyu pagadi');
     //meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
   }
 });
