@@ -19,6 +19,7 @@ const { token } = require('./config.json');
 const Canvas = require('canvas');
 const dotaPrefs = require('./dota-prefs-api.js');
 const EngTillIPA = require('./eng-till-ipa-2000.js');
+const prevodach = require('./prevodach.js');
 
 // Create a new client instance
 const client = new Client({
@@ -587,6 +588,10 @@ client.on('messageCreate', async (meddelande) => {
   }
   if (meddelande.author.id == '162288590192246784' && aleaIactaEst < 5) {
     meddelande.reply('This you?', { files: ['.august.png'] });
+  }
+  if (meddelande.content.startsWith('prevedi')) {
+    let strängToTranslate = meddelande.content.replace('prevedi', '');
+    meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
   }
 });
 
