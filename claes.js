@@ -136,7 +136,7 @@ function inRange(x, min, max) {
 }
 
 //important function for bullying
-const svampbob = (harang) => {
+const svampbob = (harang = '') => {
   var chars = harang.toLowerCase().split('');
   const svampbobbifieradeBokstäver = chars.map((char) =>
     Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()
@@ -429,7 +429,6 @@ client.on('messageCreate', async (meddelande) => {
           ljudfil = 'sarayapos2.wav';
           console.log('sara');
           break;
-
         case inRange(aleaIactaEst, 42, 47):
           ljudfil = 'onyourmarksyapos.wav';
           console.log('On your marks');
@@ -555,10 +554,10 @@ client.on('messageCreate', async (meddelande) => {
     const res = await dotaPrefs.parseMessage(meddelande);
 
     if (res.success) {
-      meddelande.react('✅');
+      meddelande.react('935684531023925299');
       meddelande.reply(svampbob(res.message));
     } else {
-      meddelande.react('❌');
+      meddelande.react('703784231893073922');
       meddelande.reply(svampbob(res.message));
     }
   }
