@@ -11,6 +11,7 @@ module.exports.swedishToEnglish = async (message) => {
 
   // return only english FOR NOW
   console.log('Här är bara translation ', translation);
+  console.log(message);
 
   return translation[0].translations.find((t) => t.to == 'en').text;
 };

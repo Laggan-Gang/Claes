@@ -599,7 +599,9 @@ client.on('messageCreate', async (meddelande) => {
       /^(prevedi|преведи)/,
       ''
     );
-    meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
+    meddelande.reply(
+      await svampbob(prevodach.swedishToEnglish(strängToTranslate))
+    );
   }
 });
 
