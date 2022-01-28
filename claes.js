@@ -590,8 +590,9 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('This you?', { files: ['.august.png'] });
   }
   if (meddelande.content.startsWith('prevedi')) {
-    let strängToTranslate = meddelande.content.replace('prevedi', '');
     meddelande.reply('Hello nyu pagadi');
+    let strängToTranslate = meddelande.content.replace('prevedi', '');
+
     //meddelande.reply(await prevodach.swedishToEnglish(strängToTranslate));
   }
 });
