@@ -13,7 +13,9 @@ module.exports.swedishToEnglish = async (message) => {
   console.log('Här är bara translation ', translation);
   console.log(message);
 
-  return translation[0].translations.find((t) => t.to == 'en').text;
+  return translation[0].translations.find(
+    (t) => console.log('Här kommer t', t) || t.to == 'en'
+  ).text;
 };
 
 async function translate(message, targetLanguages) {
