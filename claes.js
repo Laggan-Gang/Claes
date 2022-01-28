@@ -21,6 +21,21 @@ const dotaPrefs = require('./dota-prefs-api.js');
 const EngTillIPA = require('./eng-till-ipa-2000.js');
 const prevodach = require('./prevodach.js');
 
+//BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
+
+// Loop through the array and switch places
+//with a random position for every item in array
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+//ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
+
 // Create a new client instance
 const client = new Client({
   intents: [
@@ -450,21 +465,6 @@ client.on('messageCreate', async (meddelande) => {
     }
     console.log(behållare);
     console.log(spelareLista);
-
-    //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
-
-    // Loop through the array and switch places
-    //with a random position for every item in array
-    function shuffleArray(arr) {
-      const array = [...arr];
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    //ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
     //Set up a bunch of canvas shit that I don't know what's going on with but the tutorials says to do it
     const { registerFont } = require('canvas');
