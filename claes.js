@@ -613,6 +613,8 @@ client.on('messageCreate', async (meddelande) => {
     ljudGöraren(meddelande, aleaIactaEst);
     await spinnRock.spinnRock(meddelande);
   }
+  if (meddelande.content.match(/p.*di/))
+    meddelande.reply('did you mean prevedi?');
 });
 
 //CHAPTER NINE: The End
