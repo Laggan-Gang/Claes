@@ -14,12 +14,20 @@
 //Boring stuff that I don't care about but it's about using other people's code to do things no one should go
 
 // Require the necessary discord.js classes "klient" är alltså botten pretty much
-const { Client, Intents, MessageAttachment } = require('discord.js');
+const {
+  Client,
+  Intents,
+  Message,
+  Channel,
+  TextChannel,
+  MessageAttachment,
+} = require('discord.js');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
 const dotaPrefs = require('./dota-prefs-api.js');
 const EngTillIPA = require('./eng-till-ipa-2000.js');
 const prevodach = require('./prevodach.js');
+const spinnRock = require('./spinnRock.js');
 
 //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
@@ -75,6 +83,7 @@ const client = new Client({
     */
     Intents.FLAGS.GUILD_MEMBERS,
     Intents.FLAGS.GUILD_VOICE_STATES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS, //ASVIKTIG!!!
   ],
 });
 const {
@@ -185,7 +194,51 @@ function löftesKollaren(player) {
   return ed;
 }
 
-async function ljudGöraren(meddelande, ljudfil) {
+async function ljudGöraren(meddelande) {
+  let ljudfil = 'bow bow.wav';
+  console.log('Nu är tärningen ' + aleaIactaEst);
+  switch (true) {
+    case inRange(aleaIactaEst, 25, 25):
+      ljudfil = 'IASID.wav';
+      console.log('IASID');
+      break;
+    case inRange(aleaIactaEst, 0, 5):
+      ljudfil = 'mitchyapos.wav';
+      console.log('mitchyapos');
+      break;
+    case inRange(aleaIactaEst, 6, 11):
+      ljudfil = 'hugoyapos.wav';
+      console.log('hugo');
+      break;
+    case inRange(aleaIactaEst, 12, 17):
+      ljudfil = 'claesyapos.wav';
+      console.log('claes');
+      break;
+    case inRange(aleaIactaEst, 18, 23):
+      ljudfil = 'edwinyapos.wav';
+      console.log('edwin');
+      break;
+    case inRange(aleaIactaEst, 24, 29):
+      ljudfil = 'sarayapos.wav';
+      console.log('sara');
+      break;
+    case inRange(aleaIactaEst, 30, 35):
+      ljudfil = 'densetsuyapos.wav';
+      console.log('Laggan gaiden');
+      break;
+    case inRange(aleaIactaEst, 36, 41):
+      ljudfil = 'sarayapos2.wav';
+      console.log('sara');
+      break;
+    case inRange(aleaIactaEst, 42, 47):
+      ljudfil = 'onyourmarksyapos.wav';
+      console.log('On your marks');
+      break;
+
+    default:
+      console.log('default');
+      break;
+  }
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
   let resource = createAudioResource('/home/hugo/Claes/ljudklipp/' + ljudfil);
@@ -409,51 +462,7 @@ client.on('messageCreate', async (meddelande) => {
   else if (dravel.endsWith('maakep happen')) {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
-      let ljudfil = 'bow bow.wav';
-      console.log('Nu är tärningen ' + aleaIactaEst);
-      switch (true) {
-        case inRange(aleaIactaEst, 25, 25):
-          ljudfil = 'IASID.wav';
-          console.log('IASID');
-          break;
-        case inRange(aleaIactaEst, 0, 5):
-          ljudfil = 'mitchyapos.wav';
-          console.log('mitchyapos');
-          break;
-        case inRange(aleaIactaEst, 6, 11):
-          ljudfil = 'hugoyapos.wav';
-          console.log('hugo');
-          break;
-        case inRange(aleaIactaEst, 12, 17):
-          ljudfil = 'claesyapos.wav';
-          console.log('claes');
-          break;
-        case inRange(aleaIactaEst, 18, 23):
-          ljudfil = 'edwinyapos.wav';
-          console.log('edwin');
-          break;
-        case inRange(aleaIactaEst, 24, 29):
-          ljudfil = 'sarayapos.wav';
-          console.log('sara');
-          break;
-        case inRange(aleaIactaEst, 30, 35):
-          ljudfil = 'densetsuyapos.wav';
-          console.log('Laggan gaiden');
-          break;
-        case inRange(aleaIactaEst, 36, 41):
-          ljudfil = 'sarayapos2.wav';
-          console.log('sara');
-          break;
-        case inRange(aleaIactaEst, 42, 47):
-          ljudfil = 'onyourmarksyapos.wav';
-          console.log('On your marks');
-          break;
-
-        default:
-          console.log('default');
-          break;
-      }
-      ljudGöraren(meddelande, ljudfil);
+      await ljudGöraren(meddelande);
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
@@ -600,6 +609,8 @@ client.on('messageCreate', async (meddelande) => {
     );
     let funnyRetort = await prevodach.swedishToEnglish(strängToTranslate);
     meddelande.reply(svampbob(funnyRetort));
+  } else if (meddelande.content.startsWith('yarn')) {
+    await spinnRock.spinnRock(meddelande);
   }
 });
 
