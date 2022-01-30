@@ -462,7 +462,7 @@ client.on('messageCreate', async (meddelande) => {
   else if (dravel.endsWith('maakep happen')) {
     // bunch of stuff to play audio in voice
     if (meddelande.member.voice.channel !== null) {
-      await ljudGöraren(meddelande, aleaIactaEst);
+      ljudGöraren(meddelande, aleaIactaEst);
     }
     //make an array that is exactly 5 long to fit 5 bozos
     const minusMaakep = dravel.slice(0, -14);
