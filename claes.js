@@ -616,7 +616,11 @@ client.on('messageCreate', async (meddelande) => {
   if (meddelande.content.match(/p.*di/) && !meddelande.author.bot) {
     meddelande.reply('did you mean prevedi?');
   }
-  if (meddelande.content.match('gif?') && !meddelande.author.bot) {
+  if (
+    meddelande.content.match('gif?') &&
+    !meddelande.author.bot &&
+    !meddelande.content == 'oh my, what are the codes for these gifs?'
+  ) {
     meddelande.reply(
       "did you mean 'oh my, what are the codes for these gifs?'"
     );
