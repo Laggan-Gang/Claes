@@ -28,8 +28,8 @@ function ROLLCALL(noobs) {
   return `${noobs.map(vadKallasDu).join(' ')}, get ready to pick!`;
 }
 
-const meddelandeBortTagare = (tid) => async (meddelandeAttTaBort) => {
-  setTimeout(() => {
+const meddelandeBortTagare = (tid) => (meddelandeAttTaBort) => {
+  setTimeout(async () => {
     //destroy the last message
     try {
       await meddelandeAttTaBort.delete();
