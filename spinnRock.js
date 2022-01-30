@@ -113,7 +113,7 @@ module.exports = {
 
       function hittaOchKollaPreferens(noobs) {
         //kolla om vår noob har en preferens, har den det så nice
-        console.log('Vi kollar preferensen för ' + noobs[i].name);
+        console.log('Vi kollar preferensen för ' + noobs[i].namn);
         if (noobs[i].preferences) {
           console.log(
             'Vi har hittat preferenser, de ser ut såhär: ' +
@@ -146,6 +146,14 @@ module.exports = {
         return 'fill';
       }
 
+      async function uppdateraTrådmeddelande() {
+        try {
+          await trådMeddelande.edit(modMeddelande);
+        } catch (error) {
+          console.error('Failed to edit the message: ', error);
+        }
+      }
+
       async function searchAndDestroy(noobs, row) {
         //seach for new guy
         try {
@@ -154,6 +162,7 @@ module.exports = {
           let pingMeddelande = `${pickBoy}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`;
           tråden.send(pingMeddelande).then(meddelandeBortTagare(10));
           modMeddelande += `${pickBoy} is now picking...`;
+          await uppdateraTrådmeddelande();
           console.log(
             `${pickBoy} kommer asignas ${föredragen} om 60 sekunder, ${row}`
           );
@@ -169,11 +178,7 @@ module.exports = {
 
       async function autoPicker(reaktion, noobs) {
         modMeddelande = modMeddelande.split('\n').slice(0, -1).join('\n');
-        try {
-          await trådMeddelande.edit(modMeddelande);
-        } catch (error) {
-          console.error('Failed to edit the message: ', error);
-        }
+        await uppdateraTrådmeddelande();
         console.log(
           'Nu kör vi automatiska versionen! Först kollar vi om vi fått fill'
         );
@@ -223,11 +228,7 @@ module.exports = {
         modMeddelande += `${kapitalisera(
           noobs[i].namn
         )} has picked ${riktigReact}!\n`;
-        try {
-          await trådMeddelande.edit(modMeddelande);
-        } catch (error) {
-          console.error('Failed to edit the message: ', error);
-        }
+        await uppdateraTrådmeddelande();
         i++;
       }
 
@@ -289,11 +290,7 @@ module.exports = {
 
       collector.on('collect', async (reaction, user) => {
         modMeddelande = modMeddelande.split('\n').slice(0, -1).join('\n');
-        try {
-          await trådMeddelande.edit(modMeddelande);
-        } catch (error) {
-          console.error('Failed to edit the message: ', error);
-        }
+        await uppdateraTrådmeddelande();
         console.log(
           'Vi har fått en react och ska nu utvärdera om den är vanlig, dublett eller fill'
         );
