@@ -610,6 +610,7 @@ client.on('messageCreate', async (meddelande) => {
     let funnyRetort = await prevodach.swedishToEnglish(strängToTranslate);
     meddelande.reply(svampbob(funnyRetort));
   } else if (meddelande.content.startsWith('yarn')) {
+    ljudGöraren(meddelande, aleaIactaEst);
     await spinnRock.spinnRock(meddelande);
   }
 });
