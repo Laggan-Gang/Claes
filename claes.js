@@ -613,7 +613,7 @@ client.on('messageCreate', async (meddelande) => {
     ljudGöraren(meddelande, aleaIactaEst);
     await spinnRock.spinnRock(meddelande);
   }
-  if (meddelande.content.match(/p.*di/))
+  if (meddelande.content.match(/p.*di/) && !meddelande.author.bot)
     meddelande.reply('did you mean prevedi?');
 });
 
