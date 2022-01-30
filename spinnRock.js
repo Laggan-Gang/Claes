@@ -113,18 +113,26 @@ module.exports = {
 
       function hittaOchKollaPreferens(noobs) {
         //kolla om vår noob har en preferens, har den det så nice
+        console.log('Vi kollar preferensen för ' + noobs[i].name);
         if (noobs[i].preferences) {
+          console.log(
+            'Vi har hittat preferenser, de ser ut såhär: ' +
+              noobs[i].preferences
+          );
           let preferenser = noobs[i].preferences;
-          let resultat = 'fill';
-          for (const preferens of preferenser) {
+          for (var preferens in preferenser) {
             if (rollKoll(emojiSiffror[preferens - 1]) == 'vanlig') {
               //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
               //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
-              resultat = emojiSiffror[preferens - 1];
-              break;
+              console.log(
+                'Vi hittade en preferens som inte pickats, den preferensen är ' +
+                  emojiSiffror[preferens - 1]
+              );
+              return emojiSiffror[preferens - 1];
             }
           }
-          return resultat;
+          //Är alla preferenser tagna skickar vi ut fill
+          return 'fill';
         } //annars iterarar vi över emojis i emojisiffror och försöker kolla om någon av dem är en rimlig reaktion, sen kör vi iväg den
         else {
           let slumpadeEmojis = shuffleArray(emojiSiffror);
@@ -140,15 +148,12 @@ module.exports = {
         //seach for new guy
         try {
           let föredragen = hittaOchKollaPreferens(noobs);
-          let pingMeddelande = `${vadKallasDu(
-            aktivaNoobs[i]
-          )}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`;
-          tråden.send(pingMeddelande).then(meddelandeBortTagare(45));
-
+          let pickBoy = vadKallasDu(aktivaNoobs[i]);
+          let pingMeddelande = `${pickBoy}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`;
+          tråden.send(pingMeddelande).then(meddelandeBortTagare(10));
+          modMeddelande += `${pickBoy} is now picking...`;
           console.log(
-            `${vadKallasDu(
-              aktivaNoobs[i]
-            )} kommer asignas ${föredragen} om 60 sekunder, ${row}`
+            `${pickBoy} kommer asignas ${föredragen} om 60 sekunder, ${row}`
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
@@ -161,6 +166,12 @@ module.exports = {
       }
 
       async function autoPicker(reaktion, noobs) {
+        modMeddelande = modMeddelande.split('\n').slice(0, -1).join('\n');
+        try {
+          await trådMeddelande.edit(modMeddelande);
+        } catch (error) {
+          console.error('Failed to edit the message: ', error);
+        }
         console.log(
           'Nu kör vi automatiska versionen! Först kollar vi om vi fått fill'
         );
@@ -230,7 +241,7 @@ module.exports = {
           console.log('Någon har valt fill, så vi sätter hen i fillboys');
           fillBoys.unshift(dummyArray[i]);
           await standardPick('<:fill:935684531023925299>', noobs);
-          await searchAndDestroy(noobs, 419);
+          await searchAndDestroy(noobs, 244);
         }
       }
 
@@ -240,7 +251,7 @@ module.exports = {
           console.log(
             'Alla noobs har inte valt roll eller fill, vi behöver fler'
           );
-          await searchAndDestroy(noobs, 242);
+          await searchAndDestroy(noobs, 254);
         } else {
           console.log(
             'Alla har pickat roll eller fill, nu ska vi kolla om vi behöver byta array'
@@ -275,6 +286,12 @@ module.exports = {
       }
 
       collector.on('collect', async (reaction, user) => {
+        modMeddelande = modMeddelande.split('\n').slice(0, -1).join('\n');
+        try {
+          await trådMeddelande.edit(modMeddelande);
+        } catch (error) {
+          console.error('Failed to edit the message: ', error);
+        }
         console.log(
           'Vi har fått en react och ska nu utvärdera om den är vanlig, dublett eller fill'
         );
