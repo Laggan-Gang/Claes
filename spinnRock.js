@@ -104,7 +104,7 @@ module.exports = {
         );
         if (reaktion == 'fill') {
           console.log(reaktion + 'är fill! Vi kör fillBoys');
-          fillBoysNeedFilling(noobs, reaktion);
+          fillBoysNeedFilling(noobs);
         } else {
           console.log(
             'Det är inte fill, så auto picker låter ' +
@@ -270,7 +270,7 @@ module.exports = {
         }
       }
 
-      async function fillBoysNeedFilling(noobs, reaktion) {
+      async function fillBoysNeedFilling(noobs) {
         let modRader = modMeddelande.split('\n');
         if (modRader.length >= 5) {
           console.log(
@@ -309,7 +309,7 @@ module.exports = {
             break;
 
           case kolladReaktion == 'fill':
-            fillBoysNeedFilling(aktivaNoobs, reaction);
+            fillBoysNeedFilling(aktivaNoobs);
             break;
         }
       });
