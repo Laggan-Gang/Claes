@@ -137,11 +137,13 @@ module.exports = {
         else {
           let slumpadeEmojis = shuffleArray(emojiSiffror);
           for (const emoji of slumpadeEmojis) {
-            if (rollKoll(slumpadeEmojis[emoji]) == 'vanlig') {
-              return slumpadeEmojis[emoji];
+            if (rollKoll(emoji) == 'vanlig') {
+              return emoji;
             }
           }
         }
+        //Vi borde aldrig se return fill men händer det så går inget sönder och vi vet att saker e fucked
+        return 'fill';
       }
 
       async function searchAndDestroy(noobs, row) {
