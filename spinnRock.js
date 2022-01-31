@@ -190,11 +190,7 @@ module.exports = {
       }
       function modFull() {
         let modRader = modMeddelande.split('\n');
-        if (modRader.length >= 6) {
-          return true;
-        } else {
-          return false;
-        }
+        return modRader.length >= 6;
       }
       async function dublettTillrättavisaren(noobs, reaction) {
         let trängningsMeddelande = await tråden.send(
