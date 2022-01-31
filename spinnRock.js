@@ -163,15 +163,12 @@ module.exports = {
         //seach for new guy
         try {
           let föredragen = hittaOchKollaPreferens(noobs);
+          let pingNoob = vadKallasDu(aktivaNoobs[i]);
           pingMeddelande = await tråden.send(
-            `${vadKallasDu(
-              aktivaNoobs[i]
-            )}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
+            `${pingNoob}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
           );
           console.log(
-            `${vadKallasDu(
-              aktivaNoobs[i]
-            )} kommer asignas ${föredragen} om 60 sekunder, ${row}`
+            `${pingNoob} kommer asignas ${föredragen} om 60 sekunder, ${row}`
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
