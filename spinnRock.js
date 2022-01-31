@@ -9,6 +9,7 @@ function snooze(timer) {
 
 function modFull(modMeddelande) {
   modMeddelande.split('\n');
+  console.log('modMeddelande ser ut såhär nu: ', modMeddelande);
   return modMeddelande.length >= 6;
 }
 
