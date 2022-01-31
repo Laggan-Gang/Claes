@@ -113,7 +113,7 @@ module.exports = {
         //kolla om vår noob har en preferens, har den det så nice
         if (noobs[i].preferences) {
           let preferenser = noobs[i].preferences;
-          let resultat = 'fill';
+          let resultat = '<:fill:935684531023925299>';
           for (pruttkorv in preferenser) {
             if (rollKoll(emojiSiffror[pruttkorv - 1]) == 'vanlig') {
               //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
