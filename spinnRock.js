@@ -75,26 +75,22 @@ module.exports = {
         if (noobs[i].preferences) {
           let preferenser = noobs[i].preferences;
           let resultat = 'fill';
-          for (const preferens of preferenser) {
-            if (rollKoll(emojiSiffror[preferens - 1]) == 'vanlig') {
+          for (pruttkorv in preferenser) {
+            if (rollKoll(emojiSiffror[pruttkorv - 1]) == 'vanlig') {
               //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
               //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
-              resultat = emojiSiffror[preferens - 1];
-              break;
+              return emojiSiffror[pruttkorv - 1];
             }
           }
           return resultat;
         } //annars iterarar vi över emojis i emojisiffror och försöker kolla om någon av dem är en rimlig reaktion, sen kör vi iväg den
         else {
-          let rimligReaktion;
           let slumpadeEmojis = shuffleArray(emojiSiffror);
           for (emoji in slumpadeEmojis) {
             if (rollKoll(slumpadeEmojis[emoji]) == 'vanlig') {
-              rimligReaktion = slumpadeEmojis[emoji];
-              break;
+              return slumpadeEmojis[emoji];
             }
           }
-          return rimligReaktion;
         }
       }
 
