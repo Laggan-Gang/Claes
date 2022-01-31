@@ -312,7 +312,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   const subscription = connection.subscribe(player);
   for (let i = 0; i < IPAbokstäver.length; i++) {
     console.log(IPAbokstäver[i]);
-    if ('!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
+    if ('~!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
       ljudfilsomjagtyckerattvikanskebordespelanu =
         skiljetecken[IPAbokstäver[i]];
     } else {
