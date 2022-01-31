@@ -9,7 +9,7 @@ function snooze(timer) {
 
 function modFull(modMeddelande) {
   modMeddelande.split('\n');
-  return modRader.length >= 6;
+  return modMeddelande.length >= 6;
 }
 
 function kapitalisera(string) {
