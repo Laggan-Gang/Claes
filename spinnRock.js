@@ -9,7 +9,6 @@ function snooze(timer) {
 
 function modFull(modMeddelande) {
   let modRader = modMeddelande.split('\n');
-  console.log('modMeddelande ser ut såhär nu: ', modMeddelande);
   return modRader.length >= 6;
 }
 
@@ -17,9 +16,9 @@ function kapitalisera(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-async function dublettTillrättavisaren(noobs, reaction, tråden) {
+async function dublettTillrättavisaren(noob, reaction, tråden) {
   let trängningsMeddelande = await tråden.send(
-    `${kapitalisera(noobs[i].namn)} ${
+    `${kapitalisera(noob.namn)} ${
       reaction.emoji.name
     } has already been picked, please pick another role!`
   );
@@ -28,11 +27,11 @@ async function dublettTillrättavisaren(noobs, reaction, tråden) {
   }, 5_000);
 }
 
-async function skojareTillrättavisaren(noobs, tråden) {
+async function skojareTillrättavisaren(noob, tråden) {
   try {
     let skojareMeddelande = await tråden.send(
       `${kapitalisera(
-        noobs[i].namn
+        noob.namn
       )} du kan inte välja fill när du är last pick >:(`
     );
     setTimeout(() => {
@@ -268,7 +267,7 @@ module.exports = {
           console.log(
             'Nu är modrader för lång, nu får man inte fill och nu kommer mobbningen'
           );
-          await skojareTillrättavisaren(noobs, tråden);
+          await skojareTillrättavisaren(noobs[i], tråden);
         } else {
           //Vi fyller fillBoys med boys looking to fill. Sen hämtar vi nästa person som ska rakas
           console.log('Någon har valt fill, så vi sätter hen i fillboys');
@@ -297,7 +296,7 @@ module.exports = {
           case kolladReaktion == 'ogiltig':
             //Ogiltig roll (mobba!)
             console.log('Någon har gjort funny business, så vi mobbar');
-            await dublettTillrättavisaren(aktivaNoobs, reaction, tråden);
+            await dublettTillrättavisaren(aktivaNoobs[i], reaction, tråden);
             break;
 
           case kolladReaktion == 'fill':
