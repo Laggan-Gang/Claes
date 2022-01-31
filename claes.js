@@ -273,6 +273,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     '?': 'frågetecken',
     ',': 'kommatecken',
     '.': 'punkttecken',
+    '~': 'simtecken',
     '-': 'bindestreck',
     '_': 'understreck',
     ';': 'semikolontecken',
@@ -292,7 +293,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   var IPAbokstäver = '';
   for (let i = 0; i < ord.length; i++) {
     console.log(ord[i]);
-    if (i != 0 && !'!.,-()=+_<>?'.includes(ord[i])) {
+    if (i != 0 && !'~!.,-()=+_<>?'.includes(ord[i])) {
       IPAbokstäver += ' ';
     }
     IPAbokstäver += EngTillIPA.kolla(ord[i]);
