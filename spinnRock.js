@@ -122,6 +122,9 @@ module.exports = {
         //kolla om vår noob har en preferens, har den det så nice
         switch (true) {
           case pickladeRoller.length == 4:
+            console.log(
+              'Picklade roller säger att det bara finns 1 roll kvar så fuck this'
+            );
             break;
 
           case noobs[i].preferences:
@@ -140,6 +143,7 @@ module.exports = {
             }
             return resultat;
         }
+        console.log('Vi shufflar personens preferens pga yolo');
         return skufflaPreferens();
       }
       //  if (noobs[i].preferences) {
