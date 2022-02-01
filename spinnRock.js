@@ -127,7 +127,7 @@ module.exports = {
             );
             break;
 
-          case noobs[i].preferences:
+          case noobs[i].preferences !== undefined:
             console.log(
               'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
               noobs[i].preferences
