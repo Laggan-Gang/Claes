@@ -176,7 +176,7 @@ module.exports = {
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
-          if (pickladeRoller.length > 3) {
+          if ((pickladeRoller.length = 4)) {
             äggKlockan = setTimeout(async function () {
               await autoPicker(föredragen, aktivaNoobs);
             }, 60_000);
@@ -244,13 +244,17 @@ module.exports = {
               snooze(äggKlockan);
               collector.stop();
             } else {
+              console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
+              console.log(aktivaNoobs == dummyArray);
               if (aktivaNoobs == dummyArray) {
                 console.log(
                   'Aktiva noobs har inte blivit fillBoys ännu, så vi resettar i'
                 );
                 i = 0;
               }
+              console.log('Nu ska vi börja tjonga fill boys, och i = ' + i);
               aktivaNoobs = fillBoys;
+              console.log('Här är fill boys: ');
               console.log(fillBoys[i]);
               await searchAndDestroy(aktivaNoobs, 361);
             }
