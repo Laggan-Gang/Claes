@@ -112,6 +112,10 @@ module.exports = {
       function hittaOchKollaPreferens(noobs) {
         //kolla om vår noob har en preferens, har den det så nice
         if (noobs[i].preferences) {
+          console.log(
+            'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
+            noobs[i].preferences
+          );
           let preferenser = noobs[i].preferences;
           let resultat = '<:fill:935684531023925299>';
           for (pruttkorv in preferenser) {
