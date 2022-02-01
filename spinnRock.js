@@ -108,34 +108,60 @@ module.exports = {
         time: 360_000,
         max: 100,
       });
-      //Den här stannar eftersom den använder rollKoll
-      function hittaOchKollaPreferens(noobs) {
-        //kolla om vår noob har en preferens, har den det så nice
-        if (noobs[i].preferences) {
-          console.log(
-            'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
-            noobs[i].preferences
-          );
-          let preferenser = noobs[i].preferences;
-          let resultat = '<:fill:935684531023925299>';
-          for (pruttkorv in preferenser) {
-            if (rollKoll(emojiSiffror[pruttkorv - 1]) == 'vanlig') {
-              //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
-              //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
-              return emojiSiffror[pruttkorv - 1];
-            }
-          }
-          return resultat;
-        } //annars iterarar vi över emojis i emojisiffror och försöker kolla om någon av dem är en rimlig reaktion, sen kör vi iväg den
-        else {
-          let slumpadeEmojis = shuffleArray(emojiSiffror);
-          for (emoji in slumpadeEmojis) {
-            if (rollKoll(slumpadeEmojis[emoji]) == 'vanlig') {
-              return slumpadeEmojis[emoji];
-            }
+      //Den här stannar pga rollKoll
+      function skufflaPreferens() {
+        let slumpadeEmojis = shuffleArray(emojiSiffror);
+        for (emoji in slumpadeEmojis) {
+          if (rollKoll(slumpadeEmojis[emoji]) == 'vanlig') {
+            return slumpadeEmojis[emoji];
           }
         }
       }
+      //Den här stannar eftersom den använder rollKoll
+      function hittaOchKollaPreferens(noobs) {
+        //kolla om vår noob har en preferens, har den det så nice
+        switch (true) {
+          case pickladeRoller.length == 4:
+            break;
+
+          case noobs[i].preferences:
+            console.log(
+              'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
+              noobs[i].preferences
+            );
+            let preferenser = noobs[i].preferences;
+            let resultat = '<:fill:935684531023925299>';
+            for (pruttkorv in preferenser) {
+              if (rollKoll(emojiSiffror[pruttkorv - 1]) == 'vanlig') {
+                //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
+                //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
+                return emojiSiffror[pruttkorv - 1];
+              }
+            }
+            return resultat;
+        }
+        return skufflaPreferens();
+      }
+      //  if (noobs[i].preferences) {
+      //    console.log(
+      //      'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
+      //      noobs[i].preferences
+      //    );
+      //    let preferenser = noobs[i].preferences;
+      //    let resultat = '<:fill:935684531023925299>';
+      //    for (pruttkorv in preferenser) {
+      //      if (rollKoll(emojiSiffror[pruttkorv - 1]) == 'vanlig') {
+      //        //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
+      //        //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
+      //        return emojiSiffror[pruttkorv - 1];
+      //      }
+      //    }
+      //    return resultat;
+      //  } //annars iterarar vi över emojis i emojisiffror och försöker kolla om någon av dem är en rimlig reaktion, sen kör vi iväg den
+      //  else {
+      //  }
+      //}
+
       //Den här kör finska fighten bla så den måste stanna
       async function autoPicker(reaktion, noobs) {
         console.log(
@@ -176,7 +202,7 @@ module.exports = {
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
-          if (pickladeRoller.length == 4) {
+          if (!pickladeRoller.length == 4) {
             äggKlockan = setTimeout(async function () {
               await autoPicker(föredragen, aktivaNoobs);
             }, 60_000);
