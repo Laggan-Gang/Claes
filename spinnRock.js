@@ -176,9 +176,11 @@ module.exports = {
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
-          äggKlockan = setTimeout(async function () {
-            await autoPicker(föredragen, aktivaNoobs);
-          }, 60_000);
+          if (pickladeRoller.length > 3) {
+            äggKlockan = setTimeout(async function () {
+              await autoPicker(föredragen, aktivaNoobs);
+            }, 60_000);
+          }
         } catch (error) {
           console.error('Failed to send the message: ', error);
         }
