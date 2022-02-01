@@ -240,7 +240,11 @@ module.exports = {
               'Vi har boys i fill boys, vi switchar aktiv array, återställer i och kallar på nästa boy'
             );
             if (pickladeRoller.length === 5) {
-              console.log('Vi har alla roller pickade, avslutar...');
+              console.log(
+                'Vi har alla roller pickade, rollerna är ',
+                pickladeRoller
+              );
+              console.log('Alltså kan vi avsluta');
               snooze(äggKlockan);
               collector.stop();
             } else {
