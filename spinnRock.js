@@ -141,7 +141,7 @@ module.exports = {
         console.log(
           'Nu kör vi automatiska versionen! Först kollar vi om vi fått fill'
         );
-        if (reaktion == 'fill') {
+        if (reaktion == 'fill' || reaktion == '<:fill:935684531023925299>') {
           console.log(reaktion + 'är fill! Vi kör fillBoys');
           fillBoysNeedFilling(noobs);
         } else {
