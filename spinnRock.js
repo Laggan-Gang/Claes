@@ -133,15 +133,18 @@ module.exports = {
               noobs[i].preferences
             );
             let preferenser = noobs[i].preferences;
-            let resultat = '<:fill:935684531023925299>';
             for (pruttkorv in preferenser) {
               if (rollKoll(emojiSiffror[pruttkorv - 1]) == 'vanlig') {
+                console.log(
+                  'Vi hittade en preferens som räknas som vanlig, pruttkorv är ' +
+                    pruttkorv
+                );
                 //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
                 //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
                 return emojiSiffror[pruttkorv - 1];
               }
             }
-            return resultat;
+            return '<:fill:935684531023925299>';
         }
         console.log('Vi shufflar personens preferens pga yolo');
         return skufflaPreferens();
