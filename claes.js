@@ -599,7 +599,7 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply('Joina voice först');
     }
   }
-  if (meddelande.author.id == '162288590192246784' && aleaIactaEst < 5) {
+  if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 5) {
     meddelande.reply('This you?', { files: ['.august.png'] });
   }
   if (/^(prevedi|преведи)/.test(meddelande.content)) {
