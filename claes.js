@@ -601,7 +601,7 @@ client.on('messageCreate', async (meddelande) => {
   }
   if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 5) {
     meddelande.reply('This you?');
-    meddelande.reply({ files: ['august.png'] });
+    meddelande.send({ files: ['august.png'] });
   }
   if (/^(prevedi|преведи)/.test(meddelande.content)) {
     //h e l p
