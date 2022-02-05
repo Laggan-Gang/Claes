@@ -28,6 +28,7 @@ const dotaPrefs = require('./dota-prefs-api.js');
 const EngTillIPA = require('./eng-till-ipa-2000.js');
 const prevodach = require('./prevodach.js');
 const spinnRock = require('./spinnRock.js');
+const xXG4M3RXx = require('./gamer.js');
 
 //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
@@ -49,6 +50,7 @@ const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     /*
 
       var a = ['hej', 'bajs', 'kiss']
@@ -570,8 +572,12 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.react('703784231893073922');
       meddelande.reply(svampbob(res.message));
     }
+  } else if (dravel.startsWith('!challenge ') || dravel.startsWith('!utmana ')){
+    await xXG4M3RXx.förstå(meddelande).then((hurGårDet) => {
+      meddelande.channel.send(`${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`)
+      console.log(hurGårDet)
+    });
   }
-
   //CHAPTER SEVEN: The Mystery to the Key
   //below is legacy code that is important for ceremonial reasons
   if (dravel === 'hej claes') {
