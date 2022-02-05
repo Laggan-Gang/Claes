@@ -14,7 +14,7 @@ module.exports = {
     };  
     if(typeof(något) == "object"){
       if(typeof(något.content) == "string"){
-	console.log("Det här verkar vara ett något!")
+	      console.log("Det här verkar vara ett något!")
         const vadJagSkaGöra = något.content.toLocaleLowerCase().split(' ');
         const utmanad = vadJagSkaGöra[1];
         const spel = vadJagSkaGöra[2];
@@ -30,6 +30,7 @@ module.exports = {
           case 'stensaxpapper':
           case 'rockscissorspaper':
             hurGårDet = await stensaxpåse(hurGårDet,något.author,något.mentions.users.at(0));
+            console.log("Nu har stenarna saxpåsats.")
             break;
   	    }
       }
@@ -37,18 +38,21 @@ module.exports = {
       if(något[0] == "asd");
         console.log("Öh va? Det här borde aldrig hända...")
     };
-  return hurGårDet;
+    return hurGårDet;
   },
 };
 
-
+ 	
 // STEN SAX PÅSE!!1
-
+    
 async function stensaxpåse(hurGårDet,utmanare,utmanad,igen = false) {
+  console.log("Börjar ny stensaxpåse-match.")
   const [spelareEtt, spelareTvå] = await Promise.all([skickaUtmaning(utmanare,igen), skickaUtmaning(utmanad,igen)])  
   if (spelareEtt != undefined || spelareTvå != undefined){
     if (spelareEtt == spelareTvå) {
-      stensaxpåse(hurGårDet,utmanare,utmanad,true)
+      console.log("Det blev lika!")
+      hurGårDet = await stensaxpåse(hurGårDet,utmanare,utmanad,true)
+      return hurGårDet
     } else {
     switch(spelareEtt){
       case STEN:
@@ -75,12 +79,13 @@ async function stensaxpåse(hurGårDet,utmanare,utmanad,igen = false) {
     }
     hurGårDet.jättebra = true
     hurGårDet.meddelande = "Rätt bra faktiskt!"
+    hurGårDet.vinnare.send("You won! Congratulations :)")
+    return hurGårDet 
     }
   } else {
   hurGårDet.jättebra = false
+  return hurGårDet
   }
-  hurGårDet.vinnare.send("You won! Congratulations :)")
-  return hurGårDet 
 }
 async function skickaUtmaning(kämpe, igen = false){
   const jagLovarPåHederOchSamvete = new Promise(async (jagKirrar, jagBajsar) => {

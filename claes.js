@@ -573,10 +573,13 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply(svampbob(res.message));
     }
   } else if (dravel.startsWith('!challenge ') || dravel.startsWith('!utmana ')){
-    await xXG4M3RXx.förstå(meddelande).then((hurGårDet) => {
-      meddelande.channel.send(`${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`)
-      console.log(hurGårDet)
-    });
+    let hurGårDet = await xXG4M3RXx.förstå(meddelande)
+    console.log(`Spelet är över! ${hurGårDet.vinnare.username} vann.`)
+    if(hurGårDet != undefined){ //TODO: Sometimes this is undefined ( probably on ties ) maybe look into it and fix it?
+      if(hurGårDet.jättebra){
+        meddelande.channel.send(`${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`)
+      }
+    }
   }
   //CHAPTER SEVEN: The Mystery to the Key
   //below is legacy code that is important for ceremonial reasons
@@ -607,7 +610,7 @@ client.on('messageCreate', async (meddelande) => {
   }
   if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 5) {
     meddelande.reply('This you?');
-    meddelande.send({ files: ['august.png'] });
+    meddelande.channel.send({ files: ['august.png'] });
   }
   if (/^(prevedi|преведи)/.test(meddelande.content)) {
     //h e l p
