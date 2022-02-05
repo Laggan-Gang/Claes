@@ -1,7 +1,5 @@
 const axios = require('axios');
-
-let basUrl = 'http://83.251.166.89:3000';
-//let fejkLista = ['hugo', 'optitod', 'dennis', 'claes', 'max'];
+const { dotaPrefsBaseUrl } = require('./config.json');
 
 //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
@@ -21,10 +19,10 @@ module.exports = {
     const arr = meddelande.content.toLocaleLowerCase().split(' ');
     const fejkLista = arr.slice(1);
 
-    const fRes = await axios.get(`${basUrl}`);
+    const fRes = await axios.get(`${dotaPrefsBaseUrl}`);
 
     let todArray = fejkLista.map(async (bozo) => {
-      const res = await axios.get(`${basUrl}/id/${bozo}`);
+      const res = await axios.get(`${dotaPrefsBaseUrl}/id/${bozo}`);
       return { namn: bozo, preferences: fRes.data[bozo], id: res.data.id };
     });
 
@@ -35,23 +33,3 @@ module.exports = {
     return slumpBajs;
   },
 };
-
-//async function big() {
-//  const fRes = await axios.get(`${basUrl}`);
-//
-//  let todArray = fejkLista.map(async (bozo) => {
-//    const res = await axios.get(`${basUrl}/id/${bozo}`);
-//
-//    console.log(bozo);
-//    console.log(fRes.data[bozo]);
-//    console.log(res.data.id);
-//    return { namn: bozo, preferences: fRes.data[bozo], id: res.data.id };
-//  });
-//
-//  let bajsarArray = await Promise.all(todArray);
-//
-//  console.log('Här kommer bajsrakterna', bajsarArray);
-//  let slumpBajs = shuffleArray(bajsarArray);
-//  return slumpBajs;
-//  let x = 1;
-//}

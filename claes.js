@@ -314,7 +314,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   const subscription = connection.subscribe(player);
   for (let i = 0; i < IPAbokstäver.length; i++) {
     console.log(IPAbokstäver[i]);
-    if ('!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
+    if ('~!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
       ljudfilsomjagtyckerattvikanskebordespelanu =
         skiljetecken[IPAbokstäver[i]];
     } else {
@@ -605,8 +605,9 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply('Joina voice först');
     }
   }
-  if (meddelande.author.id == '162288590192246784' && aleaIactaEst < 5) {
-    meddelande.reply('This you?', { files: ['.august.png'] });
+  if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 5) {
+    meddelande.reply('This you?');
+    meddelande.send({ files: ['august.png'] });
   }
   if (/^(prevedi|преведи)/.test(meddelande.content)) {
     //h e l p
