@@ -126,7 +126,6 @@ module.exports = {
               'Picklade roller säger att det bara finns 1 roll kvar så fuck this'
             );
             break;
-
           case noobs[i].preferences !== undefined:
             console.log(
               'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
@@ -149,7 +148,6 @@ module.exports = {
         console.log('Vi shufflar personens preferens pga yolo');
         return skufflaPreferens();
       }
-
       //Den här kör finska fighten bla så den måste stanna
       async function autoPicker(reaktion, noobs) {
         console.log(
