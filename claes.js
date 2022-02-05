@@ -572,13 +572,11 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.react('703784231893073922');
       meddelande.reply(svampbob(res.message));
     }
-  } else if (dravel.startsWith('!challenge ') || dravel.startsWith('!utmana ')){
+  } else if (dravel.startsWith('!challeng') || dravel.startsWith('!utman')){
     let hurGårDet = await xXG4M3RXx.förstå(meddelande)
-    console.log(`Spelet är över! ${hurGårDet.vinnare.username} vann.`)
-    if(hurGårDet != undefined){ //TODO: Sometimes this is undefined ( probably on ties ) maybe look into it and fix it?
-      if(hurGårDet.jättebra){
-        meddelande.channel.send(`${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`)
-      }
+    if(hurGårDet.vinnare != undefined){
+      console.log(`Spelet är över! ${hurGårDet.vinnare.username} vann.`)
+      meddelande.channel.send(`${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`)
     }
   }
   //CHAPTER SEVEN: The Mystery to the Key

@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const STEN  = "✊"
 const SAX = "✌"
 const PÅSE = "✋"
@@ -6,20 +7,26 @@ let matchID = 0
 
 module.exports = {
   förstå: async (något) => {
+    console.log("GAMING ANALYSIS: ENGAGED")
     let hurGårDet = {
-      success: false,
+      jättebra: false,
       meddelande:
         'Du är inte ens ett något',
       matchid: 0,
+      vinnare: undefined,
     };  
     if(typeof(något) == "object"){
       if(typeof(något.content) == "string"){
+        // Hit kommer alla meddelanden!
+
 	      console.log("Det här verkar vara ett något!")
         const vadJagSkaGöra = något.content.toLocaleLowerCase().split(' ');
         const utmanad = vadJagSkaGöra[1];
         const spel = vadJagSkaGöra[2];
         
         matchID += 1;
+
+        console.log(spel)
   
         switch (spel) {
           case 'stensaxpåse':
@@ -32,6 +39,10 @@ module.exports = {
             hurGårDet = await stensaxpåse(hurGårDet,något.author,något.mentions.users.at(0));
             console.log("Nu har stenarna saxpåsats.")
             break;
+          case undefined:
+            hurGårDet = await förklaraVadChallengeGörIEttFintMeddelande(hurGårDet,något)
+            console.log("Nu har jag förklarat vad meningen med livet är.")
+            break;
   	    }
       }
     } else if(Array.isArray(något)){
@@ -42,6 +53,24 @@ module.exports = {
   },
 };
 
+
+async function förklaraVadChallengeGörIEttFintMeddelande(hurGårDet,något){
+  // Den här embedden görs längst ned för att inte ta en massa plats här
+  ingosad = förklaraVadUtmanaGörIEttFintMeddelandeIngos
+  embed = explainWhatChallengeDoesInAPrettyMessageEmbed
+  try {
+    if(något.content.includes('utman')){
+      något.channel.send({embeds: [ingosad]})
+    } else {
+      något.channel.send({embeds: [embed]})
+    }
+    hurGårDet.jättebra = true
+  } catch (error) {
+    hurGårDet.jättebra = false
+    console.error(error)
+  }
+  return hurGårDet
+}
  	
 // STEN SAX PÅSE!!1
     
@@ -117,3 +146,28 @@ async function skickaUtmaning(kämpe, igen = false){
   });
   return jagLovarPåHederOchSamvete
 };
+
+
+// EMBEDS OCH ANNAT SKIT
+
+const förklaraVadUtmanaGörIEttFintMeddelandeIngos = new MessageEmbed()
+  .setColor('#20993f')
+  .setTitle('G4M3R M0D3 4C71V473!')
+  .setURL('https://youtube.com/c/CircuzFunPants')
+  .setAuthor({ name: 'CL435 7H3 G4M3R', iconURL: "https://raw.githubusercontent.com/Laggan-Gang/Claes/main/gamer_pfp.png", url: 'https://youtube.com/c/CircuzFunPants'})
+  .setDescription('Åh ja... DET HÄR är gamerläge.')
+  .addFields(
+    { name: 'Sten sax påse', value: `För att utmana någon i sten sax påse, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] stensaxpåse'.`},
+  )
+  .setFooter({ text: "Om du kan läsa det här står du för nära."})
+
+const explainWhatChallengeDoesInAPrettyMessageEmbed = new MessageEmbed()
+  .setColor('#20993f')
+  .setTitle('G4M3R M0D3 4C71V473!')
+  .setURL('https://youtube.com/c/CircuzFunPants')
+  .setAuthor({ name: 'CL435 7H3 G4M3R', iconURL: "https://raw.githubusercontent.com/Laggan-Gang/Claes/main/gamer_pfp.png", url: 'https://youtube.com/c/CircuzFunPants'})
+  .setDescription('Oh yeah... THIS is gamer mode.')
+  .addFields(
+    { name: 'Rock paper scissors', value: `To challenge someone for a game of rock paper scissors, type \n'!challenge @[THEIR USERNAME] rockpaperscissors'.`},
+  )
+  .setFooter({ text: "If you're reading this, you're a n00b"})
