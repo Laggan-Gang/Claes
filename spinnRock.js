@@ -10,7 +10,9 @@ function snooze(timer) {
 
 function modFull(modFull) {
   let modRader = modFull.split('\n');
-  return modRader.length >= 6;
+
+  const expectedNumberOfNewLines = 7;
+  return modRader.length >= expectedNumberOfNewLines;
 }
 
 function kapitalisera(string) {
