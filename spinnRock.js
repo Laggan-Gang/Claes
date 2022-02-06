@@ -270,7 +270,7 @@ module.exports = {
       }
       //Den här måste stanna punkt slut
       async function finskaFighten(noobs) {
-        snooze(äggKlockan);
+        //snooze(äggKlockan);
         if (!modFull(modMeddelande)) {
           console.log(
             'Alla noobs har inte valt roll eller fill, vi behöver fler'
@@ -290,7 +290,7 @@ module.exports = {
                 pickladeRoller
               );
               console.log('Alltså kan vi avsluta');
-              snooze(äggKlockan);
+              //snooze(äggKlockan);
               collector.stop();
             } else {
               console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
