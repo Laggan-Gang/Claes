@@ -101,7 +101,7 @@ module.exports = {
       let trådNamn = `The ${meddelande.member.displayName} party`;
 
       let i = 0;
-      let dummyArray = await maakepCall.maakepCall(meddelande);
+      let dummyArray = await maakepCall.maakepCall(gubbLängdsKollare.join(' '));
       const tråden = await meddelande.channel.threads.create({
         name: trådNamn,
         autoArchiveDuration: 60,
