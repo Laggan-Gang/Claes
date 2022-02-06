@@ -1,8 +1,11 @@
 const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
-const STEN  = "✊"
+const STEN = "✊"
 const SAX = "✌"
 const PÅSE = "✋"
+const KRYSS = ["❌","🙅","❎"]
+const CIRKEL = ["🔴","🟡","🟢"]
+const KVADRAT = "⬜"
 let matchID = 0
 
 module.exports = {
@@ -71,7 +74,100 @@ async function förklaraVadChallengeGörIEttFintMeddelande(hurGårDet,något){
   }
   return hurGårDet
 }
- 	
+ 
+// TRE I RAD!!1
+    
+//async function treIRad(hurGårDet,utmanare,utmanad,igen = false) {
+//  plan = [ [0,0,0],[0,0,0],[0,0,0] ]
+//  rundaDelatPåTvå = 0 // Det blir ju max 9 rundor = 8 rundor + en som är tvingad = 4*2 rundor
+//  över = false
+//  console.log("Börjar ny tre-i-rad-match.")
+//  while(!över){ //Loopa här tills någon vinner
+//    plan = await skickaTreIRadUtmaning(plan,KRYSS,utmanare,igen)
+//    över = harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)
+//    hurGårDet.vinnare = utmanare
+//    if(!över){
+//      plan = await skickaTreIRadUtmaning(plan,CIRKEL,utmanad,igen)  
+//      över = harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)
+//      hurGårDet.vinnare = utmanad
+//    }
+//    rundaDelatPåTvå += 1
+//    if(!över %% rundaDelatPåTvå > 3){
+//      // Gör det sista draget automatiskt och kolla ifall någon vann
+//      for (let i = 0; i < 3; i++){
+//        if(plan[i].includes[0]){
+//          plan[i][plan[i].indexOf[0]] = 1 //1 börjar alltid så hen har sista draget
+//        }
+//      }
+//      if(harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)){
+//        hurGårDet.vinnare = utmanare
+//      } else {
+//        hurGårDet.vinnare = undefined
+//        över = true
+//      }
+//    }
+//  }
+//  hurGårDet.jättebra = true
+//  hurGårDet.meddelande = "Rätt bra faktiskt!"
+//  if(hurGårDet.vinnare ~undefined){
+//    hurGårDet.vinnare.send("You won! Congratulations :)")
+//  }
+//  return hurGårDet 
+//}
+//
+//async function skickaTreIRadUtmaning( plan, EMOJI, kämpe, igen = false){
+//  const jagLovarPåHederOchSamvete = new Promise(async (jagKirrar, jagBajsar) => {
+//    let pick = undefined
+//    
+//    if(igen) {
+//      sträng = KVADRAT+KVADRAT+KVADRAT
+//    } else {
+//      sträng = KVADRAT+KVADRAT+KVADRAT
+//    }
+//    
+//    const sänt1 = await kämpe.send(sträng)
+//    const sänt2 = await kämpe.send(sträng)
+//    const sänt3 = await kämpe.send(sträng)
+//    const reaktionsSamlare1 = sänt1.createReactionCollector({ time: 40_000 });
+//    const reaktionsSamlare2 = sänt2.createReactionCollector({ time: 40_000 });
+//    const reaktionsSamlare3 = sänt3.createReactionCollector({ time: 40_000 });
+//    reaktionsSamlare1.on('collect', (reaction, user) => {
+//      if(reaction.count == 2){
+//        console.log(1,EMOJI.indexOf(reaction._emoji.name))
+//        plan[1][EMOJI.indexOf(reaction._emoji.name)] = score
+//        reaktionsSamlare.stop();
+//      };
+//    });
+//    reaktionsSamlare.on('end', (reaction, user) => {
+//      //return fast async??
+//      jagKirrar(pick);
+//    });
+//    sänt.react(EMOJI[0]);
+//    sänt.react(EMOJI[1]);
+//    sänt.react(EMOJI[2]);
+//  });
+//  return jagLovarPåHederOchSamvete
+//};
+//
+//function harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan){
+//  let kolonnsummor = [0,0,0]
+//  let radsummor = [0,0,0]
+//  let diagonalsummor = [0,0]
+//  let storlek = plan.length
+//  for (let i = 0; i < storlek; i++){
+//      for (let j = 0; j < storlek; j++){
+//          kolonnsummor[j] += plan[i][j]
+//          radsummor[i] += plan[i][j]
+//          if(i==j){ diagonalsummor[0] += plan[i][j] }
+//          if(i==storlek-j-1){ diagonalsummor[1] += plan[i][j] }     
+//      }
+//  }
+//  kolonnsummor = Math.abs(kolonnsummor)
+//  radsummor = Math.abs(radsummor)
+//  diagonalsummor = Math.abs(diagonalsummor)
+//  return Math.max(kolonnsummor, radsummor, diagonalsummor) > 2
+//}
+	
 // STEN SAX PÅSE!!1
     
 async function stensaxpåse(hurGårDet,utmanare,utmanad,igen = false) {
