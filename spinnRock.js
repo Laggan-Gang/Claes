@@ -70,6 +70,7 @@ module.exports = {
       const lastItem = gubbLängdsKollare.pop();
       const newTimeout = parseInt(g);
       let LAGGAN_APPROVED_TARDYNESS = 60_000;
+      console.log(gubbLängdsKollare.length);
 
       if (isNaN(newTimeout)) {
         meddelande.reply(
@@ -82,7 +83,9 @@ module.exports = {
 
         if (newTimeout / 1000 < 1) {
           meddelande.reply(
-            `I like your style. Using ${newTimeout / 1000}s of delay. Better go quick 🦾🦾🦾`
+            `I like your style. Using ${
+              newTimeout / 1000
+            }s of delay. Better go quick 🦾🦾🦾`
           );
         } else {
           meddelande.reply(
