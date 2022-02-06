@@ -8,8 +8,8 @@ function snooze(timer) {
   }
 }
 
-function modFull(modMeddelande) {
-  let modRader = modMeddelande.split('\n');
+function modFull(modFull) {
+  let modRader = modFull.split('\n');
   return modRader.length >= 6;
 }
 
@@ -115,7 +115,6 @@ module.exports = {
       let trådMeddelande = await tråden.send(
         `Please wait for the bot to set up :)`
       );
-      let modMeddelande = '';
       //GLÖM INTE TA MED INTENTS
       await trådMeddelande.react('1️⃣');
       await trådMeddelande.react('2️⃣');
@@ -195,7 +194,7 @@ module.exports = {
               ' picka ' +
               reaktion
           );
-          await standardPick(reaktion, noobs);
+          await standardPick(reaktion, noobs, LAGGAN_APPROVED_TARDYNESS / 1000);
           console.log('Sen hämta nästa noob!');
           await finskaFighten(noobs);
         }
@@ -216,7 +215,9 @@ module.exports = {
             `${pingNoob}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
           );
           console.log(
-            `${pingNoob} kommer asignas ${föredragen} om 60 sekunder, ${row}`
+            `${pingNoob} kommer asignas ${föredragen} om ${
+              LAGGAN_APPROVED_TARDYNESS / 1000
+            } sekunder, ${row}`
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
@@ -243,8 +244,12 @@ module.exports = {
         }
       }
       //Den här behöver rollkoll så den måste stanna
-      async function standardPick(reaktion, noobs) {
+      async function standardPick(reaktion, noobs, timeToPick) {
+        let modMeddelande = '\n';
         let riktigReact;
+
+        const timeNow = performance.now();
+
         console.log('Kolla om vår reaktion har ett namn ');
         if (reaktion.emoji) {
           console.log("'Den har ett namn!", reaktion.emoji.name);
@@ -257,9 +262,13 @@ module.exports = {
           pickladeRoller.push(riktigReact);
           console.log('Picklade roller just nu är: ', pickladeRoller);
         }
+
+        const rollPicked = performance.now();
+        const elapsedTime = timeToPick || (rollPicked - timeNow) * 1000;
+
         modMeddelande += `${kapitalisera(
           noobs[i].namn
-        )} has picked ${riktigReact}!\n`;
+        )} has picked ${riktigReact}! in ${elapsedTime}s\n`;
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
