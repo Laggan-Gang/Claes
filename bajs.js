@@ -16,9 +16,9 @@ function shuffleArray(arr) {
 
 module.exports = {
   maakepCall: async (meddelandeContent) => {
-    const arr = meddelandeContent.toLocaleLowerCase().split(' ');
+    const fejkLista = meddelandeContent.toLocaleLowerCase().split(' ');
 
-    if(arr.length != 5){
+    if(fejkLista.length != 5){
       throw Error(`Maakep magic only works on 5 potential medlems`);
     }
 
