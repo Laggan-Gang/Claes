@@ -221,6 +221,7 @@ module.exports = {
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
           if (!pickladeRoller.length == 4) {
+            console.log('Timern är just nu på: ' + LAGGAN_APPROVED_TARDYNESS);
             äggKlockan = setTimeout(async function () {
               await autoPicker(föredragen, aktivaNoobs);
             }, LAGGAN_APPROVED_TARDYNESS);
