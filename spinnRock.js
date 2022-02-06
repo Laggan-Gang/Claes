@@ -66,16 +66,18 @@ module.exports = {
     const väntaNuHurMångaGubbarÄrDet = meddelande.content.split(' ');
     const gubbLängdsKollare = väntaNuHurMångaGubbarÄrDet.slice(1);
 
-    const lastItem = gubbLängdsKollare.pop();
-    const newTimeout = parseInt(g);
-    let LAGGAN_APPROVED_TARDYNESS = 60_000;
+    if (gubbLängdsKollare.length == 6) {
+      const lastItem = gubbLängdsKollare.pop();
+      const newTimeout = parseInt(g);
+      let LAGGAN_APPROVED_TARDYNESS = 60_000;
 
-    if (isNaN(newTimeout)) {
-      meddelande.reply(
-        `I don't know what this ${lastItem} is but it ain't a number for sure 🤔`
-      );
-    } else {
-      LAGGAN_APPROVED_TARDYNESS = newTimeout;
+      if (isNaN(newTimeout)) {
+        meddelande.reply(
+          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔`
+        );
+      } else {
+        LAGGAN_APPROVED_TARDYNESS = newTimeout;
+      }
     }
 
     if (gubbLängdsKollare.length == 5) {
