@@ -68,14 +68,14 @@ module.exports = {
 
     const lastItem = gubbLängdsKollare.pop();
     const newTimeout = parseInt(g);
-    let LAGGAN_APPROVED_SLOWNESS = 60_000;
+    let LAGGAN_APPROVED_TARDYNESS = 60_000;
 
     if (isNaN(newTimeout)) {
       meddelande.reply(
-        `I don't know what this ${lastItem} is but for sure it ain't a number`
+        `I don't know what this ${lastItem} is but it ain't a number for sure 🤔`
       );
     } else {
-      LAGGAN_APPROVED_SLOWNESS = newTimeout;
+      LAGGAN_APPROVED_TARDYNESS = newTimeout;
     }
 
     if (gubbLängdsKollare.length == 5) {
@@ -204,7 +204,7 @@ module.exports = {
           if (!pickladeRoller.length == 4) {
             äggKlockan = setTimeout(async function () {
               await autoPicker(föredragen, aktivaNoobs);
-            }, LAGGAN_APPROVED_SLOWNESS);
+            }, LAGGAN_APPROVED_TARDYNESS);
           }
         } catch (error) {
           console.error('Failed to send the message: ', error);
