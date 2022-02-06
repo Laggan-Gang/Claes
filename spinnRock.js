@@ -73,10 +73,24 @@ module.exports = {
 
       if (isNaN(newTimeout)) {
         meddelande.reply(
-          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔`
+          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔. Using standard ${
+            LAGGAN_APPROVED_TARDYNESS / 1000
+          }s of delay.`
         );
       } else {
         LAGGAN_APPROVED_TARDYNESS = newTimeout;
+
+        if (newTimeout / 1000 < 100) {
+          meddelande.reply(
+            `I like your style. Using ${newTimeout / 1000}s of delay. Better go quick 🦾🦾🦾`
+          );
+        } else {
+          meddelande.reply(
+            `You have chosen to change the flow of time for your party - now each medlem has ${
+              newTimeout / 1000
+            }s to pick their role.`
+          );
+        }
       }
     }
 
