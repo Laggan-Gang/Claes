@@ -110,17 +110,17 @@ module.exports = {
         reason: 'Needed a separate thread for PISS',
       });
       //const tråden = meddelande.channel.threads.cache.find((x) => {
-        //  return x.name === trådNamn;
-        //});
-        if (tråden.joinable) await tråden.join();
-        
-        let trådMeddelande = await tråden.send(
-          `Please wait for the bot to set up :)`
-          );
-          //GLÖM INTE TA MED INTENTS
-          await trådMeddelande.react('1️⃣');
-          await trådMeddelande.react('2️⃣');
-          await trådMeddelande.react('3️⃣');
+      //  return x.name === trådNamn;
+      //});
+      if (tråden.joinable) await tråden.join();
+
+      let trådMeddelande = await tråden.send(
+        `Please wait for the bot to set up :)`
+      );
+      //GLÖM INTE TA MED INTENTS
+      await trådMeddelande.react('1️⃣');
+      await trådMeddelande.react('2️⃣');
+      await trådMeddelande.react('3️⃣');
       await trådMeddelande.react('4️⃣');
       await trådMeddelande.react('5️⃣');
       await trådMeddelande.react('935684531023925299');
