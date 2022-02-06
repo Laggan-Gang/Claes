@@ -1,4 +1,5 @@
 const maakepCall = require('./bajs.js');
+let LAGGAN_APPROVED_TARDYNESS = 60_000;
 
 function snooze(timer) {
   if (timer) {
@@ -7,8 +8,8 @@ function snooze(timer) {
   }
 }
 
-function modFull(modMeddelande) {
-  let modRader = modMeddelande.split('\n');
+function modFull(modFull) {
+  let modRader = modFull.split('\n');
   return modRader.length >= 6;
 }
 
@@ -65,11 +66,42 @@ module.exports = {
   spinnRock: async (meddelande) => {
     const väntaNuHurMångaGubbarÄrDet = meddelande.content.split(' ');
     const gubbLängdsKollare = väntaNuHurMångaGubbarÄrDet.slice(1);
+
+    if (gubbLängdsKollare.length == 6) {
+      const lastItem = gubbLängdsKollare.pop();
+      const newTimeout = parseInt(lastItem);
+      console.log(gubbLängdsKollare.length);
+
+      if (isNaN(newTimeout)) {
+        meddelande.reply(
+          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔. Using standard ${
+            LAGGAN_APPROVED_TARDYNESS / 1000
+          }s of delay.`
+        );
+      } else {
+        LAGGAN_APPROVED_TARDYNESS = newTimeout;
+
+        if (newTimeout / 1000 < 1) {
+          meddelande.reply(
+            `I like your style. Using ${
+              newTimeout / 1000
+            }s of delay. Better go quick 🦾🦾🦾`
+          );
+        } else {
+          meddelande.reply(
+            `You have chosen to change the flow of time for your party - now each medlem has ${
+              newTimeout / 1000
+            }s to pick their role.`
+          );
+        }
+      }
+    }
+
     if (gubbLängdsKollare.length == 5) {
       let trådNamn = `The ${meddelande.member.displayName} party`;
 
       let i = 0;
-      let dummyArray = await maakepCall.maakepCall(meddelande);
+      let dummyArray = await maakepCall.maakepCall(gubbLängdsKollare.join(' '));
       const tråden = await meddelande.channel.threads.create({
         name: trådNamn,
         autoArchiveDuration: 60,
@@ -83,7 +115,6 @@ module.exports = {
       let trådMeddelande = await tråden.send(
         `Please wait for the bot to set up :)`
       );
-      let modMeddelande = '';
       //GLÖM INTE TA MED INTENTS
       await trådMeddelande.react('1️⃣');
       await trådMeddelande.react('2️⃣');
@@ -96,6 +127,7 @@ module.exports = {
       var emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
       let fillBoys = [];
       let aktivaNoobs = dummyArray;
+      let modMeddelande = '\n';
       var äggKlockan;
       var pingMeddelande;
 
@@ -163,7 +195,7 @@ module.exports = {
               ' picka ' +
               reaktion
           );
-          await standardPick(reaktion, noobs);
+          await standardPick(reaktion, noobs, LAGGAN_APPROVED_TARDYNESS / 1000);
           console.log('Sen hämta nästa noob!');
           await finskaFighten(noobs);
         }
@@ -184,15 +216,17 @@ module.exports = {
             `${pingNoob}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
           );
           console.log(
-            `${pingNoob} kommer asignas ${föredragen} om 60 sekunder, ${row}`
+            `${pingNoob} kommer asignas ${föredragen} om ${
+              LAGGAN_APPROVED_TARDYNESS / 1000
+            } sekunder, ${row}`
           );
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
-          if (!pickladeRoller.length == 4) {
-            äggKlockan = setTimeout(async function () {
-              await autoPicker(föredragen, aktivaNoobs);
-            }, 60_000);
-          }
+
+          console.log('Timern är just nu på: ' + LAGGAN_APPROVED_TARDYNESS);
+          äggKlockan = setTimeout(async function () {
+            await autoPicker(föredragen, aktivaNoobs);
+          }, LAGGAN_APPROVED_TARDYNESS);
         } catch (error) {
           console.error('Failed to send the message: ', error);
         }
@@ -211,8 +245,11 @@ module.exports = {
         }
       }
       //Den här behöver rollkoll så den måste stanna
-      async function standardPick(reaktion, noobs) {
+      async function standardPick(reaktion, noobs, timeToPick) {
         let riktigReact;
+
+        const timeNow = performance.now();
+
         console.log('Kolla om vår reaktion har ett namn ');
         if (reaktion.emoji) {
           console.log("'Den har ett namn!", reaktion.emoji.name);
@@ -225,9 +262,13 @@ module.exports = {
           pickladeRoller.push(riktigReact);
           console.log('Picklade roller just nu är: ', pickladeRoller);
         }
+
+        const rollPicked = performance.now();
+        const elapsedTime = timeToPick || (rollPicked - timeNow) * 1000;
+
         modMeddelande += `${kapitalisera(
           noobs[i].namn
-        )} has picked ${riktigReact}!\n`;
+        )} has picked ${riktigReact}! in ${elapsedTime}s\n`;
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
@@ -237,7 +278,7 @@ module.exports = {
       }
       //Den här måste stanna punkt slut
       async function finskaFighten(noobs) {
-        snooze(äggKlockan);
+        //snooze(äggKlockan);
         if (!modFull(modMeddelande)) {
           console.log(
             'Alla noobs har inte valt roll eller fill, vi behöver fler'
@@ -257,7 +298,7 @@ module.exports = {
                 pickladeRoller
               );
               console.log('Alltså kan vi avsluta');
-              snooze(äggKlockan);
+              //snooze(äggKlockan);
               collector.stop();
             } else {
               console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
