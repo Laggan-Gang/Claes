@@ -15,9 +15,13 @@ function shuffleArray(arr) {
 //ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
 module.exports = {
-  maakepCall: async (meddelande) => {
-    const arr = meddelande.content.toLocaleLowerCase().split(' ');
+  maakepCall: async (meddelandeContent) => {
+    const arr = meddelandeContent.toLocaleLowerCase().split(' ');
     const fejkLista = arr.slice(1);
+
+    if(fejkLista.length != 5){
+      throw Error(`Maakep magic only works on 5 potential medlems`);
+    }
 
     const fRes = await axios.get(`${dotaPrefsBaseUrl}`);
 
