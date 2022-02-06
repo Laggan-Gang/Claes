@@ -1,4 +1,5 @@
 const maakepCall = require('./bajs.js');
+let LAGGAN_APPROVED_TARDYNESS = 60_000;
 
 function snooze(timer) {
   if (timer) {
@@ -69,7 +70,6 @@ module.exports = {
     if (gubbLängdsKollare.length == 6) {
       const lastItem = gubbLängdsKollare.pop();
       const newTimeout = parseInt(lastItem);
-      let LAGGAN_APPROVED_TARDYNESS = 60_000;
       console.log(gubbLängdsKollare.length);
 
       if (isNaN(newTimeout)) {
