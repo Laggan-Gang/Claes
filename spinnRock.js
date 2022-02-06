@@ -80,7 +80,7 @@ module.exports = {
       } else {
         LAGGAN_APPROVED_TARDYNESS = newTimeout;
 
-        if (newTimeout / 1000 < 100) {
+        if (newTimeout / 1000 < 1) {
           meddelande.reply(
             `I like your style. Using ${newTimeout / 1000}s of delay. Better go quick 🦾🦾🦾`
           );
