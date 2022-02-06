@@ -65,6 +65,19 @@ module.exports = {
   spinnRock: async (meddelande) => {
     const väntaNuHurMångaGubbarÄrDet = meddelande.content.split(' ');
     const gubbLängdsKollare = väntaNuHurMångaGubbarÄrDet.slice(1);
+
+    const lastItem = gubbLängdsKollare.pop();
+    const newTimeout = parseInt(g);
+    let LAGGAN_APPROVED_SLOWNESS = 60_000;
+
+    if (isNaN(newTimeout)) {
+      meddelande.reply(
+        `I don't know what this ${lastItem} is but for sure it ain't a number`
+      );
+    } else {
+      LAGGAN_APPROVED_SLOWNESS = newTimeout;
+    }
+
     if (gubbLängdsKollare.length == 5) {
       let trådNamn = `The ${meddelande.member.displayName} party`;
 
@@ -191,7 +204,7 @@ module.exports = {
           if (!pickladeRoller.length == 4) {
             äggKlockan = setTimeout(async function () {
               await autoPicker(föredragen, aktivaNoobs);
-            }, 60_000);
+            }, LAGGAN_APPROVED_SLOWNESS);
           }
         } catch (error) {
           console.error('Failed to send the message: ', error);
