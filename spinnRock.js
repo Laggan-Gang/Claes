@@ -266,7 +266,7 @@ module.exports = {
         }
 
         const end = performance.now();
-        const elapsedTime = timeToPick || (end - start);
+        const elapsedTime = timeToPick || (end - start) * 1000;
 
         modMeddelande += `${ kapitalisera(
           noobs[i].namn
