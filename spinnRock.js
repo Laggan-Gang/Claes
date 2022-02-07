@@ -266,11 +266,11 @@ module.exports = {
         }
 
         const end = performance.now();
-        const elapsedTime = timeToPick || parseFloat(end - start).toFixed(2) * 1000;
+        const elapsedTime = timeToPick || parseFloat(end - start).toFixed(2);
 
-        modMeddelande += `[${elapsedTime}]${ kapitalisera(
+        modMeddelande += `${ kapitalisera(
           noobs[i].namn
-        )} has picked ${riktigReact}! \n`;
+        )}[${elapsedTime} ms] has picked ${riktigReact}! \n`;
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
