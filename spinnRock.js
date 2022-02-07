@@ -272,7 +272,7 @@ module.exports = {
 
         modMeddelande += `${kapitalisera(
           noobs[i].namn
-        )}[${elapsedTime} ms] has picked ${riktigReact}!\n`;
+        )}\`[${elapsedTime} ms]\` has picked ${riktigReact}!\n`;
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
@@ -391,6 +391,8 @@ module.exports = {
           console.log(sträng);
           let nySträng = sträng.replace('!', '');
           let aOchO = nySträng.split(' ');
+          console.log('Det här är vad aOchO gjort med nuvarande sträng: ');
+          console.log(aOchO);
           return `${aOchO[0]} ${aOchO.pop()}`;
         }
         for (rad of modRader) {
@@ -419,6 +421,20 @@ module.exports = {
     }
   },
 };
+
+async function embedMaker() {
+  const exampleEmbed = new MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('LaggStats')
+    .setDescription(`After a stunning match of **${game}**`)
+    //.setThumbnail("https://i.imgur.com/AfFp7pu.png")
+    .addFields(winnerField)
+    .setFooter('Please react to confirm or deny');
+
+  loserArray.forEach((loseTeam) => {
+    exampleEmbed.addField('`These also tried`', `${loseTeam.join('\n')}`, true);
+  });
+}
 
 //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
