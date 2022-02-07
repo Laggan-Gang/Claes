@@ -1,5 +1,4 @@
 const maakepCall = require('./bajs.js');
-let LAGGAN_APPROVED_TARDYNESS = 60_000;
 
 //TIMESTAMPS FOR STARTING AND ENDING
 //EMBED FINAL MESSAGE
@@ -12,7 +11,7 @@ function snooze(timer) {
 
 function modFull(modFull) {
   let modRader = modFull.split('\n');
-
+  //this number is very good
   const expectedNumberOfNewLines = 7;
   return modRader.length >= expectedNumberOfNewLines;
 }
@@ -70,10 +69,10 @@ module.exports = {
   spinnRock: async (meddelande) => {
     const väntaNuHurMångaGubbarÄrDet = meddelande.content.split(' ');
     const gubbLängdsKollare = väntaNuHurMångaGubbarÄrDet.slice(1);
-
+    let LAGGAN_APPROVED_TARDYNESS = 60_000;
     if (gubbLängdsKollare.length == 6) {
       const lastItem = gubbLängdsKollare.pop();
-      const newTimeout = parseInt(lastItem);
+      const newTimeout = parseInt(lastItem, 10);
       console.log(gubbLängdsKollare.length);
 
       if (isNaN(newTimeout)) {
