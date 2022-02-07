@@ -398,8 +398,6 @@ module.exports = {
           console.log(sträng);
           let nySträng = sträng.replace('!', '');
           let aOchO = nySträng.split(' ');
-          console.log('Det här är vad aOchO gjort med nuvarande sträng: ');
-          console.log(aOchO);
           return `${aOchO[0]} ${emojiDic[aOchO.pop()]}`;
         }
         for (rad of modRader) {
@@ -414,6 +412,7 @@ module.exports = {
             console.log('Den här raden tjongar vi in i aOchO ', rad);
           }
         }
+        await embedMaker(modRader, finsktMeddelande, trådNamn, tråden);
         console.log(finsktMeddelande);
         try {
           pingMeddelande = tråden.send(
@@ -429,18 +428,19 @@ module.exports = {
   },
 };
 
-async function embedMaker() {
+async function embedMaker(modRader, finsktMeddelande, trådNamn, tråden) {
   const exampleEmbed = new MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle('LaggStats')
-    .setDescription(`After a stunning match of **${game}**`)
+    .setColor('#ff60cc')
+    .setTitle(`${trådNamn}`)
+    .setDescription(`These are the fates you chose`)
     //.setThumbnail("https://i.imgur.com/AfFp7pu.png")
     .addFields(winnerField)
-    .setFooter('Please react to confirm or deny');
+    .setFooter(`${finsktMeddelande}`);
 
-  loserArray.forEach((loseTeam) => {
-    exampleEmbed.addField('`These also tried`', `${loseTeam.join('\n')}`, true);
+  modRader.forEach((rad) => {
+    exampleEmbed.addField(`${rad}`, true);
   });
+  await tråden.send({ embeds: [exampleEmbed] });
 }
 
 //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
