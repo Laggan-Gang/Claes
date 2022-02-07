@@ -127,12 +127,19 @@ module.exports = {
       await trådMeddelande.react('935684531023925299');
       trådMeddelande.edit('Please pick your role by reacting to this post.');
       let pickladeRoller = [];
-      var emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
+      const emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
+      const emojiDic = {
+        '1️⃣': '1',
+        '2️⃣': '2',
+        '3️⃣': '3',
+        '4️⃣': '4',
+        '5️⃣': '5',
+      };
       let fillBoys = [];
       let aktivaNoobs = dummyArray;
       let modMeddelande = '\n';
-      var äggKlockan;
-      var pingMeddelande;
+      let äggKlockan;
+      let pingMeddelande;
 
       pingMeddelande = await tråden.send(ROLLCALL(dummyArray));
 
@@ -272,7 +279,7 @@ module.exports = {
 
         modMeddelande += `${kapitalisera(
           noobs[i].namn
-        )}\`[${elapsedTime} ms]\` has picked ${riktigReact}!\n`;
+        )} \`[${elapsedTime}ms]\` has picked ${riktigReact}!\n`;
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
@@ -393,7 +400,7 @@ module.exports = {
           let aOchO = nySträng.split(' ');
           console.log('Det här är vad aOchO gjort med nuvarande sträng: ');
           console.log(aOchO);
-          return `${aOchO[0]} ${aOchO.pop()}`;
+          return `${aOchO[0]} ${emojiDic[aOchO.pop()]}`;
         }
         for (rad of modRader) {
           if (
