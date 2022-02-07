@@ -268,7 +268,8 @@ module.exports = {
         }
 
         const end = performance.now();
-        const elapsedTime = timeToPick || parseFloat(end - start).toFixed(2);
+        const elapsedTime =
+          timeToPick || parseFloat(end - start).toFixed(2) * 1000;
 
         modMeddelande += `${kapitalisera(
           noobs[i].namn
