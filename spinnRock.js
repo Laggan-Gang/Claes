@@ -411,7 +411,7 @@ module.exports = {
             console.log('Den här raden tjongar vi in i aOchO ', rad);
           }
         }
-        await embedMaker(modRader, finsktMeddelande, trådNamn, tråden);
+        await embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden);
         console.log(finsktMeddelande);
         try {
           pingMeddelande = tråden.send(
@@ -427,17 +427,16 @@ module.exports = {
   },
 };
 
-async function embedMaker(modRader, finsktMeddelande, trådNamn, tråden) {
+async function embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden) {
+  console.log(modMeddelande);
   const exampleEmbed = new MessageEmbed()
     .setColor('#ff60cc')
     .setTitle(`${trådNamn}`)
     .setDescription(`These are the fates you chose`)
-    //.setThumbnail("https://i.imgur.com/AfFp7pu.png")
     .setFooter({ text: `${finsktMeddelande}` });
 
-  modRader.forEach((rad) => {
-    exampleEmbed.addField(`${rad}`, false);
-  });
+  exampleEmbed.addField('Your picks, sir', modMeddelande, false);
+
   await tråden.send({ embeds: [exampleEmbed] });
 }
 
