@@ -380,7 +380,7 @@ module.exports = {
         }
       });
 
-      collector.on('end', (collected) => {
+      collector.on('end', async (collected) => {
         console.log('NU ÄR VI FÖRMODLIGEN KLARA');
         //Stäng av klockan och plocka bort pingmeddelande om det finns
         snooze(äggKlockan);
