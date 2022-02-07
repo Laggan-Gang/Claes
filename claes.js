@@ -616,6 +616,22 @@ client.on('messageCreate', async (meddelande) => {
       /^(prevedi|преведи)/,
       ''
     );
+
+    if (strängToTranslate != strängToTranslate.toLowerCase()){
+      console.log(strängToTranslate)
+
+      //CamelCase checker.
+      let översättningsKaraktär = 0
+      while(översättningsKaraktär < strängToTranslate.length){
+        // Check if upper case letter
+        if(strängToTranslate[översättningsKaraktär] != strängToTranslate[översättningsKaraktär].toLowerCase()){
+          // add a space before it if it is
+          strängToTranslate = strängToTranslate.slice(0,översättningsKaraktär) + " " + strängToTranslate.slice(översättningsKaraktär);
+          översättningsKaraktär++; // This is double skip to skip the capital letter
+        }
+        översättningsKaraktär++;
+      }
+    }
     let funnyRetort = await prevodach.swedishToEnglish(strängToTranslate);
     meddelande.reply(svampbob(funnyRetort));
   } else if (meddelande.content.startsWith('yarn')) {
