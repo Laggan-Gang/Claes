@@ -1,6 +1,8 @@
 const maakepCall = require('./bajs.js');
 let LAGGAN_APPROVED_TARDYNESS = 60_000;
 
+//TIMESTAMPS FOR STARTING AND ENDING
+//EMBED FINAL MESSAGE
 function snooze(timer) {
   if (timer) {
     clearTimeout(timer);
