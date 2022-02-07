@@ -412,14 +412,6 @@ module.exports = {
           }
         }
         await embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden);
-        console.log(finsktMeddelande);
-        try {
-          pingMeddelande = tråden.send(
-            `Picking is complete!\n${finsktMeddelande} Gl hf :) `
-          );
-        } catch (error) {
-          console.error('Failed to send the message: ', error);
-        }
       });
     } else {
       meddelande.reply('Wrong amount of dudes, dude!');
