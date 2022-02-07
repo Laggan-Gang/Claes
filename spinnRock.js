@@ -1,7 +1,6 @@
 const maakepCall = require('./bajs.js');
+const { DiscordAPIError, MessageEmbed } = require('discord.js');
 
-//TIMESTAMPS FOR STARTING AND ENDING
-//EMBED FINAL MESSAGE
 function snooze(timer) {
   if (timer) {
     clearTimeout(timer);
