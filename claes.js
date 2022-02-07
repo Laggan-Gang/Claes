@@ -21,6 +21,7 @@ const {
   Channel,
   TextChannel,
   MessageAttachment,
+  MessageEmbed,
 } = require('discord.js');
 const { token } = require('./config.json');
 const Canvas = require('canvas');
@@ -572,11 +573,13 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.react('703784231893073922');
       meddelande.reply(svampbob(res.message));
     }
-  } else if (dravel.startsWith('!challeng') || dravel.startsWith('!utman')){
-    let hurGårDet = await xXG4M3RXx.förstå(meddelande)
-    if(hurGårDet.vinnare != undefined){
-      console.log(`Spelet är över! ${hurGårDet.vinnare.username} vann.`)
-      meddelande.channel.send(`${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`)
+  } else if (dravel.startsWith('!challeng') || dravel.startsWith('!utman')) {
+    let hurGårDet = await xXG4M3RXx.förstå(meddelande);
+    if (hurGårDet.vinnare != undefined) {
+      console.log(`Spelet är över! ${hurGårDet.vinnare.username} vann.`);
+      meddelande.channel.send(
+        `${hurGårDet.vinnare} WON! Because they're not a NOOB! XD`
+      );
     }
   }
   //CHAPTER SEVEN: The Mystery to the Key
@@ -617,16 +620,22 @@ client.on('messageCreate', async (meddelande) => {
       ''
     );
 
-    if (strängToTranslate != strängToTranslate.toLowerCase()){
-      console.log(strängToTranslate)
+    if (strängToTranslate != strängToTranslate.toLowerCase()) {
+      console.log(strängToTranslate);
 
       //CamelCase checker.
-      let översättningsKaraktär = 0
-      while(översättningsKaraktär < strängToTranslate.length){
+      let översättningsKaraktär = 0;
+      while (översättningsKaraktär < strängToTranslate.length) {
         // Check if upper case letter
-        if(strängToTranslate[översättningsKaraktär] != strängToTranslate[översättningsKaraktär].toLowerCase()){
+        if (
+          strängToTranslate[översättningsKaraktär] !=
+          strängToTranslate[översättningsKaraktär].toLowerCase()
+        ) {
           // add a space before it if it is
-          strängToTranslate = strängToTranslate.slice(0,översättningsKaraktär) + " " + strängToTranslate.slice(översättningsKaraktär);
+          strängToTranslate =
+            strängToTranslate.slice(0, översättningsKaraktär) +
+            ' ' +
+            strängToTranslate.slice(översättningsKaraktär);
           översättningsKaraktär++; // This is double skip to skip the capital letter
         }
         översättningsKaraktär++;
