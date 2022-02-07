@@ -268,9 +268,9 @@ module.exports = {
         }
 
         const end = performance.now();
-        const elapsedTime = timeToPick || (end - start) * 1000;
+        const elapsedTime = timeToPick || parseFloat(end - start).toFixed(2);
 
-        modMeddelande += `${ kapitalisera(
+        modMeddelande += `${kapitalisera(
           noobs[i].namn
         )}[${elapsedTime} ms] has picked ${riktigReact}!\n`;
         try {
