@@ -433,7 +433,7 @@ async function embedMaker(modRader, finsktMeddelande, trådNamn, tråden) {
     .setTitle(`${trådNamn}`)
     .setDescription(`These are the fates you chose`)
     //.setThumbnail("https://i.imgur.com/AfFp7pu.png")
-    .setFooter(`${finsktMeddelande}`);
+    .setFooter({ text: `${finsktMeddelande}` });
 
   modRader.forEach((rad) => {
     exampleEmbed.addField(`${rad}`, false);
