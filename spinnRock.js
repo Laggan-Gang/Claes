@@ -10,7 +10,9 @@ function snooze(timer) {
 
 function modFull(modFull) {
   let modRader = modFull.split('\n');
-  return modRader.length >= 6;
+
+  const expectedNumberOfNewLines = 7;
+  return modRader.length >= expectedNumberOfNewLines;
 }
 
 function kapitalisera(string) {
@@ -248,7 +250,7 @@ module.exports = {
       async function standardPick(reaktion, noobs, timeToPick) {
         let riktigReact;
 
-        const timeNow = performance.now();
+        const start = performance.now();
 
         console.log('Kolla om vår reaktion har ett namn ');
         if (reaktion.emoji) {
@@ -263,12 +265,12 @@ module.exports = {
           console.log('Picklade roller just nu är: ', pickladeRoller);
         }
 
-        const rollPicked = performance.now();
-        const elapsedTime = timeToPick || (rollPicked - timeNow) * 1000;
+        const end = performance.now();
+        const elapsedTime = timeToPick || parseFloat(end - start).toFixed(2) * 1000;
 
-        modMeddelande += `${kapitalisera(
+        modMeddelande += `[${elapsedTime}]${ kapitalisera(
           noobs[i].namn
-        )} has picked ${riktigReact}! in ${elapsedTime}s\n`;
+        )} has picked ${riktigReact}! \n`;
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
@@ -327,7 +329,7 @@ module.exports = {
       //Den här behöver SearchAndDestroy, den stannar
       async function fillBoysNeedFilling(noobs) {
         let modRader = modMeddelande.split('\n');
-        if (modRader.length >= 5) {
+        if (modRader.length >= 6) {
           console.log(
             'Nu är modrader för lång, nu får man inte fill och nu kommer mobbningen'
           );
