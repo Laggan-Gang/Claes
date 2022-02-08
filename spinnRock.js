@@ -121,7 +121,7 @@ module.exports = {
       let modMeddelande = '';
       for (dummy of dummyArray) {
         console.log('Logging, ', dummy);
-        modMeddelande += `${dummy.namn}...\n`;
+        modMeddelande += `${kapitalisera(dummy.namn)}...\n`;
         console.log('modMeddelande: ' + modMeddelande);
       }
       //GLÖM INTE TA MED INTENTS
@@ -284,7 +284,7 @@ module.exports = {
 
         let modRader = modMeddelande.split('\n');
 
-        modRader[i] += `${kapitalisera(
+        modRader[i] = `${kapitalisera(
           noobs[i].namn
         )} \`[${elapsedTime}ms]\` has picked ${riktigReact}!\n`;
         modMeddelande = modRader.join('\n');
