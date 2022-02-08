@@ -323,10 +323,12 @@ module.exports = {
               console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
               console.log(aktivaNoobs == dummyArray);
               if (aktivaNoobs == dummyArray) {
-                console.log(
-                  'Aktiva noobs har inte blivit fillBoys ännu, så vi resettar i'
-                );
                 aktivaNoobs.concat(fillBoys);
+                console.log(
+                  'Nu försöker vi tjonga in fillBoys i aktivaNoobs, aktiva noobs ser ut såhär: '
+                );
+                console.log(aktivaNoobs);
+                console.log('Index ligger på: ' + i);
                 //i = 0;
               }
               console.log('Nu ska vi börja tjonga fill boys, och i = ' + i);
