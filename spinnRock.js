@@ -36,7 +36,7 @@ async function skojareTillrättavisaren(noob, tråden) {
     let skojareMeddelande = await tråden.send(
       `${kapitalisera(
         noob.namn
-      )} du kan inte välja fill när du är last pick >:(`
+      )} you are not allowed to fill when you are last pick >:(`
     );
     setTimeout(() => {
       skojareMeddelande.delete();
@@ -345,7 +345,7 @@ module.exports = {
       }
       //Den här behöver SearchAndDestroy, den stannar
       async function fillBoysNeedFilling(noobs) {
-        let modRader = modMeddelande.split('\n');
+        let modRader = modMeddelande.split('picked');
         if (modRader.length >= 6) {
           console.log(
             'Nu är modrader för lång, nu får man inte fill och nu kommer mobbningen'
