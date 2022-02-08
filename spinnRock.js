@@ -108,7 +108,7 @@ module.exports = {
       const tråden = await meddelande.channel.threads.create({
         name: trådNamn,
         autoArchiveDuration: 60,
-        reason: 'Needed a separate thread for PISS',
+        reason: 'Time to set up your dota party!',
       });
       //const tråden = meddelande.channel.threads.cache.find((x) => {
       //  return x.name === trådNamn;
@@ -118,6 +118,10 @@ module.exports = {
       let trådMeddelande = await tråden.send(
         `Please wait for the bot to set up :)`
       );
+      let modMeddelande;
+      for (dummy of dummyArray) {
+        modMeddelande += `${dummy.name}...\n`;
+      }
       //GLÖM INTE TA MED INTENTS
       await trådMeddelande.react('1️⃣');
       await trådMeddelande.react('2️⃣');
@@ -125,7 +129,7 @@ module.exports = {
       await trådMeddelande.react('4️⃣');
       await trådMeddelande.react('5️⃣');
       await trådMeddelande.react('935684531023925299');
-      trådMeddelande.edit('Please pick your role by reacting to this post.');
+      trådMeddelande.edit(modMeddelande);
       let pickladeRoller = [];
       const emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
       const emojiDic = {
@@ -137,10 +141,6 @@ module.exports = {
       };
       let fillBoys = [];
       let aktivaNoobs = dummyArray;
-      let modMeddelande;
-      for (dummy of dummyArray) {
-        modMeddelande += `${dummy.name}...\n`;
-      }
       let äggKlockan;
       let pingMeddelande;
 
