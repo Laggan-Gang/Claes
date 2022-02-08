@@ -286,7 +286,7 @@ module.exports = {
 
         modRader[i] = `${kapitalisera(
           noobs[i].namn
-        )} \`[${elapsedTime}ms]\` has picked ${riktigReact}!\n`;
+        )} \`[${elapsedTime}ms]\` has picked ${riktigReact}!`;
         modMeddelande = modRader.join('\n');
         try {
           await trådMeddelande.edit(modMeddelande);
@@ -436,7 +436,7 @@ async function embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden) {
     .setDescription(`These are the fates you chose`)
     .setFooter({ text: `${finsktMeddelande}` });
 
-  exampleEmbed.addField('Your picks, sir', modMeddelande, false);
+  exampleEmbed.addField('Your picks, sirs...', modMeddelande, false);
 
   await tråden.send({ embeds: [exampleEmbed] });
 }
