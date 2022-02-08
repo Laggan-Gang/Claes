@@ -89,7 +89,6 @@ async function treIRad(hurGårDet,utmanare,utmanad,igen = false) {
   plan = [ [0,0,0],[0,0,0],[0,0,0] ]
   rundaDelatPåTvå = 0 // Det blir ju max 9 rundor = 8 rundor + en som är tvingad = 4*2 rundor
   över = false
-  console.log("Börjar ny tre-i-rad-match.")
   while(!över){ //Loopa här tills någon vinner
     plan = await skickaTreIRadUtmaning(plan,KRYSS,utmanare, igen)
     över = harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)
@@ -108,7 +107,6 @@ async function treIRad(hurGårDet,utmanare,utmanad,igen = false) {
           plan[i][plan[i].indexOf(0)] = 1 //1 börjar alltid så hen har sista draget
         }
       }
-      console.log(plan)
       if(harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)){
         hurGårDet.vinnare = utmanare
       } else {
@@ -186,7 +184,6 @@ async function skickaTreIRadUtmaning( plan, EMOJI, kämpe, score, igen = false){
       }
     }
     
-    console.log(sträng)
     
     const sänt0 = await kämpe.send(sträng[0])
     const sänt1 = await kämpe.send(sträng[1])
@@ -251,8 +248,6 @@ function harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)
           if(i==2-j){ diagonalsummor[1] += plan[i][j] }     
       }
   }
-  console.log("HÄR ÄR SUMMORNA")
-  console.log(kolonnsummor,radsummor,diagonalsummor)
   // Max of abs of array
   kolonnsumma = Math.max.apply(null, kolonnsummor.map(Math.abs));
   radsumma = Math.max.apply(null, radsummor.map(Math.abs));
@@ -319,7 +314,6 @@ async function skickaUtmaning(kämpe, igen = false){
     const reaktionsSamlare = sänt.createReactionCollector({ filter, time: 20_000 });
     reaktionsSamlare.on('collect', (reaction, user) => {
       if(reaction.count == 2){
-        console.log(reaction._emoji.name)
         pick = reaction._emoji.name;
         reaktionsSamlare.stop();
       };
