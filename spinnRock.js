@@ -11,7 +11,7 @@ function snooze(timer) {
 function modFull(modFull) {
   let modRader = modFull.split('picked');
   //this number is very good
-  const expectedNumberOfNewLines = 7;
+  const expectedNumberOfNewLines = 6;
   console.log('Modrader är nu ' + modRader.length);
   return modRader.length >= expectedNumberOfNewLines;
 }
@@ -118,9 +118,11 @@ module.exports = {
       let trådMeddelande = await tråden.send(
         `Please wait for the bot to set up :)`
       );
-      let modMeddelande;
+      let modMeddelande = '';
       for (dummy of dummyArray) {
+        console.log('Logging, ', dummy);
         modMeddelande += `${dummy.namn}...\n`;
+        console.log('modMeddelande: ' + modMeddelande);
       }
       //GLÖM INTE TA MED INTENTS
       await trådMeddelande.react('1️⃣');
