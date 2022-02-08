@@ -9,9 +9,10 @@ function snooze(timer) {
 }
 
 function modFull(modFull) {
-  let modRader = modFull.split('\n');
+  let modRader = modFull.split('picked');
   //this number is very good
   const expectedNumberOfNewLines = 7;
+  console.log('Modrader är nu ' + modRader.length);
   return modRader.length >= expectedNumberOfNewLines;
 }
 
@@ -136,7 +137,10 @@ module.exports = {
       };
       let fillBoys = [];
       let aktivaNoobs = dummyArray;
-      let modMeddelande = '\n';
+      let modMeddelande;
+      for (dummy of dummyArray) {
+        modMeddelande += `${dummy.name}...\n`;
+      }
       let äggKlockan;
       let pingMeddelande;
 
@@ -276,9 +280,12 @@ module.exports = {
         const elapsedTime =
           timeToPick || parseFloat(end - start).toFixed(2) * 1000;
 
-        modMeddelande += `${kapitalisera(
+        let modRader = modMeddelande.split('\n');
+
+        modRader[i] += `${kapitalisera(
           noobs[i].namn
         )} \`[${elapsedTime}ms]\` has picked ${riktigReact}!\n`;
+        modMeddelande = modRader.join('\n');
         try {
           await trådMeddelande.edit(modMeddelande);
         } catch (error) {
