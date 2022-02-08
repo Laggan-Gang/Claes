@@ -120,7 +120,7 @@ module.exports = {
       );
       let modMeddelande;
       for (dummy of dummyArray) {
-        modMeddelande += `${dummy.name}...\n`;
+        modMeddelande += `${dummy.namn}...\n`;
       }
       //GLÖM INTE TA MED INTENTS
       await trådMeddelande.react('1️⃣');
