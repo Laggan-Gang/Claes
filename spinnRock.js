@@ -356,7 +356,7 @@ module.exports = {
       //Den här behöver SearchAndDestroy, den stannar
       async function fillBoysNeedFilling(noobs) {
         let modRader = modMeddelande.split('picked');
-        if (modRader.length >= 6) {
+        if (modRader.length >= 5) {
           console.log(
             'Nu är modrader för lång, nu får man inte fill och nu kommer mobbningen'
           );
