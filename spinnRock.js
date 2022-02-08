@@ -323,7 +323,7 @@ module.exports = {
               console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
               console.log(aktivaNoobs == dummyArray);
               if (aktivaNoobs == dummyArray) {
-                aktivaNoobs.concat(fillBoys);
+                aktivaNoobs = dummyArray.concat(fillBoys);
                 console.log(
                   'Nu försöker vi tjonga in fillBoys i aktivaNoobs, aktiva noobs ser ut såhär: '
                 );
@@ -333,7 +333,7 @@ module.exports = {
               }
               console.log('Nu ska vi börja tjonga fill boys, och i = ' + i);
               //aktivaNoobs = fillBoys;
-              console.log('Här är fill boys: ');
+              //console.log('Här är fill boys: ');
               //console.log(fillBoys[i]);
               await searchAndDestroy(aktivaNoobs, 361);
             }
