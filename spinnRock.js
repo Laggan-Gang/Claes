@@ -123,7 +123,7 @@ module.exports = {
         console.log('Logging, ', dummy);
         modMeddelande += `\`Then it's time for ${kapitalisera(
           dummy.namn
-        )}...\n\``;
+        )}...\`\n`;
         console.log('modMeddelande: ' + modMeddelande);
       }
       //GLÖM INTE TA MED INTENTS
