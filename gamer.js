@@ -345,7 +345,8 @@ const förklaraVadUtmanaGörIEttFintMeddelandeIngos = new MessageEmbed()
   .setAuthor({ name: 'CL435 7H3 G4M3R', iconURL: "https://raw.githubusercontent.com/Laggan-Gang/Claes/main/gamer_pfp.png", url: 'https://youtube.com/c/CircuzFunPants'})
   .setDescription('Åh ja... DET HÄR är gamerläge.')
   .addFields(
-    { name: 'Sten sax påse', value: `För att utmana någon i sten sax påse, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] stensaxpåse'.`},
+    { name: 'Sten Sax Påse', value: `För att utmana någon i sten sax påse, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] stensaxpåse'.`},
+    { name: 'Tre I Rad', value: `För att utmana någon i tre i rad, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] treirad'.`},
   )
   .setFooter({ text: "Om du kan läsa det här står du för nära."})
 
@@ -356,6 +357,7 @@ const explainWhatChallengeDoesInAPrettyMessageEmbed = new MessageEmbed()
   .setAuthor({ name: 'CL435 7H3 G4M3R', iconURL: "https://raw.githubusercontent.com/Laggan-Gang/Claes/main/gamer_pfp.png", url: 'https://youtube.com/c/CircuzFunPants'})
   .setDescription('Oh yeah... THIS is gamer mode.')
   .addFields(
-    { name: 'Rock paper scissors', value: `To challenge someone for a game of rock paper scissors, type \n'!challenge @[THEIR USERNAME] rockpaperscissors'.`},
+    { name: 'Rock Paper Scissors', value: `To challenge someone for a game of rock paper scissors, type \n'!challenge @[THEIR USERNAME] rockpaperscissors'.`},
+    { name: 'Tic Tac Toe', value: `To challenge someone for a game of tic tac toe, type \n'!challenge @[THEIR USERNAME] tictactoe'.`},
   )
   .setFooter({ text: "If you're reading this, you're a n00b"})
