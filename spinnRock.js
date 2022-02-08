@@ -228,7 +228,9 @@ module.exports = {
         //seach for new guy
         try {
           let modRader = modMeddelande.split('\n');
-          modRader[i] = `${aktivaNoobs[i].namn} is now picking...`;
+          modRader[i] = `**${kapitalisera(
+            aktivaNoobs[i].namn
+          )} is now picking...**`;
           await trådMeddelande.edit(modRader.join('\n'));
           let föredragen = hittaOchKollaPreferens(noobs);
           let pingNoob = vadKallasDu(aktivaNoobs[i]);
