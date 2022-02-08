@@ -121,7 +121,9 @@ module.exports = {
       let modMeddelande = '';
       for (dummy of dummyArray) {
         console.log('Logging, ', dummy);
-        modMeddelande += `${kapitalisera(dummy.namn)}...\n`;
+        modMeddelande += `\`Then it's time for ${kapitalisera(
+          dummy.namn
+        )}...\n\``;
         console.log('modMeddelande: ' + modMeddelande);
       }
       //GLÖM INTE TA MED INTENTS
@@ -225,6 +227,9 @@ module.exports = {
         }
         //seach for new guy
         try {
+          let modRader = modMeddelande.split('\n');
+          modRader[i] = `${aktivaNoobs[i].namn} is now picking...`;
+          await trådMeddelande.edit(modRader.join('\n'));
           let föredragen = hittaOchKollaPreferens(noobs);
           let pingNoob = vadKallasDu(aktivaNoobs[i]);
           pingMeddelande = await tråden.send(
