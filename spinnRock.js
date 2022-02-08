@@ -326,12 +326,13 @@ module.exports = {
                 console.log(
                   'Aktiva noobs har inte blivit fillBoys ännu, så vi resettar i'
                 );
-                i = 0;
+                aktivaNoobs.concat(fillBoys);
+                //i = 0;
               }
               console.log('Nu ska vi börja tjonga fill boys, och i = ' + i);
-              aktivaNoobs = fillBoys;
+              //aktivaNoobs = fillBoys;
               console.log('Här är fill boys: ');
-              console.log(fillBoys[i]);
+              //console.log(fillBoys[i]);
               await searchAndDestroy(aktivaNoobs, 361);
             }
           } else {
