@@ -609,7 +609,7 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply('Joina voice först');
     }
   }
-  if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 5) {
+  if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 2) {
     meddelande.reply('This you?');
     meddelande.channel.send({ files: ['august.png'] });
   }
