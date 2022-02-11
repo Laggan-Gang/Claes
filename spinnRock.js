@@ -70,6 +70,7 @@ module.exports = {
     const väntaNuHurMångaGubbarÄrDet = meddelande.content.split(' ');
     const gubbLängdsKollare = väntaNuHurMångaGubbarÄrDet.slice(1);
     let LAGGAN_APPROVED_TARDYNESS = 60_000;
+    let start;
     if (gubbLängdsKollare.length == 6) {
       const lastItem = gubbLängdsKollare.pop();
       const newTimeout = parseInt(lastItem, 10);
@@ -242,6 +243,8 @@ module.exports = {
               LAGGAN_APPROVED_TARDYNESS / 1000
             } sekunder, ${row}`
           );
+          //Testing to fuck around with this
+          start = performance.now();
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
 
@@ -269,8 +272,6 @@ module.exports = {
       //Den här behöver rollkoll så den måste stanna
       async function standardPick(reaktion, noobs, timeToPick) {
         let riktigReact;
-
-        const start = performance.now();
 
         console.log('Kolla om vår reaktion har ett namn ');
         if (reaktion.emoji) {
