@@ -78,18 +78,16 @@ module.exports = {
 
       if (isNaN(newTimeout)) {
         meddelande.reply(
-          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔. Using standard ${
+          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔. Time to pick is set to standard ${
             LAGGAN_APPROVED_TARDYNESS / 1000
-          }s of delay.`
+          } seconds.`
         );
       } else {
         LAGGAN_APPROVED_TARDYNESS = newTimeout;
 
         if (newTimeout / 1000 < 1) {
           meddelande.reply(
-            `I like your style. Using ${
-              newTimeout / 1000
-            }s of delay. Better go quick 🦾🦾🦾`
+            `I like your style. Time to pick is ${newTimeout} milliseconds. Better go quick 🦾🦾🦾`
           );
         } else {
           meddelande.reply(
