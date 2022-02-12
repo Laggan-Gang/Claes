@@ -287,7 +287,7 @@ module.exports = {
         }
 
         const end = performance.now();
-        const elapsedTime = timeToPick || (end - start).toFixed(2);
+        const elapsedTime = timeToPick || end - start;
 
         let modRader = modMeddelande.split('\n');
 
