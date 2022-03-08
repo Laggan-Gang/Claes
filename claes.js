@@ -408,7 +408,7 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply({ files: ['./spiderman.jpg'] });
     }
   }
-  if (dravel.includes('tack claes')) {
+  if (dravel.includes('tack claes') || dravel.includes('tack rdc')) {
     switch (true) {
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply('Inga problem!');
@@ -432,7 +432,7 @@ client.on('messageCreate', async (meddelande) => {
         break;
     }
   }
-  if (dravel.includes('thanks claes')) {
+  if (dravel.includes('thanks claes') || dravel.includes('thanks rdc')) {
     switch (true) {
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply('No problem!');
