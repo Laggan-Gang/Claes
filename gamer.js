@@ -96,25 +96,24 @@ async function förklaraVadChallengeGörIEttFintMeddelande(hurGårDet,något){
 async function röj(hurGårDet,något,textstorlek, textsvårighetsgrad = 0.2){
   storlek = parseInt(textstorlek);
   svårighetsgrad = parseFloat(textsvårighetsgrad);
-  if (svårighetsgrad == NaN) {
-    något.reply("Vad ska det betyda? Jag vill ha svårighetsgrad " + textstorlek + "? Alla vet väl att svårighetsgrader är definierade som ett tal mellan noll och ett?:rolling_eyes:");
+  if (isNaN(svårighetsgrad) || (Math.abs(svårighetsgrad - 0.5) > 0.5)){
+    något.reply("Vad ska det betyda? Jag vill ha svårighetsgrad " + textsvårighetsgrad + "? Alla vet väl att svårighetsgrader är definierade som ett tal mellan noll och ett?:rolling_eyes:");
+    return("Ganska Kasst");
   }
-  if (storlek == NaN) {
+  if (isNaN(storlek) || (storlek < 0) ) {
     något.reply("Vad ska det betyda? Jag vill ha en plan av storlek " + textstorlek + "?");
+    return("Ganska Kasst");
   }
   if (storlek > (Math.random()*80 + 100)) {
     något.reply("Oj! Så där stor plan behövs väl inte... Det här blir bra: ")
     storlek = 3
     svårighetsgrad = 0.88888
   }
-  console.log("svårighetsgrad: "+svårighetsgrad)
-  console.log("Börjar röja")
   plan = Array(storlek).fill([]);
   for (let i=0; i < storlek; i++){                        // Gör en plan med bara nollor
     plan[i] = Array(storlek).fill(0);
   }
   antalBomber = Math.ceil(svårighetsgrad * storlek * storlek)   // Så här många bomber ska det vara
-  console.log("antalBomber: " + antalBomber)
   // Placera ut alla bomber
   for (let i=0; i < antalBomber; i++){ 
     let x = Math.floor(Math.random() * storlek); // Här ska dom vara
@@ -130,7 +129,6 @@ async function röj(hurGårDet,något,textstorlek, textsvårighetsgrad = 0.2){
       };
     } else { i -= 1 }; // Gör om om det redan är en bomb här
   }
-  console.log("Här är planen: " + plan)
   // Skapa meddelandet
   meddelande = ""
   for (let i=0; i < storlek; i++){
@@ -151,6 +149,7 @@ async function röj(hurGårDet,något,textstorlek, textsvårighetsgrad = 0.2){
     något.channel.send(meddelande);
   }
   något.channel.send(BOMB + ": " + antalBomber);
+  return("Jättebra!")
 }
 
   
@@ -414,6 +413,7 @@ const förklaraVadUtmanaGörIEttFintMeddelandeIngos = new MessageEmbed()
   .addFields(
     { name: 'Sten Sax Påse', value: `För att utmana någon i sten sax påse, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] stensaxpåse'.`},
     { name: 'Tre I Rad', value: `För att utmana någon i tre i rad, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] treirad'.`},
+    { name: 'Röj', value: `För att utmana någon till att röja ett minfält, skriv \n'!challenge @[DERAS ANVÄNDARNAMN] minesweeper [STORLEK PÅ MINFÄLTET] [SVÅRIGHETSGRAD]'.`},
   )
   .setFooter({ text: "Om du kan läsa det här står du för nära."})
 
@@ -424,7 +424,8 @@ const explainWhatChallengeDoesInAPrettyMessageEmbed = new MessageEmbed()
   .setAuthor({ name: 'CL435 7H3 G4M3R', iconURL: "https://raw.githubusercontent.com/Laggan-Gang/Claes/main/gamer_pfp.png", url: 'https://youtube.com/c/CircuzFunPants'})
   .setDescription('Oh yeah... THIS is gamer mode.')
   .addFields(
-    { name: 'Rock Paper Scissors', value: `To challenge someone for a game of rock paper scissors, type \n'!challenge @[THEIR USERNAME] rockpaperscissors'.`},
-    { name: 'Tic Tac Toe', value: `To challenge someone for a game of tic tac toe, type \n'!challenge @[THEIR USERNAME] tictactoe'.`},
+    { name: 'Rock Paper Scissors', value: `To challenge someone to a game of rock paper scissors, type \n'!challenge @[THEIR USERNAME] rockpaperscissors'.`},
+    { name: 'Tic Tac Toe', value: `To challenge someone to a game of tic tac toe, type \n'!challenge @[THEIR USERNAME] tictactoe'.`},
+    { name: 'Minesweeper', value: `To challenge someone to complete a game of minesweeper, type \n'!challenge @[THEIR USERNAME] minesweeper [SIZE OF THE BOARD] [DIFFICULTY]'.`},
   )
   .setFooter({ text: "If you're reading this, you're a n00b"})
