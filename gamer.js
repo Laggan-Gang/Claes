@@ -6,6 +6,8 @@ const PÅSE = "✋"
 const KRYSS = ["❌","🙅","❎"]
 const CIRKEL = ["🔴","🟡","🟢"]
 const KVADRAT = "⬜"
+const BOMB = "💥"
+const SIFFROR = [":zero:",":one:",":two:",":three:",":four:",":five:",":six:",":seven:",":eight:"]
 let matchID = 0
 
 module.exports = {
@@ -33,6 +35,12 @@ module.exports = {
         console.log(spel)
   
         switch (spel) {
+          case 'röj':
+          case 'minesweeper':
+            hurgårdet = await röj(hurGårDet,något,vadJagSkaGöra[3],vadJagSkaGöra[4])
+            console.log("Nu är det färdigröjt.");
+            break;
+          case 'tripptrapptrull':
           case 'treirad':
           case 'tictactoe':
           case 'ttt':
@@ -82,7 +90,71 @@ async function förklaraVadChallengeGörIEttFintMeddelande(hurGårDet,något){
   }
   return hurGårDet
 }
- 
+
+// 
+    
+async function röj(hurGårDet,något,textstorlek, textsvårighetsgrad = 0.2){
+  storlek = parseInt(textstorlek);
+  svårighetsgrad = parseFloat(textsvårighetsgrad);
+  if (svårighetsgrad == NaN) {
+    något.reply("Vad ska det betyda? Jag vill ha svårighetsgrad " + textstorlek + "? Alla vet väl att svårighetsgrader är definierade som ett tal mellan noll och ett?:rolling_eyes:");
+  }
+  if (storlek == NaN) {
+    något.reply("Vad ska det betyda? Jag vill ha en plan av storlek " + textstorlek + "?");
+  }
+  if (storlek > (Math.random()*80 + 100)) {
+    något.reply("Oj! Så där stor plan behövs väl inte... Det här blir bra: ")
+    storlek = 3
+    svårighetsgrad = 0.88888
+  }
+  console.log("svårighetsgrad: "+svårighetsgrad)
+  console.log("Börjar röja")
+  plan = Array(storlek).fill([]);
+  for (let i=0; i < storlek; i++){                        // Gör en plan med bara nollor
+    plan[i] = Array(storlek).fill(0);
+  }
+  antalBomber = Math.ceil(svårighetsgrad * storlek * storlek)   // Så här många bomber ska det vara
+  console.log("antalBomber: " + antalBomber)
+  // Placera ut alla bomber
+  for (let i=0; i < antalBomber; i++){ 
+    let x = Math.floor(Math.random() * storlek); // Här ska dom vara
+    let y = Math.floor(Math.random() * storlek);
+    if (plan[x][y] != BOMB){ // Är det ingen bomb här?
+      plan[x][y] = BOMB;
+      for (let dx = Math.max(x-1,0); dx <= Math.min(x+1,storlek-1); dx++){
+        for (let dy = Math.max(y-1,0); dy <= Math.min(y+1,storlek-1); dy++){
+          if (plan[dx][dy] != BOMB){
+            plan[dx][dy] += 1;
+          };
+        };
+      };
+    } else { i -= 1 }; // Gör om om det redan är en bomb här
+  }
+  console.log("Här är planen: " + plan)
+  // Skapa meddelandet
+  meddelande = ""
+  for (let i=0; i < storlek; i++){
+    for (let j=0; j < storlek; j++){
+      meddelande += "||";
+      if (plan[i][j] == BOMB) { meddelande += BOMB }
+      else { meddelande += SIFFROR[plan[i][j]] };
+      meddelande += "||";
+    };
+    if (storlek > 9){
+      något.channel.send(meddelande);
+      meddelande = "";
+    } else {
+      meddelande += "\n"
+    }
+  };
+  if (meddelande != ""){
+    något.channel.send(meddelande);
+  }
+  något.channel.send(BOMB + ": " + antalBomber);
+}
+
+  
+  
 // TRE I RAD!!1
     
 async function treIRad(hurGårDet,utmanare,utmanad,igen = false) {
@@ -254,6 +326,7 @@ function harNågonVunnitPåDenHärPlanenNuEllerSkaViKanskeKöraEnRundaTill(plan)
   diagonalsumma = Math.max.apply(null, diagonalsummor.map(Math.abs));
   return Math.max(kolonnsumma, radsumma, diagonalsumma) > 2
 }
+
 	
 // STEN SAX PÅSE!!1
     
