@@ -85,7 +85,7 @@ module.exports = {
       } else {
         LAGGAN_APPROVED_TARDYNESS = newTimeout;
 
-        if (newTimeout < 1000 ) {
+        if (newTimeout < 1000) {
           meddelande.reply(
             `I like your style. Time to pick is ${newTimeout} milliseconds. Better go quick 🦾🦾🦾`
           );
@@ -414,7 +414,7 @@ module.exports = {
           console.log(sträng);
           let nySträng = sträng.replace('!', '');
           let aOchO = nySträng.split(' ');
-          return `${aOchO[0]} ${emojiDic[aOchO.pop()]}`;
+          return `| ${aOchO[0]} ${emojiDic[aOchO.pop()]} |`;
         }
         for (rad of modRader) {
           if (
