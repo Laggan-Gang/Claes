@@ -414,7 +414,7 @@ module.exports = {
           console.log(sträng);
           let nySträng = sträng.replace('!', '');
           let aOchO = nySträng.split(' ');
-          return `| ${aOchO[0]} ${emojiDic[aOchO.pop()]} |`;
+          return `${aOchO[0]} ${emojiDic[aOchO.pop()]} | `;
         }
         for (rad of modRader) {
           if (
@@ -428,7 +428,12 @@ module.exports = {
             console.log('Den här raden tjongar vi in i aOchO ', rad);
           }
         }
-        await embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden);
+        await embedMaker(
+          modMeddelande,
+          finsktMeddelande.slice(0, -2),
+          trådNamn,
+          tråden
+        );
       });
     } else {
       meddelande.reply('Wrong amount of dudes, dude!');
