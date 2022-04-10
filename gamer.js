@@ -413,7 +413,7 @@ const förklaraVadUtmanaGörIEttFintMeddelandeIngos = new MessageEmbed()
   .addFields(
     { name: 'Sten Sax Påse', value: `För att utmana någon i sten sax påse, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] stensaxpåse'.`},
     { name: 'Tre I Rad', value: `För att utmana någon i tre i rad, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] treirad'.`},
-    { name: 'Röj', value: `För att utmana någon till att röja ett minfält, skriv \n'!challenge @[DERAS ANVÄNDARNAMN] minesweeper [STORLEK PÅ MINFÄLTET] [SVÅRIGHETSGRAD]'.`},
+    { name: 'Röj', value: `För att utmana någon till att röja ett minfält, skriv \n'!utmana @[DERAS ANVÄNDARNAMN] minesweeper [STORLEK PÅ MINFÄLTET] [SVÅRIGHETSGRAD]'.`},
   )
   .setFooter({ text: "Om du kan läsa det här står du för nära."})
 
