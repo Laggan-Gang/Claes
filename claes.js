@@ -462,7 +462,7 @@ client.on('messageCreate', async (meddelande) => {
   }
 
   if (dravel.endsWith('er') && !dravel.endsWith(' her')) {
-    meddelande.reply(`${dravel}? I hardly know her!`);
+    meddelande.reply(`${meddelande.content}? I hardly know her!`);
   }
 
   //CHAPTER SIX: The Team
