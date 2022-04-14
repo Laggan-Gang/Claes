@@ -461,6 +461,10 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
 
+  if (dravel.endsWith('er') && !dravel.endsWith(' her')) {
+    meddelande.reply(`${dravel}? I hardly know her!`);
+  }
+
   //CHAPTER SIX: The Team
   //code to help dota nerds win games
   else if (dravel.endsWith('maakep happen')) {
