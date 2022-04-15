@@ -339,6 +339,14 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   }
 }
 
+function slutarMedNågon(ändelser, strängvärde, menInte = '') {
+  if (!!menInte && strängvärde.endsWith(menInte)) return false;
+  for (let ändelse of ändelser) {
+    if (strängvärde.endsWith(ändelse)) return true;
+  }
+  return false;
+}
+
 //CHAPTER TWO: The Key to the Mystery
 //The key is "hej" and the mystery is where pee is stored
 //The mystery is also what happened to "hej"
@@ -461,7 +469,7 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
 
-  if (dravel.endsWith('er') && !dravel.endsWith(' her')) {
+  if (slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her')) {
     meddelande.reply(`${meddelande.content}? I hardly know her!`);
   }
 
