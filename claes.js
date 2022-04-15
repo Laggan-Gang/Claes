@@ -340,11 +340,11 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 }
 
 function slutarMedNågon(ändelser, strängvärde, menInte = '') {
-  if (!!menInte && strängvärde.endsWith(menInte)) return false;
-  for (let ändelse of ändelser) {
-    if (strängvärde.endsWith(ändelse)) return true;
-  }
-  return false;
+  // if (!!menInte && strängvärde.endsWith(menInte)) return false;
+  // for (let ändelse of ändelser) {
+  //   if (strängvärde.endsWith(ändelse)) return true;
+  // }
+  // return false;
 }
 
 //CHAPTER TWO: The Key to the Mystery
