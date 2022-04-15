@@ -347,8 +347,6 @@ function slutarMedNågon(ändelser, strängvärde, menInte = '') {
   return false;
 }
 
-const isClaesBot = meddelande.author.id === '745345949295181886';
-
 //CHAPTER TWO: The Key to the Mystery
 //The key is "hej" and the mystery is where pee is stored
 //The mystery is also what happened to "hej"
@@ -472,7 +470,7 @@ client.on('messageCreate', async (meddelande) => {
   }
 
   if (
-    !isClaesBot &&
+    meddelande.author.id !== '745345949295181886' &&
     slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her')
   ) {
     meddelande.reply(`${meddelande.content}? I hardly know her!`);
