@@ -422,7 +422,7 @@ client.on('messageCreate', async (meddelande) => {
       case inRange(aleaIactaEst, 11, 20):
         meddelande.reply('Du behöver inte tacka mig!');
         break;
-      case inRange(aleaIactaEst, 1, 10):
+      case inRange(aleaIactaEst, 2, 10):
         meddelande.reply('Var så god!');
         break;
       default:
@@ -446,7 +446,7 @@ client.on('messageCreate', async (meddelande) => {
       case inRange(aleaIactaEst, 11, 20):
         meddelande.reply('No need to thank me!');
         break;
-      case inRange(aleaIactaEst, 1, 10):
+      case inRange(aleaIactaEst, 2, 10):
         meddelande.reply("You're welcome!");
         break;
       default:
