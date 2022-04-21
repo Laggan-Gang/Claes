@@ -244,7 +244,7 @@ async function ljudGöraren(meddelande, aleaIactaEst) {
   }
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
-  let resource = createAudioResource('/home/hugo/Claes/ljudklipp/' + ljudfil);
+  let resource = createAudioResource('./ljudklipp/' + ljudfil);
   const connection = joinVoiceChannel({
     channelId: channel.id,
     guildId: channel.guild.id,
@@ -291,17 +291,14 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
       i++; // Annars skjuter den fram skiljetecknet och lägger in oändligt många " "
     }
   }
-  console.log(bokstäver);
   ord = bokstäver.split(' ');
   var IPAbokstäver = '';
   for (let i = 0; i < ord.length; i++) {
-    console.log(ord[i]);
     if (i != 0 && !'~!.,-()=+_<>?'.includes(ord[i])) {
       IPAbokstäver += ' ';
     }
     IPAbokstäver += EngTillIPA.kolla(ord[i]);
   }
-  console.log(IPAbokstäver);
 
   let channel = meddelande.member.voice.channel;
   const player = createAudioPlayer();
@@ -311,10 +308,8 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     adapterCreator: channel.guild.voiceAdapterCreator,
   });
 
-  console.log('Nu är vi utanför loopen :(' + player.state.status);
   const subscription = connection.subscribe(player);
   for (let i = 0; i < IPAbokstäver.length; i++) {
-    console.log(IPAbokstäver[i]);
     if ('~!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
       ljudfilsomjagtyckerattvikanskebordespelanu =
         skiljetecken[IPAbokstäver[i]];
@@ -322,15 +317,13 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
       ljudfilsomjagtyckerattvikanskebordespelanu = IPAbokstäver[i];
     }
     let resurs = createAudioResource(
-      '/home/hugo/Claes/bokstäver/IPA/' +
+      './bokstäver/IPA/' +
         ljudfilsomjagtyckerattvikanskebordespelanu +
         '.wav'
     );
     player.play(resurs);
     await löftesKollaren(player);
-    console.log('Nu är vi i loopen :)' + player.state.status);
   }
-  console.log('Nu har jag spelat klart! :)');
   if (subscription) {
     subscription.unsubscribe();
   }
@@ -536,7 +529,7 @@ client.on('messageCreate', async (meddelande) => {
       const canvas = Canvas.createCanvas(700, 250);
       const context = canvas.getContext('2d');
       //get the dumb image and draw the dumb image
-      const background = await Canvas.loadImage('/home/hugo/Claes/maakep.png');
+      const background = await Canvas.loadImage('./maakep.png');
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
       //do the hoyl and mix up the bag of bozos
@@ -625,7 +618,7 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.reply('Joina voice först');
     }
   }
-  if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 2) {
+  if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 1) {
     meddelande.reply('This you?');
     meddelande.channel.send({ files: ['august.png'] });
   }

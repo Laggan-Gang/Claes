@@ -22,14 +22,14 @@ if (typeof EngTillIPA !== 'object') {
 
   if (typeof EngTillIPA._kollaUpp !== 'function') {
     EngTillIPA._kollaUpp = function (rader) {
-      console.log('EngTillIPA: Börjar kolla upp i uppslagsverket...');
+      //console.log('EngTillIPA: Börjar kolla upp i uppslagsverket...');
 
       for (var i in rader) {
         var ord = rader[i].split(",");
         EngTillIPA._IPpslAgsverk[ord[0]] = ord[1];
       }
 
-      console.log('EngTillIPA: Kollat klart :-)');
+      //console.log('EngTillIPA: Kollat klart :-)');
     };
   }
 
@@ -37,11 +37,11 @@ if (typeof EngTillIPA !== 'object') {
     EngTillIPA.laddaUppslagsverk = function () {
       // Väg till ordlistan:
       var OrdlistansPlats = "./eng_ipa.txt";
-      console.log(
-        'EngTillIPA: Läser uppslagsverk från ' +
-          OrdlistansPlats +
-          '... det är ganska tråkigt ...'
-      );
+      //console.log(
+      //  'EngTillIPA: Läser uppslagsverk från ' +
+      //    OrdlistansPlats +
+      //    '... det är ganska tråkigt ...'
+      //);
       var textFil = fs.readFileSync(OrdlistansPlats, 'utf-8');
       EngTillIPA._kollaUpp(textFil.split('\n'));
       console.log('EngTillIPA: Uppslagsverket är laddat!');
