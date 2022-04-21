@@ -471,7 +471,8 @@ client.on('messageCreate', async (meddelande) => {
 
   if (
     meddelande.author.id !== '745345949295181886' &&
-    slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her')
+    slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her') && 
+    aleaIactaEst < 20 // Gör det till 40% av gångerna
   ) {
     meddelande.reply(`${meddelande.content}? I hardly know her!`);
   }
