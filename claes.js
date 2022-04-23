@@ -452,7 +452,6 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
 
-  //slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her')
   if (
     meddelande.author.id !== '745345949295181886' &&
     dravel.replace(/[,.?!]+/g, '').endsWith('er') &&
