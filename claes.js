@@ -317,9 +317,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
       ljudfilsomjagtyckerattvikanskebordespelanu = IPAbokstäver[i];
     }
     let resurs = createAudioResource(
-      './bokstäver/IPA/' +
-        ljudfilsomjagtyckerattvikanskebordespelanu +
-        '.wav'
+      './bokstäver/IPA/' + ljudfilsomjagtyckerattvikanskebordespelanu + '.wav'
     );
     player.play(resurs);
     await löftesKollaren(player);
@@ -330,14 +328,6 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   if (connection) {
     connection.destroy();
   }
-}
-
-function slutarMedNågon(ändelser, strängvärde, menInte = '') {
-  if (!!menInte && strängvärde.endsWith(menInte)) return false;
-  for (let ändelse of ändelser) {
-    if (strängvärde.endsWith(ändelse)) return true;
-  }
-  return false;
 }
 
 //CHAPTER TWO: The Key to the Mystery
@@ -462,12 +452,22 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
   }
 
+  //slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her')
   if (
     meddelande.author.id !== '745345949295181886' &&
-    slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her') && 
-    aleaIactaEst < 20 // Gör det till 40% av gångerna
+    dravel.replace(/[,.?!]+/g, '').endsWith('er') &&
+    aleaIactaEst < 16 && // Gör det till 30% av gångerna
+    dravel.length < 200
   ) {
-    meddelande.reply(`${meddelande.content}? I hardly know her!`);
+    var meddelandeUtanGrammatik = meddelande.content.replace(/[,.?!]+/g, '');
+    var meddelandeBindestreck = meddelandeUtanGrammatik.replace(/\s+/g, '-');
+
+    meddelande.reply(
+      `${meddelandeBindestreck.substring(
+        0,
+        meddelandeBindestreck.length - 2
+      )} 'er? I hardly know her!`
+    );
   }
 
   //CHAPTER SIX: The Team
