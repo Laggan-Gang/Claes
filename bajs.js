@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { dotaPrefsBaseUrl } = require('./config.json');
+const { laggStatsBaseUrl } = require('./config.json');
 
 //BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
@@ -15,24 +15,18 @@ function shuffleArray(arr) {
 //ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
 
 module.exports = {
-  maakepCall: async (meddelandeContent) => {
-    const fejkLista = meddelandeContent.toLocaleLowerCase().split(' ');
-
-    if(fejkLista.length != 5){
-      throw Error(`Maakep magic only works on 5 potential medlems`);
-    }
-
-    const fRes = await axios.get(`${dotaPrefsBaseUrl}`);
-
-    let todArray = fejkLista.map(async (bozo) => {
-      const res = await axios.get(`${dotaPrefsBaseUrl}/id/${bozo}`);
-      return { namn: bozo, preferences: fRes.data[bozo], id: res.data.id };
+  fetchPreferencesForGamers: async (gamers) => {
+    const res = await axios.post(`${laggStatsBaseUrl}/d2pos`, {
+      aliases: gamers,
     });
 
-    let bajsarArray = await Promise.all(todArray);
+    const playersWithRoles = res.map((x) => ({
+      namn: x.alias,
+      id: x.id,
+      preferences: x.preferences,
+    }));
 
-    console.log('Här kommer bajsrakterna', bajsarArray);
-    let slumpBajs = shuffleArray(bajsarArray);
-    return slumpBajs;
+    const shuffled = shuffleArray(playersWithRoles);
+    return shuffled;
   },
 };

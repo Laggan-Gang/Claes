@@ -581,6 +581,10 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.react('703784231893073922');
       meddelande.reply(svampbob(res.message));
     }
+  } else if (dravel.startsWith('!profile')) {
+    meddelande.reply(
+      `https://profile-l7v5yabica-ew.a.run.app/id/${meddelande.author}`
+    );
   } else if (dravel.startsWith('!challeng') || dravel.startsWith('!utman')) {
     let hurGårDet = await xXG4M3RXx.förstå(meddelande);
     if (hurGårDet.vinnare != undefined) {
