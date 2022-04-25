@@ -318,9 +318,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
       ljudfilsomjagtyckerattvikanskebordespelanu = IPAbokstäver[i];
     }
     let resurs = createAudioResource(
-      './bokstäver/IPA/' +
-        ljudfilsomjagtyckerattvikanskebordespelanu +
-        '.wav'
+      './bokstäver/IPA/' + ljudfilsomjagtyckerattvikanskebordespelanu + '.wav'
     );
     player.play(resurs);
     await löftesKollaren(player);
@@ -331,14 +329,6 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   if (connection) {
     connection.destroy();
   }
-}
-
-function slutarMedNågon(ändelser, strängvärde, menInte = '') {
-  if (!!menInte && strängvärde.endsWith(menInte)) return false;
-  for (let ändelse of ändelser) {
-    if (strängvärde.endsWith(ändelse)) return true;
-  }
-  return false;
 }
 
 //CHAPTER TWO: The Key to the Mystery
@@ -465,10 +455,19 @@ client.on('messageCreate', async (meddelande) => {
 
   if (
     meddelande.author.id !== '745345949295181886' &&
-    slutarMedNågon(['er', 'er.', 'er!', 'er?'], dravel, ' her') && 
-    aleaIactaEst < 20 // Gör det till 40% av gångerna
+    dravel.replace(/[,.?!]+/g, '').endsWith('er') &&
+    aleaIactaEst < 16 && // Gör det till 30% av gångerna
+    dravel.length < 200
   ) {
-    meddelande.reply(`${meddelande.content}? I hardly know her!`);
+    var meddelandeUtanGrammatik = meddelande.content.replace(/[,.?!]+/g, '');
+    var meddelandeBindestreck = meddelandeUtanGrammatik.replace(/\s+/g, '-');
+
+    meddelande.reply(
+      `${meddelandeBindestreck.substring(
+        0,
+        meddelandeBindestreck.length - 2
+      )} 'er? I hardly know her!`
+    );
   }
 
   //CHAPTER SIX: The Team
@@ -583,6 +582,10 @@ client.on('messageCreate', async (meddelande) => {
       meddelande.react('703784231893073922');
       meddelande.reply(svampbob(res.message));
     }
+  } else if (dravel.startsWith('!profile')) {
+    meddelande.reply(
+      `https://profile-l7v5yabica-ew.a.run.app/id/${meddelande.author}`
+    );
   } else if (dravel.startsWith('!challeng') || dravel.startsWith('!utman')) {
     let hurGårDet = await xXG4M3RXx.förstå(meddelande);
     if (hurGårDet.vinnare != undefined) {
