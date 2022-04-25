@@ -283,6 +283,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     ':': 'kolontecken',
     '<': 'mindreäntecken',
     '>': 'störreäntecken',
+    '|': 'piptecken',
   };
 
   for (let i = 0; i < bokstäver.length; i++) {
@@ -294,7 +295,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
   ord = bokstäver.split(' ');
   var IPAbokstäver = '';
   for (let i = 0; i < ord.length; i++) {
-    if (i != 0 && !'~!.,-()=+_<>?'.includes(ord[i])) {
+    if (i != 0 && !'~!.,-()=+_<>?|'.includes(ord[i])) {
       IPAbokstäver += ' ';
     }
     IPAbokstäver += EngTillIPA.kolla(ord[i]);
@@ -310,7 +311,7 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 
   const subscription = connection.subscribe(player);
   for (let i = 0; i < IPAbokstäver.length; i++) {
-    if ('~!$%&/()=+?,.-_;:<>'.includes(IPAbokstäver[i])) {
+    if ('~!$%&/()=+?,.-_;:<>|'.includes(IPAbokstäver[i])) {
       ljudfilsomjagtyckerattvikanskebordespelanu =
         skiljetecken[IPAbokstäver[i]];
     } else {
