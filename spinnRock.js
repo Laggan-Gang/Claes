@@ -49,7 +49,7 @@ async function skojareTillrättavisaren(noob, tråden) {
 function vadKallasDu(noob) {
   if (noob.id) {
     console.log('Nooben i fråga har ett ID ', noob.id);
-    return noob.id;
+    return `<@${noob.id}>`;
   } else {
     console.log('Nooben har inte ett id ' + noob.namn);
     console.log(noob);
