@@ -20,7 +20,7 @@ module.exports = {
       aliases: gamers,
     });
 
-    const playersWithRoles = res.map((x) => ({
+    const playersWithRoles = res.data.map((x) => ({
       namn: x.alias,
       id: x.id,
       preferences: x.preferences,
