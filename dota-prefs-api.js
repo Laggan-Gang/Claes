@@ -1,6 +1,8 @@
 const { laggStatsBaseUrl } = require('./config.json');
 const axios = require('axios');
 
+const PREF_URL = laggStatsBaseUrl + '/d2pos';
+
 module.exports = {
   parseMessage: async (meddelande) => {
     const arr = meddelande.content.toLocaleLowerCase().split(' ');
@@ -16,15 +18,15 @@ module.exports = {
     switch (command) {
       case 'set':
         const [...roles] = parameters;
-        res = await save(roles, meddelande.author.toString());
+        res = await save(roles, meddelande.author.id);
         break;
       case 'roles': {
-        res = await getMyPreferences(meddelande.author.toString());
+        res = await getMyPreferences(meddelande.author.id);
         break;
       }
       case 'link':
         res.success = true;
-        res.message = laggStatsBaseUrl + '/d2pos';
+        res.message = PREF_URL;
         break;
     }
 
@@ -33,15 +35,19 @@ module.exports = {
 };
 
 async function getMyPreferences(discordId) {
-  const res = await axios.default.post(laggStatsBaseUrl, {
+  const res = await axios.default.post(PREF_URL, {
     aliases: [discordId],
   });
-  return res.data.preference.join(' -> ');
+  const prefs = res.data?.[0]?.preference.join(' > ');
+
+  return {
+    message: prefs || 'No roles stored for you. Use `!dota set 5 2 3 fill 1 2`',
+    success: !!prefs,
+  };
 }
 
 async function save(roles, discordId) {
-  console.log(roles, discordId);
-  const res = await axios.default.put(laggStatsBaseUrl, {
+  const res = await axios.default.put(PREF_URL, {
     id: discordId,
     preference: roles,
   });

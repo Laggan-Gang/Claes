@@ -581,14 +581,14 @@ client.on('messageCreate', async (meddelande) => {
 
     if (res.success) {
       meddelande.react('899414250492166174');
-      meddelande.reply(svampbob(res.message));
+      meddelande.reply(res.message);
     } else {
       meddelande.react('703784231893073922');
-      meddelande.reply(svampbob(res.message));
+      meddelande.reply(res.message);
     }
   } else if (dravel.startsWith('!profile')) {
     meddelande.reply(
-      `https://profile-l7v5yabica-ew.a.run.app/id/${meddelande.author}`
+      `https://profile-l7v5yabica-ew.a.run.app/id/${meddelande.author.id}`
     );
   } else if (dravel.startsWith('!challeng') || dravel.startsWith('!utman')) {
     let hurGårDet = await xXG4M3RXx.förstå(meddelande);
