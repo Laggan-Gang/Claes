@@ -1,6 +1,8 @@
 const dotaPrefs = require('./dota-prefs-api.js');
 const { DiscordAPIError, MessageEmbed } = require('discord.js');
 
+const FILL_EMOJI = '<:fill:935684531023925299>';
+
 function snooze(timer) {
   if (timer) {
     clearTimeout(timer);
@@ -116,12 +118,10 @@ module.exports = {
       );
       let modMeddelande = '';
 
-      console.log('');
       for (dummy of dummyArray) {
         modMeddelande += `\`Then it's time for ${kapitalisera(
           dummy.namn
         )}...\`\n`;
-        console.log('modMeddelande: ' + modMeddelande);
       }
       //GLÖM INTE TA MED INTENTS
       await trådMeddelande.react('1️⃣');
@@ -132,14 +132,20 @@ module.exports = {
       await trådMeddelande.react('935684531023925299');
       trådMeddelande.edit(modMeddelande);
       let pickladeRoller = [];
-      const emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', 'fill'];
+      const emojiSiffror = {
+        fill: FILL_EMOJI,
+        1: '1️⃣',
+        2: '2️⃣',
+        3: '3️⃣',
+        4: '4️⃣',
+        5: '5️⃣',
+      };
       const emojiDic = {
         '1️⃣': '1',
         '2️⃣': '2',
         '3️⃣': '3',
         '4️⃣': '4',
         '5️⃣': '5',
-        '*️⃣': 'fill',
       };
       let fillBoys = [];
       let aktivaNoobs = dummyArray;
@@ -148,7 +154,7 @@ module.exports = {
 
       pingMeddelande = await tråden.send(ROLLCALL(dummyArray));
 
-      searchAndDestroy(dummyArray, 199);
+      searchAndDestroy();
 
       const collector = trådMeddelande.createReactionCollector({
         filter: (_, user) => !user.bot,
@@ -157,71 +163,44 @@ module.exports = {
       });
       //Den här stannar pga rollKoll
       function skufflaPreferens() {
-        let slumpadeEmojis = shuffleArray(emojiSiffror);
+        let slumpadeEmojis = dotaPrefs.shuffleArray(
+          Object.values(emojiSiffror).slice(1) // slice away the fill option
+        );
+
         for (emoji in slumpadeEmojis) {
           if (rollKoll(slumpadeEmojis[emoji]) == 'vanlig') {
             return slumpadeEmojis[emoji];
           }
         }
       }
-      //Den här stannar eftersom den använder rollKoll
-      function hittaOchKollaPreferens(noob) {
-        //kolla om vår noob har en preferens, har den det så nice
-        if (noob.preferences !== undefined) {
-          console.log(
-            'Vi hittade preferenser för ' + noob.namn + ' de ser ut såhär',
-            noob.preferences
-          );
-          let preferenser = noob.preferences;
-          for (föredragen of preferenser) {
-            if (rollKoll(emojiSiffror[föredragen - 1]) == 'vanlig') {
-              console.log(
-                emojiSiffror,
-                föredragen - 1,
-                emojiSiffror[föredragen - 1]
-              );
-              console.log('Vi hittade preferensen ' + föredragen);
-              console.log(
-                'Så emojin vi skickar är ' + emojiSiffror[föredragen - 1]
-              );
-              //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
-              //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
-              return emojiSiffror[föredragen - 1];
-            }
+
+      function hittaOchKollaPreferens(noob, isLastPick) {
+        for (const föredragen of noob?.preferences || []) {
+          if (isLastPick && föredragen == 'fill') {
+            continue;
           }
-          return '<:fill:935684531023925299>';
+
+          if (rollKoll(emojiSiffror[föredragen]) == 'vanlig') {
+            return emojiSiffror[föredragen];
+          }
         }
 
-        console.log(
-          'Vi shufflar personens preferens pga ingen preferenser hittade yolo'
-        );
         return skufflaPreferens();
       }
       //Den här kör finska fighten bla så den måste stanna
       async function autoPicker(reaktion, noobs) {
-        console.log(
-          'Nu kör vi automatiska versionen! Först kollar vi om vi fått fill'
-        );
-        if (reaktion == 'fill' || reaktion == '<:fill:935684531023925299>') {
-          console.log(reaktion + 'är fill! Vi kör fillBoys');
+        if (reaktion == 'fill' || reaktion == FILL_EMOJI) {
           fillBoysNeedFilling(noobs);
         } else {
-          console.log(
-            'Det är inte fill, så auto picker låter ' +
-              noobs[i] +
-              ' picka ' +
-              reaktion
-          );
           await standardPick(reaktion, noobs, LAGGAN_APPROVED_TARDYNESS / 1000);
-          console.log('Sen hämta nästa noob!');
-          await finskaFighten(noobs);
+          await finskaFighten();
         }
       }
       //Den här använder Hittaochkollapreferens som använder roll koll
-      async function searchAndDestroy(noobs, row) {
-        //destroy the last message
+      async function searchAndDestroy() {
         try {
-          await pingMeddelande.delete();
+          //destroy the last message
+          pingMeddelande.delete();
         } catch (error) {
           console.error('Failed to delete the message: ', error);
         }
@@ -231,23 +210,22 @@ module.exports = {
           modRader[i] = `**${kapitalisera(
             aktivaNoobs[i].namn
           )} is now picking...**`;
+
+          const isLastPick = i > 3;
+
           await trådMeddelande.edit(modRader.join('\n'));
-          let föredragen = hittaOchKollaPreferens(noobs[i]);
+
+          let föredragen = hittaOchKollaPreferens(aktivaNoobs[i], isLastPick);
           let pingNoob = vadKallasDu(aktivaNoobs[i]);
           pingMeddelande = await tråden.send(
             `${pingNoob}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
           );
-          console.log(
-            `${pingNoob} kommer asignas ${föredragen} om ${
-              LAGGAN_APPROVED_TARDYNESS / 1000
-            } sekunder, ${row}`
-          );
+
           //Testing to fuck around with this
           start = performance.now();
           //Vi sätter en äggklocka, men ser först till att vi avslutar den tidigare (om det finns någon)
           snooze(äggKlockan);
 
-          console.log('Timern är just nu på: ' + LAGGAN_APPROVED_TARDYNESS);
           äggKlockan = setTimeout(async function () {
             await autoPicker(föredragen, aktivaNoobs);
           }, LAGGAN_APPROVED_TARDYNESS);
@@ -257,7 +235,7 @@ module.exports = {
       }
       //Den här behöver en lokal picklade roller, så den måste stanna
       function rollKoll(reaktion) {
-        let vanligPick = emojiSiffror.includes(reaktion);
+        let vanligPick = Object.values(emojiSiffror).includes(reaktion);
         if (vanligPick) {
           if (pickladeRoller.includes(reaktion)) {
             return 'ogiltig';
@@ -269,7 +247,7 @@ module.exports = {
         }
       }
       //Den här behöver rollkoll så den måste stanna
-      async function standardPick(reaktion, noobs, timeToPick) {
+      async function standardPick(reaktion, noobs) {
         let riktigReact;
 
         console.log('Kolla om vår reaktion har ett namn ');
@@ -280,7 +258,7 @@ module.exports = {
           console.log('Den har inte ett namn!', reaktion);
           riktigReact = reaktion;
         }
-        if (rollKoll(riktigReact) == 'vanlig') {
+        if (rollKoll(riktigReact) == 'vanlig' && riktigReact != FILL_EMOJI) {
           pickladeRoller.push(riktigReact);
           console.log('Picklade roller just nu är: ', pickladeRoller);
         }
@@ -302,13 +280,12 @@ module.exports = {
         i++;
       }
       //Den här måste stanna punkt slut
-      async function finskaFighten(noobs) {
-        //snooze(äggKlockan);
+      async function finskaFighten() {
         if (!modFull(modMeddelande)) {
           console.log(
             'Alla noobs har inte valt roll eller fill, vi behöver fler'
           );
-          await searchAndDestroy(noobs, 340);
+          await searchAndDestroy();
         } else {
           console.log(
             'Alla har pickat roll eller fill, nu ska vi kolla om vi behöver byta array'
@@ -318,30 +295,14 @@ module.exports = {
               'Vi har boys i fill boys, vi switchar aktiv array, återställer i och kallar på nästa boy'
             );
             if (pickladeRoller.length === 5) {
-              console.log(
-                'Vi har alla roller pickade, rollerna är ',
-                pickladeRoller
-              );
-              console.log('Alltså kan vi avsluta');
-              //snooze(äggKlockan);
               collector.stop();
             } else {
               console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
               console.log(aktivaNoobs == dummyArray);
               if (aktivaNoobs == dummyArray) {
                 aktivaNoobs = dummyArray.concat(fillBoys);
-                console.log(
-                  'Nu försöker vi tjonga in fillBoys i aktivaNoobs, aktiva noobs ser ut såhär: '
-                );
-                console.log(aktivaNoobs);
-                console.log('Index ligger på: ' + i);
-                //i = 0;
               }
-              console.log('Nu ska vi börja tjonga fill boys, och i = ' + i);
-              //aktivaNoobs = fillBoys;
-              //console.log('Här är fill boys: ');
-              //console.log(fillBoys[i]);
-              await searchAndDestroy(aktivaNoobs, 361);
+              await searchAndDestroy();
             }
           } else {
             console.log(
@@ -356,49 +317,39 @@ module.exports = {
       async function fillBoysNeedFilling(noobs) {
         let modRader = modMeddelande.split('picked');
         if (modRader.length >= 5) {
-          console.log(
-            'Nu är modrader för lång, nu får man inte fill och nu kommer mobbningen'
-          );
           await skojareTillrättavisaren(noobs[i], tråden);
         } else {
           //Vi fyller fillBoys med boys looking to fill. Sen hämtar vi nästa person som ska rakas
           console.log('Någon har valt fill, så vi sätter hen i fillboys');
           fillBoys.unshift(dummyArray[i]);
-          await standardPick('<:fill:935684531023925299>', noobs);
-          await searchAndDestroy(noobs, 419);
+          await standardPick(FILL_EMOJI, noobs);
+          await searchAndDestroy();
         }
       }
 
       collector.on('collect', async (reaction, user) => {
-        console.log(
-          'Vi har fått en react och ska nu utvärdera om den är vanlig, dublett eller fill'
-        );
         let kolladReaktion = rollKoll(reaction.emoji.name);
-        switch (true) {
-          case kolladReaktion == 'vanlig':
-            console.log(
-              'Picken är vanlig, så vi kör standardPick. Efter det här utvärderar vi om vi behöver fler noobs eller inte.'
-            );
-            //om det är en standard pick
+
+        switch (kolladReaktion) {
+          case 'vanlig':
             await standardPick(reaction, aktivaNoobs);
             //Avsluta det hela genom att kalla nya noobs, men bara om vi behöver fler noobs (dvs om modFull inte är full)
-            await finskaFighten(aktivaNoobs);
+            await finskaFighten();
             break;
 
-          case kolladReaktion == 'ogiltig':
+          case 'ogiltig':
             //Ogiltig roll (mobba!)
             console.log('Någon har gjort funny business, så vi mobbar');
             await dublettTillrättavisaren(aktivaNoobs[i], reaction, tråden);
             break;
 
-          case kolladReaktion == 'fill':
+          case 'fill':
             fillBoysNeedFilling(aktivaNoobs);
             break;
         }
       });
 
       collector.on('end', async (collected) => {
-        console.log('NU ÄR VI FÖRMODLIGEN KLARA');
         //Stäng av klockan och plocka bort pingmeddelande om det finns
         snooze(äggKlockan);
         if (pingMeddelande) {
@@ -419,11 +370,11 @@ module.exports = {
         }
         for (rad of modRader) {
           if (
-            rad.includes(emojiSiffror[0]) ||
-            rad.includes(emojiSiffror[1]) ||
-            rad.includes(emojiSiffror[2]) ||
-            rad.includes(emojiSiffror[3]) ||
-            rad.includes(emojiSiffror[4])
+            rad.includes(emojiSiffror['1']) ||
+            rad.includes(emojiSiffror['2']) ||
+            rad.includes(emojiSiffror['3']) ||
+            rad.includes(emojiSiffror['4']) ||
+            rad.includes(emojiSiffror['5'])
           ) {
             finsktMeddelande += `${aOchO(rad)} `;
             console.log('Den här raden tjongar vi in i aOchO ', rad);
@@ -443,7 +394,6 @@ module.exports = {
 };
 
 async function embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden) {
-  console.log(modMeddelande);
   const exampleEmbed = new MessageEmbed()
     .setColor('#ff60cc')
     .setTitle(`${trådNamn}`)
@@ -454,16 +404,3 @@ async function embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden) {
 
   await tråden.send({ embeds: [exampleEmbed] });
 }
-
-//BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
-
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-//ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\

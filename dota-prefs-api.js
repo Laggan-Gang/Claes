@@ -84,4 +84,5 @@ async function fetchPreferencesForGamers(gamers) {
 module.exports = {
   parseMessage,
   fetchPreferencesForGamers,
+  shuffleArray,
 };
