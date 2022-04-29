@@ -1,4 +1,5 @@
 const dotaPrefs = require('./dota-prefs-api.js');
+const { shuffleArray, random } = require('./helpers.js');
 const { DiscordAPIError, MessageEmbed } = require('discord.js');
 
 const FILL_EMOJI = '<:fill:935684531023925299>';
@@ -28,7 +29,11 @@ async function dublettTillrättavisaren(noob, reaction, tråden) {
     } has already been picked, please pick another role!`
   );
   setTimeout(() => {
-    trängningsMeddelande.delete();
+    try {
+      trängningsMeddelande.delete();
+    } catch (e) {
+      console.error(e);
+    }
   }, 5_000);
 }
 
@@ -97,7 +102,9 @@ module.exports = {
     }
 
     if (gubbLängdsKollare.length == 5) {
-      let trådNamn = `The ${meddelande.member.displayName} DEBUG party`;
+      let trådNamn = `The ${adjective()} ${
+        meddelande.member.displayName
+      } ${subjective()}`;
 
       let i = 0;
       let dummyArray = await dotaPrefs.fetchPreferencesForGamers(
@@ -163,7 +170,7 @@ module.exports = {
       });
       //Den här stannar pga rollKoll
       function skufflaPreferens() {
-        let slumpadeEmojis = dotaPrefs.shuffleArray(
+        let slumpadeEmojis = shuffleArray(
           Object.values(emojiSiffror).slice(1) // slice away the fill option
         );
 
@@ -200,7 +207,7 @@ module.exports = {
       async function searchAndDestroy() {
         try {
           //destroy the last message
-          pingMeddelande.delete();
+          await pingMeddelande.delete();
         } catch (error) {
           console.error('Failed to delete the message: ', error);
         }
@@ -216,6 +223,7 @@ module.exports = {
           await trådMeddelande.edit(modRader.join('\n'));
 
           let föredragen = hittaOchKollaPreferens(aktivaNoobs[i], isLastPick);
+
           let pingNoob = vadKallasDu(aktivaNoobs[i]);
           pingMeddelande = await tråden.send(
             `${pingNoob}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
@@ -298,7 +306,6 @@ module.exports = {
               collector.stop();
             } else {
               console.log('Nu ska vi kolla om aktiva noobs är dummy array:');
-              console.log(aktivaNoobs == dummyArray);
               if (aktivaNoobs == dummyArray) {
                 aktivaNoobs = dummyArray.concat(fillBoys);
               }
@@ -403,4 +410,62 @@ async function embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden) {
   exampleEmbed.addField('Your picks, sirs...', modMeddelande, false);
 
   await tråden.send({ embeds: [exampleEmbed] });
+}
+
+function adjective() {
+  return random([
+    'Wholesome',
+    'Ruthless',
+    'Cringe',
+    'Based',
+    'Amazing',
+    'POGGERS',
+    'Neat',
+    '1337',
+    'Big',
+    'Mediocre',
+    'Throwing',
+    'Nerdy',
+    'Stunless',
+    'Dramatic',
+    'Clowny',
+    'Clueless',
+    'Gungho',
+    'Gamba',
+    'Kawaii',
+    'Glorious',
+    'Farming',
+    'Marvelous',
+    'AFKing',
+    'Filling',
+    'Tea-making',
+    'Coffee-making',
+    'Cocktail-making',
+    'friends and ',
+    'good players and ',
+    'handsome gamers and ',
+    'Lame',
+    'losers and ',
+  ]);
+}
+
+function subjective() {
+  return random([
+    'Party',
+    'Gathering',
+    'Assembly',
+    'Meeting',
+    'Meet',
+    'Convention',
+    'Rally',
+    'Congress',
+    'Convocation',
+    'Conclave',
+    'Council',
+    'Forum',
+    'Get-together',
+    'Political Campaign',
+    'Number Clicker Gang',
+    'Gang',
+  ]);
 }

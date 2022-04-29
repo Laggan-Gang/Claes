@@ -1,4 +1,5 @@
 const { laggStatsBaseUrl } = require('./config.json');
+const { shuffleArray } = require('./helpers.js');
 const axios = require('axios');
 
 const PREF_URL = laggStatsBaseUrl + '/d2pos';
@@ -58,15 +59,6 @@ async function save(roles, discordId) {
   };
 }
 
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 async function fetchPreferencesForGamers(gamers) {
   const res = await axios.post(`${laggStatsBaseUrl}/d2pos`, {
     aliases: gamers,
@@ -84,5 +76,4 @@ async function fetchPreferencesForGamers(gamers) {
 module.exports = {
   parseMessage,
   fetchPreferencesForGamers,
-  shuffleArray,
 };

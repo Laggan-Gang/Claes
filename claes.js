@@ -30,21 +30,7 @@ const EngTillIPA = require('./eng-till-ipa-2000.js');
 const prevodach = require('./prevodach.js');
 const spinnRock = require('./spinnRock.js');
 const xXG4M3RXx = require('./gamer.js');
-
-//BELOW THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
-
-// Loop through the array and switch places
-//with a random position for every item in array
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-//ABOVE THIS LINE IS AUTHENTIC MAAKEP CODE, DO NOT MAKE ANY CHANGES AS IT IS THE ENGINE WHICH DRIVES THE ENTIRE PROJECT\\
+const { shuffleArray } = require('./helpers.js');
 
 // Create a new client instance
 const client = new Client({
@@ -198,8 +184,6 @@ function löftesKollaren(player) {
 }
 
 async function ljudGöraren(meddelande, aleaIactaEst) {
-  if (process.platform == 'win32') return;
-
   let ljudfil = 'bow bow.wav';
   switch (true) {
     case inRange(aleaIactaEst, 25, 25):
