@@ -3,36 +3,34 @@ const axios = require('axios');
 
 const PREF_URL = laggStatsBaseUrl + '/d2pos';
 
-module.exports = {
-  parseMessage: async (meddelande) => {
-    const arr = meddelande.content.toLocaleLowerCase().split(' ');
-    const command = arr[1];
-    const parameters = arr.slice(2);
+async function parseMessage(meddelande) {
+  const arr = meddelande.content.toLocaleLowerCase().split(' ');
+  const command = arr[1];
+  const parameters = arr.slice(2);
 
-    let res = {
-      success: false,
-      message:
-        'Available commands: roles | set | link \r\n Example: `!dota set 1 5 2 fill 4 3`',
-    };
+  let res = {
+    success: false,
+    message:
+      'Available commands: roles | set | link \r\n Example: `!dota set 1 5 2 fill 4 3`',
+  };
 
-    switch (command) {
-      case 'set':
-        const [...roles] = parameters;
-        res = await save(roles, meddelande.author.id);
-        break;
-      case 'roles': {
-        res = await getMyPreferences(meddelande.author.id);
-        break;
-      }
-      case 'link':
-        res.success = true;
-        res.message = PREF_URL;
-        break;
+  switch (command) {
+    case 'set':
+      const [...roles] = parameters;
+      res = await save(roles, meddelande.author.id);
+      break;
+    case 'roles': {
+      res = await getMyPreferences(meddelande.author.id);
+      break;
     }
+    case 'link':
+      res.success = true;
+      res.message = PREF_URL;
+      break;
+  }
 
-    return res;
-  },
-};
+  return res;
+}
 
 async function getMyPreferences(discordId) {
   const res = await axios.default.post(PREF_URL, {
@@ -59,3 +57,31 @@ async function save(roles, discordId) {
     message: body,
   };
 }
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+async function fetchPreferencesForGamers(gamers) {
+  const res = await axios.post(`${laggStatsBaseUrl}/d2pos`, {
+    aliases: gamers,
+  });
+
+  const playersWithRoles = res.data.map((x) => ({
+    namn: x.alias,
+    id: x.id,
+    preferences: x.preferences,
+  }));
+
+  const shuffled = shuffleArray(playersWithRoles);
+  return shuffled;
+}
+module.exports = {
+  parseMessage,
+  fetchPreferencesForGamers,
+};

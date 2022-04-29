@@ -1,4 +1,4 @@
-const maakepCall = require('./bajs.js');
+const dotaPrefs = require('./dota-prefs-api.js');
 const { DiscordAPIError, MessageEmbed } = require('discord.js');
 
 function snooze(timer) {
@@ -74,7 +74,6 @@ module.exports = {
     if (gubbLängdsKollare.length == 6) {
       const lastItem = gubbLängdsKollare.pop();
       const newTimeout = parseInt(lastItem, 10);
-      console.log(gubbLängdsKollare.length);
 
       if (isNaN(newTimeout)) {
         meddelande.reply(
@@ -103,7 +102,7 @@ module.exports = {
       let trådNamn = `The ${meddelande.member.displayName} party`;
 
       let i = 0;
-      let dummyArray = await maakepCall.fetchPreferencesForGamers(
+      let dummyArray = await dotaPrefs.fetchPreferencesForGamers(
         gubbLängdsKollare
       );
       const tråden = await meddelande.channel.threads.create({
