@@ -198,8 +198,9 @@ function löftesKollaren(player) {
 }
 
 async function ljudGöraren(meddelande, aleaIactaEst) {
+  if (process.platform == 'win32') return;
+
   let ljudfil = 'bow bow.wav';
-  console.log('Nu är tärningen ' + aleaIactaEst);
   switch (true) {
     case inRange(aleaIactaEst, 25, 25):
       ljudfil = 'IASID.wav';
@@ -351,7 +352,6 @@ client.on('messageCreate', async (meddelande) => {
 
   //the die is cast is very important for determining what's going on
   var aleaIactaEst = Math.floor(Math.random() * 50);
-  console.log('Tärningen är kastad! ' + aleaIactaEst);
   //if we get bully crit then we bully
   if (aleaIactaEst == 18 && meddelande.author.id !== '745345949295181886') {
     //make the webhook that impersonates the bullyee

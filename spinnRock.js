@@ -12,7 +12,6 @@ function modFull(modFull) {
   let modRader = modFull.split('picked');
   //this number is very good
   const expectedNumberOfNewLines = 6;
-  console.log('Modrader är nu ' + modRader.length);
   return modRader.length >= expectedNumberOfNewLines;
 }
 
@@ -48,11 +47,8 @@ async function skojareTillrättavisaren(noob, tråden) {
 
 function vadKallasDu(noob) {
   if (noob.id) {
-    console.log('Nooben i fråga har ett ID ', noob.id);
     return `<@${noob.id}>`;
   } else {
-    console.log('Nooben har inte ett id ' + noob.namn);
-    console.log(noob);
     return kapitalisera(noob.namn);
   }
 }
@@ -99,7 +95,7 @@ module.exports = {
     }
 
     if (gubbLängdsKollare.length == 5) {
-      let trådNamn = `The ${meddelande.member.displayName} party`;
+      let trådNamn = `The ${meddelande.member.displayName} DEBUG party`;
 
       let i = 0;
       let dummyArray = await dotaPrefs.fetchPreferencesForGamers(
@@ -119,8 +115,9 @@ module.exports = {
         `Please wait for the bot to set up :)`
       );
       let modMeddelande = '';
+
+      console.log('');
       for (dummy of dummyArray) {
-        console.log('Logging, ', dummy);
         modMeddelande += `\`Then it's time for ${kapitalisera(
           dummy.namn
         )}...\`\n`;
@@ -135,13 +132,14 @@ module.exports = {
       await trådMeddelande.react('935684531023925299');
       trådMeddelande.edit(modMeddelande);
       let pickladeRoller = [];
-      const emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
+      const emojiSiffror = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', 'fill'];
       const emojiDic = {
         '1️⃣': '1',
         '2️⃣': '2',
         '3️⃣': '3',
         '4️⃣': '4',
         '5️⃣': '5',
+        '*️⃣': 'fill',
       };
       let fillBoys = [];
       let aktivaNoobs = dummyArray;
@@ -169,32 +167,34 @@ module.exports = {
       //Den här stannar eftersom den använder rollKoll
       function hittaOchKollaPreferens(noob) {
         //kolla om vår noob har en preferens, har den det så nice
-        switch (true) {
-          case pickladeRoller.length == 4:
-            console.log(
-              'Picklade roller säger att det bara finns 1 roll kvar så fuck this'
-            );
-            break;
-          case noob.preferences !== undefined:
-            console.log(
-              'Vi hittade preferenser för ' + noob.namn + ' de ser ut såhär',
-              noob.preferences
-            );
-            let preferenser = noob.preferences;
-            for (föredragen of preferenser) {
-              if (rollKoll(emojiSiffror[föredragen - 1]) == 'vanlig') {
-                console.log('Vi hittade preferensen ' + föredragen);
-                console.log(
-                  'Så emojin vi skickar är ' + emojiSiffror[föredragen - 1]
-                );
-                //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
-                //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
-                return emojiSiffror[föredragen - 1];
-              }
+        if (noob.preferences !== undefined) {
+          console.log(
+            'Vi hittade preferenser för ' + noob.namn + ' de ser ut såhär',
+            noob.preferences
+          );
+          let preferenser = noob.preferences;
+          for (föredragen of preferenser) {
+            if (rollKoll(emojiSiffror[föredragen - 1]) == 'vanlig') {
+              console.log(
+                emojiSiffror,
+                föredragen - 1,
+                emojiSiffror[föredragen - 1]
+              );
+              console.log('Vi hittade preferensen ' + föredragen);
+              console.log(
+                'Så emojin vi skickar är ' + emojiSiffror[föredragen - 1]
+              );
+              //Vi använder roll-koll för att hitta vad som räknas som en "vanlig" pick och sen tjongar vi iväg den. Det är funky när vi översätter preferens till emojiSiffror eftersom
+              //Den ena börjar på 0 och den andra på 1 men det verkar funka :)
+              return emojiSiffror[föredragen - 1];
             }
-            return '<:fill:935684531023925299>';
+          }
+          return '<:fill:935684531023925299>';
         }
-        console.log('Vi shufflar personens preferens pga yolo');
+
+        console.log(
+          'Vi shufflar personens preferens pga ingen preferenser hittade yolo'
+        );
         return skufflaPreferens();
       }
       //Den här kör finska fighten bla så den måste stanna
