@@ -75,7 +75,7 @@ async function fetchPreferencesForGamers(gamers) {
   const playersWithRoles = res.data.map((x) => ({
     namn: x.alias,
     id: x.id,
-    preferences: x.preferences,
+    preferences: x.preference,
   }));
 
   const shuffled = shuffleArray(playersWithRoles);

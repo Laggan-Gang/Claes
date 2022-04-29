@@ -167,7 +167,7 @@ module.exports = {
         }
       }
       //Den här stannar eftersom den använder rollKoll
-      function hittaOchKollaPreferens(noobs) {
+      function hittaOchKollaPreferens(noob) {
         //kolla om vår noob har en preferens, har den det så nice
         switch (true) {
           case pickladeRoller.length == 4:
@@ -175,12 +175,12 @@ module.exports = {
               'Picklade roller säger att det bara finns 1 roll kvar så fuck this'
             );
             break;
-          case noobs[i].preferences !== undefined:
+          case noob.preferences !== undefined:
             console.log(
-              'Vi hittade preferenser för ' + noobs[i] + ' de ser ut såhär',
-              noobs[i].preferences
+              'Vi hittade preferenser för ' + noob.namn + ' de ser ut såhär',
+              noob.preferences
             );
-            let preferenser = noobs[i].preferences;
+            let preferenser = noob.preferences;
             for (föredragen of preferenser) {
               if (rollKoll(emojiSiffror[föredragen - 1]) == 'vanlig') {
                 console.log('Vi hittade preferensen ' + föredragen);
@@ -232,7 +232,7 @@ module.exports = {
             aktivaNoobs[i].namn
           )} is now picking...**`;
           await trådMeddelande.edit(modRader.join('\n'));
-          let föredragen = hittaOchKollaPreferens(noobs);
+          let föredragen = hittaOchKollaPreferens(noobs[i]);
           let pingNoob = vadKallasDu(aktivaNoobs[i]);
           pingMeddelande = await tråden.send(
             `${pingNoob}, your turn to pick. If you do not pick within 60 seconds you will be assigned ${föredragen}`
