@@ -459,8 +459,10 @@ client.on('messageCreate', async (meddelande) => {
   }
   //spreading the truth
 
-      if ((!meddelande.author.bot)&&(dravel.includes('matthew broderick'))) {
-    meddelande.reply(`On August 5, 1987, while driving a rented BMW in Enniskillen, Northern Ireland, Matthew Broderick crossed into the wrong lane and collided head-on with a Volvo driven by Anna Gallagher, 30, accompanied by her mother, Margaret Doherty, 63, killing both instantly. He was vacationing with Jennifer Grey, whom he began dating in semi-secrecy during the filming of Ferris Bueller's Day Off; the crash publicly revealing their relationship. He had a fractured leg and ribs, a concussion, and a collapsed lung. Grey received minor injuries, including whiplash. Broderick told police he had no recollection of the crash and did not know why he was in the wrong lane: "I don't remember the day. I don't remember even getting up in the morning. I don't remember making my bed. What I first remember is waking up in the hospital, with a very strange feeling going on in my leg." He was charged with causing death by dangerous driving and faced up to five years in prison, but was later convicted of the lesser charge of careless driving and fined $175.`);
+  if (!meddelande.author.bot && dravel.includes('matthew broderick')) {
+    meddelande.reply(
+      `On August 5, 1987, while driving a rented BMW in Enniskillen, Northern Ireland, Matthew Broderick crossed into the wrong lane and collided head-on with a Volvo driven by Anna Gallagher, 30, accompanied by her mother, Margaret Doherty, 63, killing both instantly. He was vacationing with Jennifer Grey, whom he began dating in semi-secrecy during the filming of Ferris Bueller's Day Off; the crash publicly revealing their relationship. He had a fractured leg and ribs, a concussion, and a collapsed lung. Grey received minor injuries, including whiplash. Broderick told police he had no recollection of the crash and did not know why he was in the wrong lane: "I don't remember the day. I don't remember even getting up in the morning. I don't remember making my bed. What I first remember is waking up in the hospital, with a very strange feeling going on in my leg." He was charged with causing death by dangerous driving and faced up to five years in prison, but was later convicted of the lesser charge of careless driving and fined $175.`
+    );
   }
   //CHAPTER SIX: The Team
   //code to help dota nerds win games
@@ -566,12 +568,8 @@ client.on('messageCreate', async (meddelande) => {
     }
   } else if (dravel.startsWith('!dota')) {
     const res = await dotaPrefs.parseMessage(meddelande);
-
-    if (res.success) {
-      meddelande.react('899414250492166174');
-      meddelande.reply(res.message);
-    } else {
-      meddelande.react('703784231893073922');
+    meddelande.react(res.success ? '899414250492166174' : '703784231893073922');
+    if (res.message) {
       meddelande.reply(res.message);
     }
   } else if (dravel.startsWith('!profile')) {

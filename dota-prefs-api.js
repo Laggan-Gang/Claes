@@ -55,7 +55,6 @@ async function save(roles, discordId) {
 
   return {
     success: res.status == 200,
-    message: body,
   };
 }
 
