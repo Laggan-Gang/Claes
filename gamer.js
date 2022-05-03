@@ -259,9 +259,9 @@ async function skickaTreIRadUtmaning( plan, EMOJI, kämpe, score, igen = false){
     const sänt0 = await kämpe.send(sträng[0])
     const sänt1 = await kämpe.send(sträng[1])
     const sänt2 = await kämpe.send(sträng[2])
-    const reaktionsSamlare0 = sänt0.createReactionCollector({ time: 40_000 });
-    const reaktionsSamlare1 = sänt1.createReactionCollector({ time: 40_000 });
-    const reaktionsSamlare2 = sänt2.createReactionCollector({ time: 40_000 });
+    const reaktionsSamlare0 = sänt0.createReactionCollector({ time: 80_000 });
+    const reaktionsSamlare1 = sänt1.createReactionCollector({ time: 80_000 });
+    const reaktionsSamlare2 = sänt2.createReactionCollector({ time: 80_000 });
     reaktionsSamlare0.on('collect', (reaction, user) => {
       if(reaction.count == 2){
         index = EMOJI.indexOf(reaction._emoji.name)
