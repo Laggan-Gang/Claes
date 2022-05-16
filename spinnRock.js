@@ -174,17 +174,17 @@ module.exports = {
           Object.values(emojiSiffror).slice(1) // slice away the fill option
         );
 
-        for (emoji in slumpadeEmojis) {
-          if (rollKoll(slumpadeEmojis[emoji]) == 'vanlig') {
-            return slumpadeEmojis[emoji];
-          }
-        }
+        return slumpadeEmojis.find((x) => rollKoll(x) == 'vanlig');
       }
 
       function hittaOchKollaPreferens(noob, isLastPick) {
         for (const föredragen of noob?.preferences || []) {
           if (isLastPick && föredragen == 'fill') {
             continue;
+          }
+
+          if (föredragen == 'random') {
+            break;
           }
 
           if (rollKoll(emojiSiffror[föredragen]) == 'vanlig') {
