@@ -367,26 +367,28 @@ module.exports = {
           }
         }
         //Formatera om översta posten
-        let modRader = modMeddelande.split('\n');
-        let finsktMeddelande = '';
+        let modRader = modMeddelande
+          .split('\n')
+          .filter(
+            (x) =>
+              x.includes(emojiSiffror['1']) ||
+              x.includes(emojiSiffror['2']) ||
+              x.includes(emojiSiffror['3']) ||
+              x.includes(emojiSiffror['4']) ||
+              x.includes(emojiSiffror['5'])
+          );
+
         function aOchO(sträng) {
-          console.log(sträng);
           let nySträng = sträng.replace('!', '');
           let aOchO = nySträng.split(' ');
-          return `${aOchO[0]} ${emojiDic[aOchO.pop()]} | `;
+          return `${aOchO[0]} ${emojiDic[aOchO.pop()]}`;
         }
-        for (rad of modRader) {
-          if (
-            rad.includes(emojiSiffror['1']) ||
-            rad.includes(emojiSiffror['2']) ||
-            rad.includes(emojiSiffror['3']) ||
-            rad.includes(emojiSiffror['4']) ||
-            rad.includes(emojiSiffror['5'])
-          ) {
-            finsktMeddelande += `${aOchO(rad)} `;
-            console.log('Den här raden tjongar vi in i aOchO ', rad);
-          }
-        }
+
+        const finsktMeddelande = modRader
+          .map((x) => aOchO(x))
+          .filter((x) => x != undefined)
+          .join(' | ');
+
         await embedMaker(
           modMeddelande,
           finsktMeddelande.slice(0, -2),
