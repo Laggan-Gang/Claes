@@ -4,7 +4,7 @@
   "description": "it's claesbot",
   "main": "claes.js",
   "scripts": {
-    "ci": "git pull && npm ci",
+    "startup": "npm ci && npm start",
     "start": "node claes.js"
   },
   "repository": {

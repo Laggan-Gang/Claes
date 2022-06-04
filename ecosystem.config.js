@@ -2,9 +2,9 @@ module.exports = {
   apps: [
     {
       name: 'claes',
-      script: 'claes.js',
+      script: 'npm run startup',
       env_hook: {
-        command: 'npm run ci && pm2 restart claes',
+        command: 'git pull && pm2 restart claes',
         cwd: '/home/hugo/Claes',
       },
     },
