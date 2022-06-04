@@ -228,6 +228,11 @@ async function ljudGöraren(meddelande, aleaIactaEst) {
       break;
   }
   let channel = meddelande.member.voice.channel;
+
+  if (channel == undefined) {
+    return;
+  }
+
   const player = createAudioPlayer();
   let resource = createAudioResource('./ljudklipp/' + ljudfil);
   const connection = joinVoiceChannel({
