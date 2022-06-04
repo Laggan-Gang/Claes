@@ -171,7 +171,7 @@ module.exports = {
       //Den här stannar pga rollKoll
       function skufflaPreferens() {
         let slumpadeEmojis = shuffleArray(
-          Object.values(emojiSiffror).slice(1) // slice away the fill option
+          Object.values(emojiSiffror).slice(0, -1) // slice away the fill option
         );
 
         return slumpadeEmojis.find((x) => rollKoll(x) == 'vanlig');
@@ -223,6 +223,13 @@ module.exports = {
           await trådMeddelande.edit(modRader.join('\n'));
 
           let föredragen = hittaOchKollaPreferens(aktivaNoobs[i], isLastPick);
+
+          console.log(
+            'Preferred role became ',
+            föredragen,
+            'prefs: ',
+            aktivaNoobs[i].preferences
+          );
 
           let pingNoob = vadKallasDu(aktivaNoobs[i]);
           pingMeddelande = await tråden.send(
@@ -389,12 +396,7 @@ module.exports = {
           .filter((x) => x != undefined)
           .join(' | ');
 
-        await embedMaker(
-          modMeddelande,
-          finsktMeddelande.slice(0, -2),
-          trådNamn,
-          tråden
-        );
+        await embedMaker(modMeddelande, finsktMeddelande, trådNamn, tråden);
       });
     } else {
       meddelande.reply('Wrong amount of dudes, dude!');
