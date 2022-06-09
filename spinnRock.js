@@ -2,7 +2,7 @@ const dotaPrefs = require('./dota-prefs-api.js');
 const { shuffleArray, random } = require('./helpers.js');
 const { DiscordAPIError, MessageEmbed } = require('discord.js');
 
-const FILL_EMOJI = '<:fill:935684531023925299>';
+const FILL_EMOJI = '🗄️';
 
 function snooze(timer) {
   if (timer) {
