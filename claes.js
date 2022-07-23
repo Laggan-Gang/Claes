@@ -186,41 +186,45 @@ function löftesKollaren(player) {
 async function ljudGöraren(meddelande, aleaIactaEst) {
   let ljudfil = 'bow bow.wav';
   switch (true) {
-    case inRange(aleaIactaEst, 25, 25):
+    case inRange(aleaIactaEst, 0, 0):
       ljudfil = 'IASID.wav';
       console.log('IASID');
       break;
-    case inRange(aleaIactaEst, 0, 5):
+    case inRange(aleaIactaEst, 1, 5):
       ljudfil = 'mitchyapos.wav';
       console.log('mitchyapos');
       break;
-    case inRange(aleaIactaEst, 6, 11):
+    case inRange(aleaIactaEst, 6, 10):
       ljudfil = 'hugoyapos.wav';
       console.log('hugo');
       break;
-    case inRange(aleaIactaEst, 12, 17):
+    case inRange(aleaIactaEst, 11, 15):
       ljudfil = 'claesyapos.wav';
       console.log('claes');
       break;
-    case inRange(aleaIactaEst, 18, 23):
+    case inRange(aleaIactaEst, 16, 20):
       ljudfil = 'edwinyapos.wav';
       console.log('edwin');
       break;
-    case inRange(aleaIactaEst, 24, 29):
+    case inRange(aleaIactaEst, 21, 25):
       ljudfil = 'sarayapos.wav';
       console.log('sara');
       break;
-    case inRange(aleaIactaEst, 30, 35):
+    case inRange(aleaIactaEst, 26, 30):
       ljudfil = 'densetsuyapos.wav';
       console.log('Laggan gaiden');
       break;
-    case inRange(aleaIactaEst, 36, 41):
+    case inRange(aleaIactaEst, 31, 35):
       ljudfil = 'sarayapos2.wav';
       console.log('sara');
       break;
-    case inRange(aleaIactaEst, 42, 47):
+    case inRange(aleaIactaEst, 36, 40):
       ljudfil = 'onyourmarksyapos.wav';
       console.log('On your marks');
+      break;
+    case inRange(aleaIactaEst, 41, 45):
+      ljudfil = 'garboyapos.wav';
+      console.log('woof woof');
       break;
 
     default:
