@@ -390,7 +390,7 @@ client.on('messageCreate', async (meddelande) => {
   )
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
-  if (dravel.startsWith('tack mig') || dravel.startsWith('tack mej'))  || dravel.startsWith('thanks me')) {
+  if (dravel.startsWith('tack mig') || dravel.startsWith('tack mej') || dravel.startsWith('thanks me')) {
     if (meddelande.author.id == '207974495393153024') {
       // CLAES
       //if (meddelande.author.id == '199914493570973697') { // AUGUST för att testa
