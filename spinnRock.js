@@ -69,10 +69,11 @@ function ROLLCALL(noobs) {
 }
 
 module.exports = {
-  spinnRock: async (meddelande) => {
+  spinnRock: async (meddelande, fastmode) => {
     const väntaNuHurMångaGubbarÄrDet = meddelande.content.split(' ');
     const gubbLängdsKollare = väntaNuHurMångaGubbarÄrDet.slice(1);
-    let LAGGAN_APPROVED_TARDYNESS = 60_000;
+    let LAGGAN_APPROVED_TARDYNESS = fastmode ? 7 : 60;
+
     let start;
     if (gubbLängdsKollare.length == 6) {
       const lastItem = gubbLängdsKollare.pop();
@@ -80,22 +81,20 @@ module.exports = {
 
       if (isNaN(newTimeout)) {
         meddelande.reply(
-          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔. Time to pick is set to standard ${
-            LAGGAN_APPROVED_TARDYNESS / 1000
-          } seconds.`
+          `I don't know what this ${lastItem} is but it ain't a number for sure 🤔. Time to pick is set to standard ${LAGGAN_APPROVED_TARDYNESS} seconds.`
         );
       } else {
         LAGGAN_APPROVED_TARDYNESS = newTimeout;
 
-        if (newTimeout < 1000) {
+        if (newTimeout < 1) {
           meddelande.reply(
-            `I like your style. Time to pick is ${newTimeout} milliseconds. Better go quick 🦾🦾🦾`
+            `I like your style. Time to pick is ${
+              newTimeout * 1000
+            } milliseconds. Better go quick 🦾🦾🦾`
           );
         } else {
           meddelande.reply(
-            `You have chosen to change the flow of time for your party - now each medlem has ${
-              newTimeout / 1000
-            }s to pick their role.`
+            `You have chosen to change the flow of time for your party - now each medlem has ${newTimeout}s to pick their role.`
           );
         }
       }
@@ -199,7 +198,7 @@ module.exports = {
         if (reaktion == 'fill' || reaktion == FILL_EMOJI) {
           fillBoysNeedFilling(noobs);
         } else {
-          await standardPick(reaktion, noobs, LAGGAN_APPROVED_TARDYNESS / 1000);
+          await standardPick(reaktion, noobs);
           await finskaFighten();
         }
       }
@@ -243,7 +242,7 @@ module.exports = {
 
           äggKlockan = setTimeout(async function () {
             await autoPicker(föredragen, aktivaNoobs);
-          }, LAGGAN_APPROVED_TARDYNESS);
+          }, LAGGAN_APPROVED_TARDYNESS * 1000);
         } catch (error) {
           console.error('Failed to send the message: ', error);
         }

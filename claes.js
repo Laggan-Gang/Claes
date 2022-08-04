@@ -390,7 +390,11 @@ client.on('messageCreate', async (meddelande) => {
   )
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
-  if (dravel.startsWith('tack mig') || dravel.startsWith('tack mej') || dravel.startsWith('thanks me')) {
+  if (
+    dravel.startsWith('tack mig') ||
+    dravel.startsWith('tack mej') ||
+    dravel.startsWith('thanks me')
+  ) {
     if (meddelande.author.id == '207974495393153024') {
       // CLAES
       //if (meddelande.author.id == '199914493570973697') { // AUGUST för att testa
@@ -658,6 +662,9 @@ client.on('messageCreate', async (meddelande) => {
   } else if (meddelande.content.startsWith('yarn')) {
     ljudGöraren(meddelande, aleaIactaEst);
     await spinnRock.spinnRock(meddelande);
+  } else if (meddelande.content.startsWith('fastyarn')) {
+    ljudGöraren(meddelande, aleaIactaEst);
+    await spinnRock.spinnRock(meddelande, true);
   }
   if (meddelande.content.match(/^p.*di/) && !meddelande.author.bot) {
     meddelande.reply('did you mean prevedi?');
