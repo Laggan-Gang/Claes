@@ -394,7 +394,8 @@ client.on('messageCreate', async (meddelande) => {
   if (
     /.+\?([\n\r\t !]|$)/gi.test(dravel) &&
     aleaIactaEst < 7 &&
-    meddelande.author.id !== '745345949295181886'
+    meddelande.author.id !== '745345949295181886' &&
+    meddelande.author.id !== '1011640018479091722'
   )
     meddelande.reply('Bra fråga, återkommer :)');
   //a proper thank you gets a proper response
