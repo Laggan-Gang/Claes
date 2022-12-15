@@ -363,10 +363,6 @@ client.on('messageCreate', async (meddelande) => {
       //    break;
       //}
       try {
-        console.log('Här kommer claes stats! Den här försöker han härma');
-        console.log(meddelande.author);
-        console.log('Det här är meddelande');
-        console.log(meddelande);
         const channel = client.channels.cache.get(meddelande.channel.id);
         var webhook = await channel.createWebhook(
           '"' + svampbob(meddelande.member.displayName) + '"',
