@@ -346,7 +346,11 @@ client.on('messageCreate', async (meddelande) => {
   //the die is cast is very important for determining what's going on
   var aleaIactaEst = Math.floor(Math.random() * 50);
   //if we get bully crit then we bully
-  if (aleaIactaEst == 18 && meddelande.author.id !== '745345949295181886') {
+  if (
+    aleaIactaEst == 18 &&
+    meddelande.author.id !== '745345949295181886' &&
+    meddelande.author.id !== '1011640018479091722'
+  ) {
     //make the webhook that impersonates the bullyee
     let jamesCameron =
       'https://cdn.discordapp.com/avatars/' +
