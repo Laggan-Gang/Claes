@@ -467,7 +467,8 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.author.id !== '745345949295181886' &&
     dravel.replace(/[,.?!]+/g, '').endsWith('er') &&
     aleaIactaEst < 16 && // Gör det till 30% av gångerna
-    dravel.length < 200
+    dravel.length < 200 &&
+    meddelande.author.id !== '1011640018479091722'
   ) {
     var meddelandeUtanGrammatik = meddelande.content.replace(/[,.?!]+/g, '');
     var meddelandeBindestreck = meddelandeUtanGrammatik.replace(/\s+/g, '-');
