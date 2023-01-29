@@ -296,6 +296,8 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
     if (i != 0 && !'{}[]~!.,-()=+_<>?|'.includes(ord[i])) {
       IPAbokstäver += ' ';
     }
+		console.log(ord)
+		console.log(ord[i])
     IPAbokstäver += EngTillIPA.kolla(ord[i]);
   }
 
@@ -392,8 +394,35 @@ client.on('messageCreate', async (meddelande) => {
     aleaIactaEst < 7 &&
     meddelande.author.id !== '745345949295181886' &&
     meddelande.author.id !== '1011640018479091722'
-  )
-    meddelande.reply('Bra fråga, återkommer :)');
+  ) {
+		// Test if the message is in english using the translation (works!)
+    // testMessage = meddelande.content;
+    // translatedTestMessage = await(prevodach.swedishToEnglish(testMessage))
+    // if (testMessage == translatedTestMessage) {
+    //   meddelande.reply("Good question, I'll get back to you :)");
+    // } else {
+    //   meddelande.reply('Bra fråga, återkommer :)');
+    // }
+		
+		// Test if the message is in english using the IPA lookup (works?)
+		splitMessage = meddelande.content.replace('?','').split(' ');
+		denSakenSomBlirMindreInEnglish = 0
+		for ( const ord of splitMessage ) {
+			IPAOrd = EngTillIPA.kolla(ord)
+			console.log(IPAOrd)
+			console.log(ord) 
+    	if (IPAOrd != ord) {
+				denSakenSomBlirMindreInEnglish -= 1;
+			} else {
+				denSakenSomBlirMindreInEnglish += 1;
+			}
+		}
+	  if (denSakenSomBlirMindreInEnglish < 0) {
+      meddelande.reply("Good question, I'll get back to you :)");
+    } else {
+      meddelande.reply('Bra fråga, återkommer :)');
+    }
+  }
   //a proper thank you gets a proper response
   if (
     dravel.startsWith('tack mig') ||
