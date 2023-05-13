@@ -347,9 +347,11 @@ client.on('messageCreate', async (meddelande) => {
   var aleaIactaEst = Math.floor(Math.random() * 50);
   //if we get bully crit then we bully
   if (
-    aleaIactaEst == 18 &&
     meddelande.author.id !== '745345949295181886' &&
-    meddelande.author.id !== '1011640018479091722'
+    (
+      (aleaIactaEst == 18 && meddelande.author.id !== '1011640018479091722') 
+      || (/regex/.test(meddelande.content) && aleaIactaEst > 5)
+    )
   ) {
     //make the webhook that impersonates the bullyee
     let jamesCameron =
