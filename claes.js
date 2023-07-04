@@ -31,6 +31,8 @@ const prevodach = require('./prevodach.js');
 const spinnRock = require('./spinnRock.js');
 const xXG4M3RXx = require('./gamer.js');
 const { shuffleArray } = require('./helpers.js');
+const falskt = false
+const sant = true
 
 // Create a new client instance
 const client = new Client({
@@ -138,7 +140,7 @@ client.once('ready', () => {
 //CHAPTER ONE: Boring Functions
 //These are boring functions that are mostly stolen
 
-var upptagen = false;
+var upptagen = falskt;
 
 function kapitalisera(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -185,7 +187,7 @@ function löftesKollaren(player) {
 
 async function ljudGöraren(meddelande, aleaIactaEst) {
   let ljudfil = 'bow bow.wav';
-  switch (true) {
+  switch (sant) {
     case inRange(aleaIactaEst, 0, 0):
       ljudfil = 'IASID.wav';
       console.log('IASID');
@@ -360,7 +362,7 @@ client.on('messageCreate', async (meddelande) => {
       '/' +
       meddelande.author.avatar;
     async function webbKrok() {
-      //switch (true) {
+      //switch (sant) {
       //  case client.channels.cache.get(meddelande.channel.id):
       //    break;
       //}
@@ -434,7 +436,7 @@ client.on('messageCreate', async (meddelande) => {
     }
   }
   if (dravel.includes('tack claes') || dravel.includes('tack rdc')) {
-    switch (true) {
+    switch (sant) {
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply('Inga problem!');
         break;
@@ -458,7 +460,7 @@ client.on('messageCreate', async (meddelande) => {
     }
   }
   if (dravel.includes('thanks claes') || dravel.includes('thanks rdc')) {
-    switch (true) {
+    switch (sant) {
       case inRange(aleaIactaEst, 41, 50):
         meddelande.reply('No problem!');
         break;
@@ -647,11 +649,11 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.content.toLowerCase().startsWith('say ')
   ) {
     if (meddelande.member.voice.channel !== null) {
-      if (upptagen !== true) {
-        upptagen = true;
+      if (upptagen !== sant) {
+        upptagen = sant;
         attsäga = meddelande.cleanContent.substring(4).toLowerCase();
         spelaungefärljudetavenbokstav(meddelande, attsäga);
-        upptagen = false;
+        upptagen = falskt;
       } else {
         meddelande.reply('Jag är upptagen');
       }
@@ -698,7 +700,7 @@ client.on('messageCreate', async (meddelande) => {
     await spinnRock.spinnRock(meddelande);
   } else if (meddelande.content.startsWith('fastyarn')) {
     ljudGöraren(meddelande, aleaIactaEst);
-    await spinnRock.spinnRock(meddelande, true);
+    await spinnRock.spinnRock(meddelande, sant);
   }
   if (meddelande.content.match(/^p.*di/) && !meddelande.author.bot) {
     meddelande.reply('did you mean prevedi?');
