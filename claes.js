@@ -409,7 +409,8 @@ client.on('messageCreate', async (meddelande) => {
     // Test if the message is in english using the IPA lookup (works?)
     splitMessage = meddelande.content.replace('?','').split(' ');
     denSakenSomBlirMindreInEnglish = 0
-    for ( const ord of splitMessage ) {
+    for ( const Ord of splitMessage ) {
+      ord = Ord.toLowerCase()
       IPAOrd = EngTillIPA.kolla(ord)
       if (IPAOrd != ord) {
         denSakenSomBlirMindreInEnglish -= 1;
