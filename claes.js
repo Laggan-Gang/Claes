@@ -459,6 +459,8 @@ client.on('messageCreate', async (meddelande) => {
         );
         break;
     }
+  if (dravel.includes('helt rätt claes') || dravel.includes('helt rätt rdc') || dravel.includes('damn right claes') || dravel.includes('damn right rdc')) {
+    meddelande.reply('😎👉👉');
   }
   if (dravel.includes('thanks claes') || dravel.includes('thanks rdc')) {
     switch (sant) {
