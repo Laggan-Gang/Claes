@@ -31,8 +31,8 @@ const prevodach = require('./prevodach.js');
 const spinnRock = require('./spinnRock.js');
 const xXG4M3RXx = require('./gamer.js');
 const { shuffleArray } = require('./helpers.js');
-const falskt = false
-const sant = true
+const falskt = false;
+const sant = true;
 
 // Create a new client instance
 const client = new Client({
@@ -350,10 +350,8 @@ client.on('messageCreate', async (meddelande) => {
   //if we get bully crit then we bully
   if (
     meddelande.author.id !== '745345949295181886' &&
-    (
-      (aleaIactaEst == 18 && meddelande.author.id !== '1011640018479091722') 
-      || (/regex/.test(meddelande.content) && aleaIactaEst > 5)
-    )
+    ((aleaIactaEst == 18 && meddelande.author.id !== '1011640018479091722') ||
+      (/regex/.test(meddelande.content) && aleaIactaEst > 5))
   ) {
     //make the webhook that impersonates the bullyee
     let jamesCameron =
@@ -397,7 +395,7 @@ client.on('messageCreate', async (meddelande) => {
     meddelande.author.id !== '745345949295181886' &&
     meddelande.author.id !== '1011640018479091722'
   ) {
-		// Test if the message is in english using the translation (works!)
+    // Test if the message is in english using the translation (works!)
     // testMessage = meddelande.content;
     // translatedTestMessage = await(prevodach.swedishToEnglish(testMessage))
     // if (testMessage == translatedTestMessage) {
@@ -405,13 +403,13 @@ client.on('messageCreate', async (meddelande) => {
     // } else {
     //   meddelande.reply('Bra fråga, återkommer :)');
     // }
-		
+
     // Test if the message is in english using the IPA lookup (works?)
-    splitMessage = meddelande.content.replace('?','').split(' ');
-    denSakenSomBlirMindreInEnglish = 0
-    for ( const Ord of splitMessage ) {
-      ord = Ord.toLowerCase()
-      IPAOrd = EngTillIPA.kolla(ord)
+    splitMessage = meddelande.content.replace('?', '').split(' ');
+    denSakenSomBlirMindreInEnglish = 0;
+    for (const Ord of splitMessage) {
+      ord = Ord.toLowerCase();
+      IPAOrd = EngTillIPA.kolla(ord);
       if (IPAOrd != ord) {
         denSakenSomBlirMindreInEnglish -= 1;
       } else {
@@ -459,8 +457,14 @@ client.on('messageCreate', async (meddelande) => {
         );
         break;
     }
-  if (dravel.includes('helt rätt claes') || dravel.includes('helt rätt rdc') || dravel.includes('damn right claes') || dravel.includes('damn right rdc')) {
-    meddelande.reply('😎👉👉');
+    if (
+      dravel.includes('helt rätt claes') ||
+      dravel.includes('helt rätt rdc') ||
+      dravel.includes('damn right claes') ||
+      dravel.includes('damn right rdc')
+    ) {
+      meddelande.reply('😎👉👉');
+    }
   }
   if (dravel.includes('thanks claes') || dravel.includes('thanks rdc')) {
     switch (sant) {
@@ -509,25 +513,6 @@ client.on('messageCreate', async (meddelande) => {
       )} 'er? I hardly know her!`
     );
   }
-
-  const chrisOrden = ["chris", "clam", "christopher", "lambert"];
-  const doktorOrden = ["dr", "doktor", "doctor"];
-  const dravelUtanGrammatik = dravel.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\?]/g,"").toLowerCase();
-  const dravelOrd = dravelUtanGrammatik.split(" ");
-  const chrisTaggas = meddelande.mentions.users.some(omtaladAnvandare => omtaladAnvandare.id === '224953719945560066');
-  const chrisFinns = chrisOrden.some(chrisOrd => dravelOrd.includes(chrisOrd.toLowerCase()));
-  const chrisHarTituleratsKorrekt = doktorOrden.some(doktorOrd => dravelOrd.includes(doktorOrd.toLowerCase()));
-  const chrisHarDisrespekterats = !chrisHarTituleratsKorrekt && (chrisTaggas || chrisFinns);
-  
-  if (
-      !['1011640018479091722', '745345949295181886', '1109079876713066518', '224953719945560066'].includes(
-      meddelande.author.id
-    ) && //???, Rainbowdashclaes, Shortstack, Clam
-    chrisHarDisrespekterats
-  ) {
-    meddelande.reply("It's Dr. Lambert to you");
-  }
-
   //spreading the truth
 
   if (!meddelande.author.bot && dravel.includes('matthew broderick')) {
