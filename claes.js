@@ -513,6 +513,36 @@ client.on('messageCreate', async (meddelande) => {
       )} 'er? I hardly know her!`
     );
   }
+
+  const chrisOrden = ['chris', 'clam', 'christopher', 'lambert'];
+  const doktorOrden = ['dr', 'doktor', 'doctor'];
+  const dravelUtanGrammatik = dravel
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\?]/g, '')
+    .toLowerCase();
+  const dravelOrd = dravelUtanGrammatik.split(' ');
+  const chrisTaggas = meddelande.mentions.users.some(
+    (omtaladAnvandare) => omtaladAnvandare.id === '224953719945560066'
+  );
+  const chrisFinns = chrisOrden.some((chrisOrd) =>
+    dravelOrd.includes(chrisOrd.toLowerCase())
+  );
+  const chrisHarTituleratsKorrekt = doktorOrden.some((doktorOrd) =>
+    dravelOrd.includes(doktorOrd.toLowerCase())
+  );
+  const chrisHarDisrespekterats =
+    !chrisHarTituleratsKorrekt && (chrisTaggas || chrisFinns);
+
+  if (
+    ![
+      '1011640018479091722',
+      '745345949295181886',
+      '1109079876713066518',
+      '224953719945560066',
+    ].includes(meddelande.author.id) && //???, Rainbowdashclaes, Shortstack, Clam
+    chrisHarDisrespekterats
+  ) {
+    meddelande.reply("It's Dr. Lambert to you");
+  }
   //spreading the truth
 
   if (!meddelande.author.bot && dravel.includes('matthew broderick')) {
