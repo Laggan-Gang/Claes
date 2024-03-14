@@ -520,7 +520,7 @@ client.on('messageCreate', async (meddelande) => {
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\?]/g, '')
     .toLowerCase();
   const dravelOrd = dravelUtanGrammatik.split(' ');
-  const chrisTaggas = meddelande.mentions.users.some(
+  const chrisTaggas = meddelande.mentions.parsedUsers.some(
     (omtaladAnvandare) => omtaladAnvandare.id === '224953719945560066'
   );
   const chrisFinns = chrisOrden.some((chrisOrd) =>
