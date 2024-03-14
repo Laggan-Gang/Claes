@@ -515,13 +515,16 @@ client.on('messageCreate', async (meddelande) => {
     );
   }
 
+  console.log(`parsedUsers: ` + meddelande.mentions.parsedUsers);
+  console.log(`mentions: ` + meddelande.mentions);
+
   const chrisOrden = ['chris', 'clam', 'christopher', 'lambert'];
   const doktorOrden = ['dr', 'doktor', 'doctor'];
   const dravelUtanGrammatik = dravel
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\?]/g, '')
     .toLowerCase();
   const dravelOrd = dravelUtanGrammatik.split(' ');
-  const chrisTaggas = meddelande.mentions.parsedUsers.some(
+  const chrisTaggas = meddelande.mentions.users.some(
     (omtaladAnvandare) => omtaladAnvandare.id === '224953719945560066'
   );
   const chrisFinns = chrisOrden.some((chrisOrd) =>
