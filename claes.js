@@ -33,6 +33,7 @@ const xXG4M3RXx = require('./gamer.js');
 const { shuffleArray } = require('./helpers.js');
 const falskt = false;
 const sant = true;
+const tagg = '1.0.7';
 
 // Create a new client instance
 const client = new Client({
@@ -543,6 +544,11 @@ client.on('messageCreate', async (meddelande) => {
   ) {
     meddelande.reply("It's Dr. Lambert to you");
   }
+
+  if (dravel == 'ayo claes kan du hooka upp mig med versionen?') {
+    meddelande.reply('ye bror det e ' + tagg);
+  }
+
   //spreading the truth
 
   if (!meddelande.author.bot && dravel.includes('matthew broderick')) {
