@@ -19,7 +19,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.7.5",
     "axios": "^0.25.0",
-    "canvas": "^2.9.0",
+    "canvas": "^2.11.2",
     "discord.js": "^13.1.0",
     "libsodium-wrappers": "^0.7.9",
     "uuid": "^8.3.2"
