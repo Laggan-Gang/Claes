@@ -33,7 +33,7 @@ const xXG4M3RXx = require('./gamer.js');
 const { shuffleArray } = require('./helpers.js');
 const falskt = false;
 const sant = true;
-const tagg = '1.0.7';
+const tagg = '1.0.9';
 
 // Create a new client instance
 const client = new Client({
