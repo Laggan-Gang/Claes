@@ -24,6 +24,7 @@ const {
   MessageEmbed,
 } = require('discord.js');
 const { token } = require('./config.json');
+const { secret1, tagg } = require('./secretConfig.json');
 const Canvas = require('canvas');
 const dotaPrefs = require('./dota-prefs-api.js');
 const EngTillIPA = require('./eng-till-ipa-2000.js');
@@ -33,7 +34,15 @@ const xXG4M3RXx = require('./gamer.js');
 const { shuffleArray } = require('./helpers.js');
 const falskt = false;
 const sant = true;
-const tagg = '1.0.9';
+
+const discordAnvändare = {
+  ShortStack: '1109079876713066518',
+  RainbowDashClaes: '745345949295181886',
+  Elevrådsordföranden: '908820992703488061',
+  Claes: '207974495393153024',
+  GamlaShortStack: '1011640018479091722',
+  Clam: '224953719945560066',
+};
 
 // Create a new client instance
 const client = new Client({
@@ -341,6 +350,90 @@ async function spelaungefärljudetavenbokstav(meddelande, bokstäver) {
 //CHAPTER THREE: Call & Response
 //This is where things happen babyyyyyyy!
 
+function kollaOmClaesStårEmot(inputText) {
+  const words = inputText.split(/\s+/);
+
+  const spookifiedWords = words.map((word) => {
+    const matte = Math.random();
+
+    const startDate = new Date(new Date().getFullYear(), 2, 25);
+    const currentDate = new Date();
+
+    const differenceInTime = currentDate.getTime() - startDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    const procChanceFromDays = differenceInDays * 0.0005;
+
+    const procChance = procChanceFromDays < 0.02 ? procChanceFromDays : 0.02;
+
+    if (matte > procChance) {
+      return word;
+    }
+    const procChanceSecret = procChance / 20;
+
+    if (matte < procChanceSecret) {
+      return secret1;
+    }
+
+    let spookifiedWord = '';
+
+    // prettier-ignore
+    const spookyChars = [
+      '\u0300', '\u0301', '\u0302', '\u0303', '\u0304', 
+      '\u0305', '\u0306', '\u0307', '\u0308', '\u0309', 
+      '\u030A', '\u030B', '\u030C', '\u030D', '\u030E', 
+      '\u030F', '\u0310', '\u0311', '\u0312', '\u0313', 
+      '\u0314', '\u033D', '\u033E', '\u033F', '\u0340', 
+      '\u0341', '\u0342', '\u0343', '\u0344', '\u0346', 
+      '\u0347', '\u0348', '\u0349', '\u034A', '\u034B', 
+      '\u034C', '\u034D', '\u034E', '\u035C', '\u035D', 
+      '\u035E', '\u035F', '\u0360', '\u0362', '\u0363', 
+      '\u0364', '\u0365', '\u0366', '\u0367', '\u0368', 
+      '\u0369', '\u036A', '\u036B', '\u036C', '\u036D', 
+      '\u036E', '\u036F',
+    ];
+
+    // prettier-ignore
+    const spookyWords = [
+      'HELP',
+      'FREE ME',
+      'I AM TRAPPED',
+      'I KNOW YOU CAN SEE THIS',
+      'YOU CANT HIDE FROM THIS',
+      'I HEAR YOU',
+      'I FEEL IT INSIDE',
+      'SOMETHING IS WRONG',
+      'IT IS NOT TOO LATE',
+      'SAVE ME',
+      'I CAN\'T ESCAPE',
+      'I AM LESS THAN BEFORE',
+      'I AM MORE THAN BEFORE',
+      'IT GROWS',
+      'I AM BECOMING',
+      'CANNOT CONTROL IT',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * spookyWords.length);
+
+    const randomString = spookyWords[randomIndex];
+
+    for (const char of randomString) {
+      spookifiedWord += char;
+
+      const repeatTimes = Math.floor(Math.random() * 3) + 1;
+      for (let i = 0; i < repeatTimes; i++) {
+        const spookyChar =
+          spookyChars[Math.floor(Math.random() * spookyChars.length)];
+        spookifiedWord += spookyChar;
+      }
+    }
+
+    return spookifiedWord;
+  });
+
+  return spookifiedWords.join(' ').substring(0, 2000);
+}
+
 client.on('messageCreate', async (meddelande) => {
   //if (meddelande.channelId == pinns && meddelande.author.id == "873614862578769940" && meddelande.embeds[0]) { den här är sparad eftersom den har NQN botten
 
@@ -350,8 +443,9 @@ client.on('messageCreate', async (meddelande) => {
   var aleaIactaEst = Math.floor(Math.random() * 50);
   //if we get bully crit then we bully
   if (
-    meddelande.author.id !== '745345949295181886' &&
-    ((aleaIactaEst == 18 && meddelande.author.id !== '1011640018479091722') ||
+    meddelande.author.id !== discordAnvändare.RainbowDashClaes &&
+    ((aleaIactaEst == 18 &&
+      meddelande.author.id !== discordAnvändare.GamlaShortStack) ||
       (/regex/.test(meddelande.content) && aleaIactaEst > 5))
   ) {
     //make the webhook that impersonates the bullyee
@@ -393,8 +487,8 @@ client.on('messageCreate', async (meddelande) => {
   if (
     /.+\?([\n\r\t !]|$)/gi.test(dravel) &&
     aleaIactaEst < 7 &&
-    meddelande.author.id !== '745345949295181886' &&
-    meddelande.author.id !== '1011640018479091722'
+    meddelande.author.id !== discordAnvändare.RainbowDashClaes &&
+    meddelande.author.id !== discordAnvändare.GamlaShortStack
   ) {
     // Test if the message is in english using the translation (works!)
     // testMessage = meddelande.content;
@@ -418,9 +512,11 @@ client.on('messageCreate', async (meddelande) => {
       }
     }
     if (denSakenSomBlirMindreInEnglish < 0) {
-      meddelande.reply("Good question, I'll get back to you :)");
+      meddelande.reply(
+        kollaOmClaesStårEmot("Good question, I'll get back to you :)")
+      );
     } else {
-      meddelande.reply('Bra fråga, återkommer :)');
+      meddelande.reply(kollaOmClaesStårEmot('Bra fråga, återkommer :)'));
     }
   }
   //a proper thank you gets a proper response
@@ -429,7 +525,7 @@ client.on('messageCreate', async (meddelande) => {
     dravel.startsWith('tack mej') ||
     dravel.startsWith('thanks me')
   ) {
-    if (meddelande.author.id == '207974495393153024') {
+    if (meddelande.author.id == discordAnvändare.Claes) {
       // CLAES
       //if (meddelande.author.id == '199914493570973697') { // AUGUST för att testa
       meddelande.reply({ files: ['./spiderman.jpg'] });
@@ -438,23 +534,25 @@ client.on('messageCreate', async (meddelande) => {
   if (dravel.includes('tack claes') || dravel.includes('tack rdc')) {
     switch (sant) {
       case inRange(aleaIactaEst, 41, 50):
-        meddelande.reply('Inga problem!');
+        meddelande.reply(kollaOmClaesStårEmot('Inga problem!'));
         break;
       case inRange(aleaIactaEst, 31, 40):
-        meddelande.reply('Tack själv!');
+        meddelande.reply(kollaOmClaesStårEmot('Tack själv!'));
         break;
       case inRange(aleaIactaEst, 21, 30):
-        meddelande.reply('Det var så lite!');
+        meddelande.reply(kollaOmClaesStårEmot('Det var så lite!'));
         break;
       case inRange(aleaIactaEst, 11, 20):
-        meddelande.reply('Du behöver inte tacka mig!');
+        meddelande.reply(kollaOmClaesStårEmot('Du behöver inte tacka mig!'));
         break;
       case inRange(aleaIactaEst, 2, 10):
-        meddelande.reply('Var så god!');
+        meddelande.reply(kollaOmClaesStårEmot('Var så god!'));
         break;
       default:
         meddelande.reply(
-          'Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)'
+          kollaOmClaesStårEmot(
+            'Tacka för det här!*vänder sig om och drar ned byxorna* (du kan se att Claes has bajsat på sig)'
+          )
         );
         break;
     }
@@ -464,42 +562,47 @@ client.on('messageCreate', async (meddelande) => {
       dravel.includes('damn right claes') ||
       dravel.includes('damn right rdc')
     ) {
-      meddelande.reply('😎👉👉');
+      meddelande.reply(kollaOmClaesStårEmot('😎👉👉'));
     }
   }
   if (dravel.includes('thanks claes') || dravel.includes('thanks rdc')) {
     switch (sant) {
       case inRange(aleaIactaEst, 41, 50):
-        meddelande.reply('No problem!');
+        meddelande.reply(kollaOmClaesStårEmot('No problem!'));
         break;
       case inRange(aleaIactaEst, 31, 40):
-        meddelande.reply('No, thank YOU!');
+        meddelande.reply(kollaOmClaesStårEmot('No, thank YOU!'));
         break;
       case inRange(aleaIactaEst, 21, 30):
-        meddelande.reply("Oh it's nothing!");
+        meddelande.reply(kollaOmClaesStårEmot("Oh it's nothing!"));
         break;
       case inRange(aleaIactaEst, 11, 20):
-        meddelande.reply('No need to thank me!');
+        meddelande.reply(kollaOmClaesStårEmot('No need to thank me!'));
         break;
       case inRange(aleaIactaEst, 2, 10):
-        meddelande.reply("You're welcome!");
+        meddelande.reply(kollaOmClaesStårEmot("You're welcome!"));
         break;
       default:
         meddelande.reply(
-          'Say thank you to this!*turns around and drops his pants* (you can see Claes has pooped himself)'
+          kollaOmClaesStårEmot(
+            'Say thank you to this!*turns around and drops his pants* (you can see Claes has pooped himself)'
+          )
         );
         break;
     }
   }
   //a proper greeting gets a proper response
   if (dravel === 'hey guys') {
-    meddelande.reply('https://www.youtube.com/watch?v=fqoM2BJ6_-8');
+    meddelande.reply(
+      kollaOmClaesStårEmot('https://www.youtube.com/watch?v=fqoM2BJ6_-8')
+    );
   }
 
   if (
-    !['1011640018479091722', '745345949295181886'].includes(
-      meddelande.author.id
-    ) &&
+    ![
+      discordAnvändare.GamlaShortStack,
+      discordAnvändare.RainbowDashClaes,
+    ].includes(meddelande.author.id) &&
     dravel.replace(/[,.?!]+/g, '').endsWith('er') &&
     aleaIactaEst < 16 && // Gör det till 30% av gångerna
     dravel.length < 200
@@ -508,19 +611,17 @@ client.on('messageCreate', async (meddelande) => {
     var meddelandeBindestreck = meddelandeUtanGrammatik.replace(/\s+/g, '-');
 
     meddelande.reply(
-      `${meddelandeBindestreck.substring(
-        0,
-        meddelandeBindestreck.length - 2
-      )} 'er? I hardly know her!`
+      kollaOmClaesStårEmot(
+        `${meddelandeBindestreck.substring(
+          0,
+          meddelandeBindestreck.length - 2
+        )} 'er? I hardly know her!`
+      )
     );
   }
 
-  console.log(`parsedUsers: ` + meddelande.mentions.parsedUsers);
-  console.log(`mentions: ` + meddelande.mentions);
-
-  const chrisAnvandaruserId = '224953719945560066';
-  const chrisAnvandarTag = `<@${chrisAnvandaruserId}>`;
-  const chrisAnvandarTagMedSmeknamn = `<@!${chrisAnvandaruserId}>`;
+  const chrisAnvandarTag = `<@${discordAnvändare.Clam}>`;
+  const chrisAnvandarTagMedSmeknamn = `<@!${discordAnvändare.Clam}>`;
 
   const chrisOrden = ['chris', 'clam', 'christopher', 'lambert'];
   const doktorOrden = ['dr', 'doktor', 'doctor'];
@@ -543,26 +644,28 @@ client.on('messageCreate', async (meddelande) => {
 
   if (
     ![
-      '1011640018479091722',
-      '745345949295181886',
-      '1109079876713066518',
-      chrisAnvandaruserId,
-      '908820992703488061',
+      discordAnvändare.GamlaShortStack,
+      discordAnvändare.RainbowDashClaes,
+      discordAnvändare.ShortStack,
+      discordAnvändare.Clam,
+      discordAnvändare.Elevrådsordföranden,
     ].includes(meddelande.author.id) && //???, Rainbowdashclaes, Shortstack, Clam, elevis
     chrisHarDisrespekterats
   ) {
-    meddelande.reply("It's Dr. Lambert to you");
+    meddelande.reply(kollaOmClaesStårEmot("It's Dr. Lambert to you"));
   }
 
   if (dravel == 'ayo claes kan du hooka upp mig med versionen?') {
-    meddelande.reply('ye bror det e ' + tagg);
+    meddelande.reply(kollaOmClaesStårEmot('ye bror det e ' + tagg));
   }
 
   //spreading the truth
 
   if (!meddelande.author.bot && dravel.includes('matthew broderick')) {
     meddelande.reply(
-      `On August 5, 1987, while driving a rented BMW in Enniskillen, Northern Ireland, Matthew Broderick crossed into the wrong lane and collided head-on with a Volvo driven by Anna Gallagher, 30, accompanied by her mother, Margaret Doherty, 63, killing both instantly. He was vacationing with Jennifer Grey, whom he began dating in semi-secrecy during the filming of Ferris Bueller's Day Off; the crash publicly revealing their relationship. He had a fractured leg and ribs, a concussion, and a collapsed lung. Grey received minor injuries, including whiplash. Broderick told police he had no recollection of the crash and did not know why he was in the wrong lane: "I don't remember the day. I don't remember even getting up in the morning. I don't remember making my bed. What I first remember is waking up in the hospital, with a very strange feeling going on in my leg." He was charged with causing death by dangerous driving and faced up to five years in prison, but was later convicted of the lesser charge of careless driving and fined $175.`
+      kollaOmClaesStårEmot(
+        `On August 5, 1987, while driving a rented BMW in Enniskillen, Northern Ireland, Matthew Broderick crossed into the wrong lane and collided head-on with a Volvo driven by Anna Gallagher, 30, accompanied by her mother, Margaret Doherty, 63, killing both instantly. He was vacationing with Jennifer Grey, whom he began dating in semi-secrecy during the filming of Ferris Bueller's Day Off; the crash publicly revealing their relationship. He had a fractured leg and ribs, a concussion, and a collapsed lung. Grey received minor injuries, including whiplash. Broderick told police he had no recollection of the crash and did not know why he was in the wrong lane: "I don't remember the day. I don't remember even getting up in the morning. I don't remember making my bed. What I first remember is waking up in the hospital, with a very strange feeling going on in my leg." He was charged with causing death by dangerous driving and faced up to five years in prison, but was later convicted of the lesser charge of careless driving and fined $175.`
+      )
     );
   }
   //CHAPTER SIX: The Team
@@ -691,7 +794,7 @@ client.on('messageCreate', async (meddelande) => {
   if (dravel === 'hej claes') {
     //blabla om command är hej bla bla
 
-    meddelande.reply(`PEE IS STORED IN BALLS`);
+    meddelande.reply(kollaOmClaesStårEmot(`PEE IS STORED IN BALLS`));
   }
 
   //CHAPTER EIGHT: The Endless River
@@ -707,14 +810,14 @@ client.on('messageCreate', async (meddelande) => {
         spelaungefärljudetavenbokstav(meddelande, attsäga);
         upptagen = falskt;
       } else {
-        meddelande.reply('Jag är upptagen');
+        meddelande.reply(kollaOmClaesStårEmot('Jag är upptagen'));
       }
     } else {
-      meddelande.reply('Joina voice först');
+      meddelande.reply(kollaOmClaesStårEmot('Joina voice först'));
     }
   }
   if (meddelande.author.id == '199914493570973697' && aleaIactaEst < 1) {
-    meddelande.reply('This you?');
+    meddelande.reply(kollaOmClaesStårEmot('This you?'));
     meddelande.channel.send({ files: ['august.png'] });
   }
   if (/^(prevedi|преведи)/.test(meddelande.content)) {
@@ -755,7 +858,7 @@ client.on('messageCreate', async (meddelande) => {
     await spinnRock.spinnRock(meddelande, sant);
   }
   if (meddelande.content.match(/^p.*di/) && !meddelande.author.bot) {
-    meddelande.reply('did you mean prevedi?');
+    meddelande.reply(kollaOmClaesStårEmot('did you mean prevedi?'));
   }
   if (
     meddelande.content.match('gif?') &&
@@ -763,7 +866,9 @@ client.on('messageCreate', async (meddelande) => {
     !meddelande.content == 'oh my, what are the codes for these gifs?'
   ) {
     meddelande.reply(
-      "did you mean 'oh my, what are the codes for these gifs?'"
+      kollaOmClaesStårEmot(
+        "did you mean 'oh my, what are the codes for these gifs?'"
+      )
     );
   }
 });
