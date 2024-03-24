@@ -24,7 +24,6 @@ const {
   MessageEmbed,
 } = require('discord.js');
 const { token } = require('./config.json');
-const { secret1, tagg } = require('./secretConfig.json');
 const Canvas = require('canvas');
 const dotaPrefs = require('./dota-prefs-api.js');
 const EngTillIPA = require('./eng-till-ipa-2000.js');
@@ -34,6 +33,17 @@ const xXG4M3RXx = require('./gamer.js');
 const { shuffleArray } = require('./helpers.js');
 const falskt = false;
 const sant = true;
+
+let secret1 = '',
+  tagg = '';
+
+try {
+  const config = require('./secretConfig.json');
+  secret1 = config.secret1 ?? '';
+  tagg = config.tagg ?? '';
+} catch (error) {
+  console.error('Kunde inte ladda ./secretConfig.json', error);
+}
 
 const discordAnvändare = {
   ShortStack: '1109079876713066518',
