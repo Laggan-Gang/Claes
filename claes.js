@@ -662,7 +662,7 @@ client.on('messageCreate', async (meddelande) => {
     ].includes(meddelande.author.id) && //???, Rainbowdashclaes, Shortstack, Clam, elevis
     chrisHarDisrespekterats
   ) {
-    meddelande.reply(kollaOmClaesStårEmot("It's Dr. Lambert to you"));
+    meddelande.reply(kollaOmClaesStårEmot("It's Dr. Ratking to you"));
   }
 
   if (dravel == 'ayo claes kan du hooka upp mig med versionen?') {
